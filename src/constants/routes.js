@@ -1,3 +1,4 @@
+const WELCOME = "Welcome";
 const LOGIN = "Login";
 const REGISTER = "Register";
 
@@ -13,6 +14,7 @@ const FAVORITES_DRAWER = "Favorites drawer";
 const PROFILE_DRAWER = "Profile drawer";
 
 export {
+  WELCOME,
   LOGIN,
   REGISTER,
   HOME,
