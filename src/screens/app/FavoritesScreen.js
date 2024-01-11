@@ -60,7 +60,6 @@ export default function FavoritesScreen({ navigation }) {
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={<Text>Not items found</Text>}
         ListFooterComponent={<View className="h-5"></View>}
-        ItemSeparatorComponent={<View className="h-3"></View>}
       />
     </SafeAreaView>
   );
