@@ -55,10 +55,10 @@ const HomeScreen = ({ navigation }) => {
         <ImageBackground
           source={bg1}
           resizeMode="stretch"
-          className="h-44 w-full"
+          className="h-40 w-full"
         >
           <View
-            className="flex flex-row justify-between items-center px-4 pb-6 pt-14"
+            className="flex flex-row justify-between items-center px-4 pb-6 pt-8"
             style={[shadow.boxShadow]}
           >
             <View className="flex flex-row gap-3 items-center">
