@@ -44,7 +44,15 @@ const HomeScreen = ({ navigation }) => {
             style={[shadow.boxShadow]}
           >
             <View className="flex flex-row gap-3 items-center">
-              <Image source={user} className="w-14 h-14 rounded-full" />
+              <View
+                onPress={() => {
+                  navigation.navigate(PROFILE);
+                }}
+                className="border-[2px] border-white w-16 h-16 rounded-full overflow-hidden"
+                style={[shadow.boxShadow]}
+              >
+                <Image source={user} className="w-full h-full" />
+              </View>
               <View>
                 <Text
                   className="text-white/80 text-lg"
@@ -56,7 +64,7 @@ const HomeScreen = ({ navigation }) => {
                   className="text-white text-2xl"
                   style={{ fontFamily: "baiJamjuree-bold" }}
                 >
-                  Chourafi
+                  @chourafi
                 </Text>
               </View>
             </View>
