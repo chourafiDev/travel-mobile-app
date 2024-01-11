@@ -6,8 +6,11 @@ import { FAVORITES } from "../../constants/routes";
 import { destinations } from "../../../utils/data";
 import Destination from "../../components/Destination";
 import Search from "../../components/Search";
+import { useColorScheme } from "nativewind";
 
 export default function DestinationsScreen({ navigation }) {
+  const { colorScheme } = useColorScheme();
+
   return (
     <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
       {/* header */}
@@ -15,7 +18,7 @@ export default function DestinationsScreen({ navigation }) {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           activeOpacity={0.8}
-          className="bg-gray-1 w-9 h-9 rounded-lg items-center justify-center"
+          className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
         >
           <Icon
             name="arrow-left"
@@ -23,18 +26,18 @@ export default function DestinationsScreen({ navigation }) {
               fontFamily: "baiJamjuree-bold",
             }}
             size={16}
-            color="#222B45"
+            color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
           />
         </TouchableOpacity>
         <Text
-          className="text-dark text-xl"
+          className="text-dark dark:text-white text-xl"
           style={{ fontFamily: "baiJamjuree-bold" }}
         >
           Explore
         </Text>
         <TouchableOpacity
           onPress={() => navigation.navigate(FAVORITES)}
-          className="bg-gray-1 w-9 h-9 rounded-lg items-center justify-center"
+          className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
         >
           <Icon
             name="heart"
@@ -42,7 +45,7 @@ export default function DestinationsScreen({ navigation }) {
               fontFamily: "baiJamjuree-bold",
             }}
             size={16}
-            color="#222B45"
+            color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
           />
         </TouchableOpacity>
       </View>
@@ -58,7 +61,11 @@ export default function DestinationsScreen({ navigation }) {
         data={destinations}
         renderItem={({ item, index }) => {
           return (
-            <View className={`flex-1 flex-col mx-1 `}>
+            <View
+              className={`flex-1 flex-col mx-1 ${index % 2 != 0 && "mt-6"} ${
+                (index + 1) % 2 == 0 && "mt-5"
+              }`}
+            >
               <Destination key={item.title} destination={item} />
             </View>
           );
@@ -66,7 +73,6 @@ export default function DestinationsScreen({ navigation }) {
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={<Text>Not items found</Text>}
         ListFooterComponent={<View className="h-5"></View>}
-        ItemSeparatorComponent={<View className="h-3"></View>}
       />
     </SafeAreaView>
   );

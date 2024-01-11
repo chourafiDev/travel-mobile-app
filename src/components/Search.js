@@ -46,7 +46,7 @@ const Search = ({ withFilter, placeHolder }) => {
         </View>
         {withFilter && (
           <TouchableOpacity
-            className="bg-brand justify-center items-center w-12 h-12 rounded-2xl"
+            className="bg-brand dark:bg-dark-2/60 justify-center items-center w-12 h-12 rounded-2xl"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={handleSnapPress}
           >
