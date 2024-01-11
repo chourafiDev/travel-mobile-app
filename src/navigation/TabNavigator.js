@@ -10,10 +10,13 @@ import HomeScreen from "../screens/app/HomeScreen";
 import DestinationsScreen from "../screens/app/DestinationsScreen";
 import FavoritesScreen from "../screens/app/FavoritesScreen";
 import ProfileScreen from "../screens/app/ProfileScreen";
+import { useColorScheme } from "nativewind";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNavigator() {
+  const { colorScheme } = useColorScheme();
+
   // Animated Tab Indicator...
   const tabOffsetValue = useRef(new Animated.Value(0)).current;
 
@@ -24,11 +27,16 @@ export default function TabNavigator() {
           headerShown: false,
           tabBarShowLabel: false,
           tabBarStyle: {
-            position: "absolute",
-            bottom: 10,
-            marginHorizontal: 15,
-            height: 60,
-            borderRadius: 10,
+            // position: "absolute",
+            // bottom: 10,
+            // marginHorizontal: 15,
+            // borderRadius: 10,
+            // borderTopLeftRadius: 20,
+            // borderTopRightRadius: 20,
+            height: 65,
+            borderWidth: 0,
+            borderColor: colorScheme == "light" ? "#ffffff" : "#1A2138",
+            backgroundColor: colorScheme == "light" ? "#ffffff" : "#1A2138",
 
             // shadow
             shadowColor: "#cad2c5",
@@ -97,7 +105,7 @@ export default function TabNavigator() {
             // Onpress Update....
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 1.45,
+                toValue: getWidth() * 1.57,
                 useNativeDriver: true,
               }).start();
             },
@@ -127,7 +135,7 @@ export default function TabNavigator() {
             // Onpress Update....
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 2.88,
+                toValue: getWidth() * 3.12,
                 useNativeDriver: true,
               }).start();
             },
@@ -157,7 +165,7 @@ export default function TabNavigator() {
             // Onpress Update....
             tabPress: (e) => {
               Animated.spring(tabOffsetValue, {
-                toValue: getWidth() * 4.34,
+                toValue: getWidth() * 4.7,
                 useNativeDriver: true,
               }).start();
             },
@@ -166,7 +174,7 @@ export default function TabNavigator() {
       </Tab.Navigator>
 
       <Animated.View
-        className="absolute bg-brand h-[2px] bottom-[68px] left-[40px] rounded-full"
+        className="absolute bg-brand h-[2px] bottom-[64px] left-[28px] rounded-full"
         style={{
           width: getWidth() - 20,
           transform: [{ translateX: tabOffsetValue }],
