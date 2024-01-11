@@ -1,9 +1,10 @@
-import { View, TextInput, TouchableOpacity, Text } from "react-native";
+import { View, TextInput, TouchableOpacity, Image } from "react-native";
 import React, { useRef } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { shadow } from "../../utils/theme";
 import Filter from "./Filter";
 import { useColorScheme } from "nativewind";
+import { filter } from "../../utils/assets";
 
 const Search = ({ withFilter, placeHolder }) => {
   const { colorScheme } = useColorScheme();
@@ -50,15 +51,7 @@ const Search = ({ withFilter, placeHolder }) => {
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={handleSnapPress}
           >
-            <Icon
-              name="sliders"
-              style={{
-                fontFamily: "baiJamjuree-bold",
-                transform: [{ rotate: "90deg" }],
-              }}
-              size={14}
-              color="#FBFBFB"
-            />
+            <Image source={filter} className="w-6 h-6" />
           </TouchableOpacity>
         )}
       </View>
