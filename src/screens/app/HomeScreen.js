@@ -28,10 +28,6 @@ const HomeScreen = ({ navigation }) => {
   // Open modal bottom
   const sheetRef = useRef(null);
 
-  const handleSnapPress = () => {
-    sheetRef.current?.present();
-  };
-
   // Select category
   // catgeory
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -205,9 +201,6 @@ const HomeScreen = ({ navigation }) => {
             ListEmptyComponent={<Text>Not items found</Text>}
           />
         </View>
-
-        {/* Modal filter */}
-        <Filter sheetRef={sheetRef} />
       </ScrollView>
     </SafeAreaView>
   );
