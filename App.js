@@ -1,20 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import AppNavigation from "./src/navigation";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    "baiJamjuree-extralight": require("./assets/fonts/BaiJamjuree-ExtraLight.ttf"),
+    "baiJamjuree-light": require("./assets/fonts/BaiJamjuree-Light.ttf"),
+    "baiJamjuree-regular": require("./assets/fonts/BaiJamjuree-Regular.ttf"),
+    "baiJamjuree-medium": require("./assets/fonts/BaiJamjuree-Medium.ttf"),
+    "baiJamjuree-semibold": require("./assets/fonts/BaiJamjuree-SemiBold.ttf"),
+    "baiJamjuree-bold": require("./assets/fonts/BaiJamjuree-Bold.ttf"),
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  } else {
+    SplashScreen.hideAsync();
+  }
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView className="flex-1">
+      <BottomSheetModalProvider>
+        <AppNavigation />
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
