@@ -2,14 +2,17 @@ import { View, Text, Image, TouchableOpacity } from "react-native";
 import React from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { shadow } from "../../utils/theme";
+import { useColorScheme } from "nativewind";
 
 export default function Destination({
   destination: { title, destination, image },
 }) {
+  const { colorScheme } = useColorScheme();
+
   return (
     <TouchableOpacity
-      className="rounded-2xl px-1 pt-1 pb-3 bg-white mr-3 relative border border-gray-50 w-full"
-      style={[shadow.boxShadow]}
+      className="rounded-2xl px-1 pt-1 pb-3 bg-white dark:bg-dark-2 mr-3 relative border border-gray-50 dark:border-dark-2 w-full"
+      style={[colorScheme == "light" && shadow.boxShadow]}
       activeOpacity={0.8}
     >
       <TouchableOpacity
@@ -21,7 +24,7 @@ export default function Destination({
 
       <Image source={image} className="rounded-2xl w-full h-32" />
       <Text
-        className="text-dark text-base mt-4"
+        className="text-dark dark:text-white text-base mt-4"
         style={{ fontFamily: "baiJamjuree-semibold" }}
       >
         {title}
@@ -36,7 +39,7 @@ export default function Destination({
           color="#23A892"
         />
         <Text
-          className="text-dark/60"
+          className="text-dark/60 dark:text-white/60"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
           {destination}

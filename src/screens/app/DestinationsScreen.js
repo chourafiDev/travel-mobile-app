@@ -65,7 +65,7 @@ export default function DestinationsScreen({ navigation }) {
         }}
         keyExtractor={(item, index) => index.toString()}
         ListEmptyComponent={<Text>Not items found</Text>}
-        ListFooterComponent={<View className="h-20"></View>}
+        ListFooterComponent={<View className="h-5"></View>}
         ItemSeparatorComponent={<View className="h-3"></View>}
       />
     </SafeAreaView>

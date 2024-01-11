@@ -87,13 +87,13 @@ const HomeScreen = ({ navigation }) => {
 
         <View className="px-4 mt-3 mb-6">
           <Text
-            className="text-dark text-[28px] -mb-2"
+            className="text-dark dark:text-white text-[28px] -mb-2"
             style={{ fontFamily: "baiJamjuree-regular" }}
           >
             Explore <Text className="text-brand">Naural</Text>
           </Text>
           <Text
-            className="text-dark font-semibold text-[30px]"
+            className="text-dark dark:text-white font-semibold text-[30px]"
             style={{ fontFamily: "baiJamjuree-bold" }}
           >
             Beauty of the Earth.
@@ -108,7 +108,7 @@ const HomeScreen = ({ navigation }) => {
               color="#23A892"
             />
             <Text
-              className="text-dark/60"
+              className="text-dark/60 dark:text-white/60"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Marrakech, Morocco
@@ -123,14 +123,14 @@ const HomeScreen = ({ navigation }) => {
         <View className="px-4 mt-10 space-y-5">
           <View className="flex-row justify-between items-center">
             <Text
-              className="text-dark/80 text-[22px]"
+              className="text-dark/80 dark:text-white/80 text-[22px]"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
               Categories
             </Text>
-            <TouchableOpacity className="bg-gray-1 rounded-lg px-3 py-2">
+            <TouchableOpacity className="bg-gray-1 dark:bg-dark-2/70  rounded-lg px-3 py-2">
               <Text
-                className="text-dark/80 text-sm"
+                className="text-dark/80 text-sm dark:text-white/80"
                 style={{ fontFamily: "baiJamjuree-semibold" }}
               >
                 View all
@@ -159,20 +159,20 @@ const HomeScreen = ({ navigation }) => {
         </View>
 
         {/* Destinations */}
-        <View className="px-4 mt-6 space-y-5 pb-20">
+        <View className="px-4 mt-6 space-y-5">
           <View className="flex-row justify-between items-center">
             <Text
-              className="text-dark/80 text-[22px]"
+              className="text-dark/80 dark:text-white/80 text-[22px]"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
               Top 10 Destinations
             </Text>
             <TouchableOpacity
               onPress={() => navigation.navigate(DESTINATIONS)}
-              className="bg-gray-1 rounded-lg px-3 py-2"
+              className="bg-gray-1 dark:bg-dark-2/70 rounded-lg px-3 py-2"
             >
               <Text
-                className="text-dark/80 text-sm"
+                className="text-dark/80 dark:text-white/80 text-sm"
                 style={{ fontFamily: "baiJamjuree-semibold" }}
               >
                 View all
