@@ -1,12 +1,10 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   ScrollView,
   View,
   TouchableOpacity,
   Text,
   Image,
-  Switch,
-  TextInput,
   ImageBackground,
   FlatList,
 } from "react-native";
@@ -17,7 +15,6 @@ import Category from "../../components/Category";
 import { categories, destinations } from "../../../utils/data";
 import Destination from "../../components/Destination";
 import { shadow } from "../../../utils/theme";
-import Filter from "../../components/Filter";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Search from "../../components/Search";
 import { DESTINATIONS } from "../../constants/routes";
