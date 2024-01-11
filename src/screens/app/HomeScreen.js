@@ -31,7 +31,7 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-gray-50 dark:bg-dark">
+    <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <ImageBackground
