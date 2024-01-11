@@ -16,8 +16,11 @@ import { categories } from "../../utils/data";
 import Icon from "react-native-vector-icons/Feather";
 import DropDown from "./ui/DropDown";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { shadow } from "../../utils/theme";
+import { useColorScheme } from "nativewind";
+
 export default function Filter({ sheetRef }) {
+  const { colorScheme } = useColorScheme();
+
   const snapPoints = useMemo(() => ["90%"], []);
 
   const renderBackdrop = useCallback((props) => {
@@ -116,11 +119,14 @@ export default function Filter({ sheetRef }) {
       snapPoints={snapPoints}
       backdropComponent={renderBackdrop}
       enablePanDownToClose
+      backgroundStyle={{
+        backgroundColor: colorScheme == "light" ? "#FBFBFB" : "#222B45",
+      }}
     >
       <BottomSheetView>
         <View className="px-4">
           <Text
-            className="text-dark text-xl mb-4"
+            className="text-dark dark:text-white text-xl mb-4"
             style={{ fontFamily: "baiJamjuree-semibold" }}
           >
             Destinations Filter
@@ -128,7 +134,7 @@ export default function Filter({ sheetRef }) {
 
           <View>
             <Text
-              className="text-dark text-lg mb-1"
+              className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Location
@@ -136,13 +142,16 @@ export default function Filter({ sheetRef }) {
             <TextInput
               placeholder="Find the world..."
               style={{ fontFamily: "baiJamjuree-regular" }}
-              className="w-full text-dark border border-dark/10 p-2 rounded-2xl"
+              className="w-full text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
+              placeholderTextColor={
+                colorScheme == "light" ? "#222B4580" : "#ffffff"
+              }
             />
           </View>
 
           <View className="mt-5">
             <Text
-              className="text-dark text-lg mb-1"
+              className="text-dark dark:text-white  text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Category
@@ -156,7 +165,7 @@ export default function Filter({ sheetRef }) {
                   className={` text-base px-5 py-[10px] rounded-full border ${
                     category === title
                       ? "bg-brand/10 border-brand/40"
-                      : "bg-gray-100 border-gray-100"
+                      : "bg-gray-100 dark:bg-dark-2 border-gray-100 dark:border-gray-1/5"
                   }`}
                 >
                   <Text
@@ -173,7 +182,7 @@ export default function Filter({ sheetRef }) {
 
           <View className="mt-5">
             <Text
-              className="text-dark text-lg mb-1"
+              className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Duration
@@ -190,7 +199,7 @@ export default function Filter({ sheetRef }) {
 
           <View className="mt-5">
             <Text
-              className="text-dark text-lg mb-1"
+              className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Activity
@@ -208,7 +217,7 @@ export default function Filter({ sheetRef }) {
 
           <View className="mt-5">
             <Text
-              className="text-dark text-lg mb-1"
+              className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Date
@@ -216,12 +225,15 @@ export default function Filter({ sheetRef }) {
 
             <Pressable onPress={toogleDatePicker}>
               <TextInput
-                className="w-full text-dark border border-dark/10 px-3 py-2 rounded-2xl"
+                className="w-full text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
                 placeholder="Date"
                 editable={false}
                 value={startDate}
                 onChangeText={setStartDate}
                 onPressIn={toogleDatePicker}
+                placeholderTextColor={
+                  colorScheme == "light" ? "#222B4580" : "#ffffff"
+                }
               />
             </Pressable>
 
@@ -238,7 +250,7 @@ export default function Filter({ sheetRef }) {
 
           <View className="mt-5">
             <Text
-              className="text-dark text-lg mb-1"
+              className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
               Price
@@ -246,24 +258,30 @@ export default function Filter({ sheetRef }) {
             <View className="flex-row gap-3">
               <TextInput
                 onChangeText={setMinPrice}
-                className="flex-1 text-dark border border-dark/10 px-3 py-2 rounded-2xl"
+                className="flex-1 text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
                 value={minPrice}
                 placeholder="Min"
                 keyboardType="numeric"
+                placeholderTextColor={
+                  colorScheme == "light" ? "#222B4580" : "#ffffff"
+                }
               />
               <TextInput
                 onChangeText={setMaxPrice}
-                className="flex-1 text-dark border border-dark/10 px-3 py-2 rounded-2xl"
+                className="flex-1 text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
                 value={maxPrice}
                 placeholder="Max"
                 keyboardType="numeric"
+                placeholderTextColor={
+                  colorScheme == "light" ? "#222B4580" : "#ffffff"
+                }
               />
             </View>
           </View>
 
           <TouchableOpacity
             activeOpacity={0.8}
-            className="p-3 rounded-2xl bg-brand mt-3"
+            className="p-3 rounded-2xl bg-brand dark:bg-dark-2/60 border dark:border-gray-1/5 mt-3"
           >
             <Text
               className="text-white text-center text-[18px]"
