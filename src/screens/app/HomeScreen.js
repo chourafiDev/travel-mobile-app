@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   View,
@@ -9,7 +9,6 @@ import {
   FlatList,
 } from "react-native";
 import { bg1, user } from "../../../utils/assets";
-import { useColorScheme } from "nativewind";
 import Icon from "react-native-vector-icons/Feather";
 import Category from "../../components/Category";
 import { categories, destinations } from "../../../utils/data";
@@ -20,11 +19,6 @@ import Search from "../../components/Search";
 import { DESTINATIONS } from "../../constants/routes";
 
 const HomeScreen = ({ navigation }) => {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
-
-  // Open modal bottom
-  const sheetRef = useRef(null);
-
   // Select category
   // catgeory
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -39,11 +33,6 @@ const HomeScreen = ({ navigation }) => {
   return (
     <SafeAreaView className="flex-1 bg-gray-50 dark:bg-dark">
       <ScrollView showsVerticalScrollIndicator={false}>
-        {/* <View>
-          <Switch value={colorScheme === "dark"} onChange={toggleColorScheme} />
-          <Text>{colorScheme}</Text>
-        </View> */}
-
         {/* Header */}
         <ImageBackground
           source={bg1}
