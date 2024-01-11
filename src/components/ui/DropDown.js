@@ -20,7 +20,7 @@ export default function DropDown({
       setValue={setValue}
       setItems={setItems}
       zIndex={zIndex}
-      style={{ borderColor: "#162B451A" }}
+      style={{ borderColor: "#162B451A", borderRadius: 16 }}
       textStyle={{
         color: "#222B45",
         fontFamily: "baiJamjuree-medium",

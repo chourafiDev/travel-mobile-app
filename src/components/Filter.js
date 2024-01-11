@@ -136,7 +136,7 @@ export default function Filter({ sheetRef }) {
             <TextInput
               placeholder="Find the world..."
               style={{ fontFamily: "baiJamjuree-regular" }}
-              className="w-full text-dark border border-dark/10 p-2 rounded-lg"
+              className="w-full text-dark border border-dark/10 p-2 rounded-2xl"
             />
           </View>
 
@@ -216,7 +216,7 @@ export default function Filter({ sheetRef }) {
 
             <Pressable onPress={toogleDatePicker}>
               <TextInput
-                className="w-full text-dark border border-dark/10 p-2 rounded-lg"
+                className="w-full text-dark border border-dark/10 px-3 py-2 rounded-2xl"
                 placeholder="Date"
                 editable={false}
                 value={startDate}
@@ -246,14 +246,14 @@ export default function Filter({ sheetRef }) {
             <View className="flex-row gap-3">
               <TextInput
                 onChangeText={setMinPrice}
-                className="flex-1 text-dark border border-dark/10 p-2 rounded-lg"
+                className="flex-1 text-dark border border-dark/10 px-3 py-2 rounded-2xl"
                 value={minPrice}
                 placeholder="Min"
                 keyboardType="numeric"
               />
               <TextInput
                 onChangeText={setMaxPrice}
-                className="flex-1 text-dark border border-dark/10 p-2 rounded-lg"
+                className="flex-1 text-dark border border-dark/10 px-3 py-2 rounded-2xl"
                 value={maxPrice}
                 placeholder="Max"
                 keyboardType="numeric"
@@ -263,7 +263,7 @@ export default function Filter({ sheetRef }) {
 
           <TouchableOpacity
             activeOpacity={0.8}
-            className="p-3 rounded-lg bg-brand mt-3"
+            className="p-3 rounded-2xl bg-brand mt-3"
           >
             <Text
               className="text-white text-center text-[18px]"
