@@ -3,10 +3,13 @@ import React from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { shadow } from "../../utils/theme";
 import { useColorScheme } from "nativewind";
+import { useNavigation } from "@react-navigation/native";
+import { DESTINATION } from "../constants/routes";
 
 export default function Destination({
   destination: { title, destination, image },
 }) {
+  const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
 
   return (
@@ -14,6 +17,9 @@ export default function Destination({
       className="rounded-2xl px-1 pt-1 pb-3 bg-white dark:bg-dark-2 mr-3 relative border border-gray-50 dark:border-dark-2 w-full"
       style={[colorScheme == "light" && shadow.boxShadow]}
       activeOpacity={0.8}
+      onPress={() => {
+        navigation.navigate(DESTINATION);
+      }}
     >
       <TouchableOpacity
         className="absolute top-3 right-3 bg-white/80 backdrop-blur-md w-7 h-7 rounded-full z-10 justify-center items-center"
