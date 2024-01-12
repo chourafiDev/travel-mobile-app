@@ -6,7 +6,7 @@ import {
   PROFILE_DRAWER,
 } from "../constants/routes";
 
-import CustomDrawer from "../components/layout.js/CustomDrawer";
+import CustomDrawer from "../components/layout/CustomDrawer";
 // Screens
 import FavoritesScreen from "../screens/app/FavoritesScreen";
 import ProfileScreen from "../screens/app/ProfileScreen";
