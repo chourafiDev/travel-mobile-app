@@ -1,16 +1,13 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
-import {
-  FAVORITES_DRAWER,
-  HOME_TAB,
-  PROFILE_DRAWER,
-} from "../constants/routes";
+import { DESTINATION, HOME_TAB } from "../constants/routes";
 
 import CustomDrawer from "../components/layout/CustomDrawer";
 // Screens
 import FavoritesScreen from "../screens/app/FavoritesScreen";
 import ProfileScreen from "../screens/app/ProfileScreen";
 import TabNavigator from "./TabNavigator";
+import DestinationScreen from "../screens/app/DestinationScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -37,21 +34,12 @@ function DrawerNavigator() {
           ),
         }}
       />
+
       <Drawer.Screen
-        name={FAVORITES_DRAWER}
-        component={FavoritesScreen}
+        name={DESTINATION}
+        component={DestinationScreen}
         options={{
-          title: "Favorites",
-          drawerIcon: ({ color }) => (
-            <Icon name="home-sharp" size={20} color={color} />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name={PROFILE_DRAWER}
-        component={ProfileScreen}
-        options={{
-          title: "Profile",
+          title: "Destination",
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
