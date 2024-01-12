@@ -281,7 +281,7 @@ export default function Filter({ sheetRef }) {
 
           <TouchableOpacity
             activeOpacity={0.8}
-            className="p-3 rounded-2xl bg-brand dark:bg-dark-2/60 border dark:border-gray-1/5 mt-3"
+            className="p-3 rounded-2xl bg-brand mt-3"
           >
             <Text
               className="text-white text-center text-[18px]"
