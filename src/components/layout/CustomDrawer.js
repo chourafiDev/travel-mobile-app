@@ -7,7 +7,12 @@ import {
   ImageBackground,
 } from "react-native";
 import { bg1, user } from "../../../utils/assets";
-import { DESTINATIONS, HOME_TAB, PROFILE } from "../../constants/routes";
+import {
+  DESTINATIONS,
+  FAVORITES,
+  HOME_TAB,
+  PROFILE,
+} from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useColorScheme } from "nativewind";
@@ -92,7 +97,7 @@ const CustomDrawer = ({ navigation }) => {
           <TouchableOpacity
             className="flex-row space-x-5 items-center mb-4"
             onPress={() => {
-              navigation.navigate(HOME_TAB);
+              navigation.navigate(FAVORITES);
             }}
           >
             <Icon
