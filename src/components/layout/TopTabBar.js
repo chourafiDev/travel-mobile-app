@@ -7,7 +7,7 @@ export default function TopTabBar({
   position,
 }) {
   return (
-    <View className="flex-row bg-[#EEF0F7] rounded-full mb-4">
+    <View className="flex-row bg-[#EEF0F7] dark:bg-dark-2 rounded-full mb-4">
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -46,18 +46,17 @@ export default function TopTabBar({
             testID={options.tabBarTestID}
             onPress={onPress}
             onLongPress={onLongPress}
-            style={{
-              flex: 1,
-              backgroundColor: isFocused ? "#fbfbfb" : "#EEF0F7",
-              borderRadius: 30,
-              margin: 4,
-              marginVertical: 4,
-              paddingVertical: 11,
-            }}
+            className={`${
+              isFocused
+                ? "bg-white dark:bg-dark"
+                : "bg-[#EEF0F7] dark:bg-dark-2"
+            } flex-1 mx-4 rounded-full p-3 m-[4px]`}
           >
             <Text
-              className={` text-center ${
-                isFocused ? "text-dark" : "text-dark/70"
+              className={` text-center text-base ${
+                isFocused
+                  ? "text-dark dark:text-white"
+                  : "text-dark/70 dark:text-white/70"
               }`}
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
