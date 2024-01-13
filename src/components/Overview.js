@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
+import Animated, { FadeInDown } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/Feather";
 
 const Overview = () => {
@@ -10,7 +11,10 @@ const Overview = () => {
       className="bg-[#f8f8fa] dark:bg-dark"
     >
       <View className="flex-row justify-between items-center">
-        <View className="flex-row items-center gap-3">
+        <Animated.View
+          entering={FadeInDown.delay(40)}
+          className="flex-row items-center gap-3"
+        >
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             activeOpacity={0.8}
@@ -39,9 +43,12 @@ const Overview = () => {
               2 Days
             </Text>
           </View>
-        </View>
+        </Animated.View>
 
-        <View className="flex-row items-center gap-3">
+        <Animated.View
+          entering={FadeInDown.delay(40)}
+          className="flex-row items-center gap-3"
+        >
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             activeOpacity={0.8}
@@ -70,19 +77,21 @@ const Overview = () => {
               4.2 out of 5
             </Text>
           </View>
-        </View>
+        </Animated.View>
       </View>
 
       <View className="mt-6 space-y-3">
-        <Text
+        <Animated.Text
+          entering={FadeInDown.delay(110)}
           className="text-dark dark:text-white text-xl"
           style={{
             fontFamily: "baiJamjuree-bold",
           }}
         >
           Description
-        </Text>
-        <Text
+        </Animated.Text>
+        <Animated.Text
+          entering={FadeInDown.delay(200)}
           className="text-dark/80 dark:text-white/80 text-[17px] leading-7"
           style={{
             fontFamily: "baiJamjuree-light",
@@ -100,7 +109,7 @@ const Overview = () => {
           essentially unchanged scrambled it to make a type specimen book. It
           has survived not only five centuries, but also the leap into
           electronic typesetting, remaining essentially unchanged.
-        </Text>
+        </Animated.Text>
       </View>
 
       <View className="h-20"></View>
