@@ -49,6 +49,7 @@ export default function WelcomeScreen() {
           </View>
         </View>
         <TouchableOpacity
+          activeOpacity={0.9}
           onPress={() => navigation.navigate("Home")}
           className="p-3 rounded-lg bg-white"
         >
