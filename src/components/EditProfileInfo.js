@@ -12,9 +12,7 @@ const EditProfileInfo = () => {
     <View className="bg-[#f8f8fa] dark:bg-dark h-full pt-3">
       {/* Body */}
       <Animated.View
-        entering={FadeInDown.delay(100 * 1)
-          .duration(1000)
-          .springify()}
+        entering={FadeInDown.delay(100).duration(1000).springify()}
         className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
@@ -28,9 +26,7 @@ const EditProfileInfo = () => {
         />
       </Animated.View>
       <Animated.View
-        entering={FadeInDown.delay(100 * 2)
-          .duration(1000)
-          .springify()}
+        entering={FadeInDown.delay(200).duration(1000).springify()}
         className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
@@ -44,9 +40,7 @@ const EditProfileInfo = () => {
         />
       </Animated.View>
       <Animated.View
-        entering={FadeInDown.delay(100 * 3)
-          .duration(1000)
-          .springify()}
+        entering={FadeInDown.delay(300).duration(1000).springify()}
         className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
@@ -60,9 +54,7 @@ const EditProfileInfo = () => {
         />
       </Animated.View>
       <Animated.View
-        entering={FadeInDown.delay(100 * 4)
-          .duration(1000)
-          .springify()}
+        entering={FadeInDown.delay(400).duration(1000).springify()}
         className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
@@ -78,9 +70,7 @@ const EditProfileInfo = () => {
 
       {/* Footer */}
       <Animated.View
-        entering={FadeInDown.delay(100 * 5)
-          .duration(1000)
-          .springify()}
+        entering={FadeInDown.delay(500).duration(1000).springify()}
       >
         <TouchableOpacity
           activeOpacity={0.8}
