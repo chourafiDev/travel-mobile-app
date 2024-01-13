@@ -45,7 +45,7 @@ export default function DestinationsScreen({ navigation }) {
               fontFamily: "baiJamjuree-bold",
             }}
             size={16}
-            color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+            color="#e63946"
           />
         </TouchableOpacity>
       </View>
