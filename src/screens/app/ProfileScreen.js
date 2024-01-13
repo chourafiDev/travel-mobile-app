@@ -1,14 +1,13 @@
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
-import { ScrollView } from "react-native-gesture-handler";
 import { user } from "../../../utils/assets";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Feather";
 import { useColorScheme } from "nativewind";
 import { shadow } from "../../../utils/theme";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import EditProfileInfo from "../../components/EditProfileInfo";
-import EditProfilePassword from "../../components/EditProfilePassword";
+import EditProfileInfo from "../../components/Foms/EditProfileInfo";
+import EditProfilePassword from "../../components/Foms/EditProfilePassword";
 import TopTabBar from "../../components/layout/TopTabBar";
 
 const Tab = createMaterialTopTabNavigator();
