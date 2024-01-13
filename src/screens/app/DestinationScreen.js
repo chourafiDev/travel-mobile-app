@@ -142,7 +142,10 @@ export default function DestinationScreen({ navigation }) {
 
       <View className="absolute w-full bottom-0">
         <LinearGradient
-          colors={["transparent", "#222B45"]}
+          colors={[
+            "transparent",
+            colorScheme == "light" ? "#fbfbfbfb" : "#222B45",
+          ]}
           start={{ x: 0.5, y: 0 }}
           end={{ x: 0.5, y: 0.4 }}
           className="absolute bottom-0 w-full h-28"
