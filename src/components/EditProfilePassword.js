@@ -13,15 +13,13 @@ const EditProfilePassword = () => {
       {/* Body */}
       <Animated.View
         entering={FadeInDown.delay(200).duration(1000).springify()}
-        className="mb-5"
+        className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-5"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="Old Password"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
@@ -30,15 +28,13 @@ const EditProfilePassword = () => {
 
       <Animated.View
         entering={FadeInDown.delay(200).duration(1000).springify()}
-        className="mb-5"
+        className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-5"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="New Password"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
@@ -47,15 +43,13 @@ const EditProfilePassword = () => {
 
       <Animated.View
         entering={FadeInDown.delay(200).duration(1000).springify()}
-        className="mb-5"
+        className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-5"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="Confirme Password"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }

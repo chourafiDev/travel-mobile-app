@@ -12,64 +12,64 @@ const EditProfileInfo = () => {
     <View className="bg-[#f8f8fa] dark:bg-dark h-full pt-3">
       {/* Body */}
       <Animated.View
-        entering={FadeInDown.duration(1000).springify()}
-        className="mb-3"
+        entering={FadeInDown.delay(100 * 1)
+          .duration(1000)
+          .springify()}
+        className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="Username"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
       </Animated.View>
       <Animated.View
-        entering={FadeInDown.duration(1000).springify()}
-        className="mb-3"
+        entering={FadeInDown.delay(100 * 2)
+          .duration(1000)
+          .springify()}
+        className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="First Name"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
       </Animated.View>
       <Animated.View
-        entering={FadeInDown.duration(1000).springify()}
-        className="mb-3"
+        entering={FadeInDown.delay(100 * 3)
+          .duration(1000)
+          .springify()}
+        className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="Last Name"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
       </Animated.View>
       <Animated.View
-        entering={FadeInDown.duration(1000).springify()}
-        className="mb-3"
+        entering={FadeInDown.delay(100 * 4)
+          .duration(1000)
+          .springify()}
+        className="w-full border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
+        style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <TextInput
           placeholder="Email address"
-          className="w-full text-dark dark:text-white border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
+          className="text-dark dark:text-white"
+          style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
@@ -78,7 +78,9 @@ const EditProfileInfo = () => {
 
       {/* Footer */}
       <Animated.View
-        entering={FadeInDown.delay(400).duration(1000).springify()}
+        entering={FadeInDown.delay(100 * 5)
+          .duration(1000)
+          .springify()}
       >
         <TouchableOpacity
           activeOpacity={0.8}
