@@ -6,6 +6,7 @@ import { destinations } from "../../../utils/data";
 import Destination from "../../components/Destination";
 import Search from "../../components/Search";
 import { useColorScheme } from "nativewind";
+import Animated, { FadeInDown } from "react-native-reanimated";
 
 export default function FavoritesScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
@@ -48,13 +49,14 @@ export default function FavoritesScreen({ navigation }) {
         data={destinations}
         renderItem={({ item, index }) => {
           return (
-            <View
+            <Animated.View
+              entering={FadeInDown.delay(250 * index)}
               className={`flex-1 flex-col mx-1 ${index % 2 != 0 && "mt-6"} ${
                 (index + 1) % 2 == 0 && "mt-5"
               }`}
             >
               <Destination key={item.title} destination={item} />
-            </View>
+            </Animated.View>
           );
         }}
         keyExtractor={(item, index) => index.toString()}
