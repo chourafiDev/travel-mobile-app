@@ -11,7 +11,7 @@ import {
   DESTINATIONS,
   FAVORITES,
   HOME_TAB,
-  PROFILE,
+  SETTING,
 } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -30,7 +30,7 @@ const CustomDrawer = ({ navigation }) => {
         <View className="px-6 py-4">
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate(PROFILE);
+              navigation.navigate(SETTING);
             }}
             className="border-[2px] border-white w-20 h-20 rounded-full overflow-hidden"
           >
@@ -116,7 +116,7 @@ const CustomDrawer = ({ navigation }) => {
           <TouchableOpacity
             className="flex-row space-x-5 items-center mb-4"
             onPress={() => {
-              navigation.navigate(PROFILE);
+              navigation.navigate(SETTING);
             }}
           >
             <Icon
@@ -129,7 +129,7 @@ const CustomDrawer = ({ navigation }) => {
               className="text-dark dark:text-white text-[17px]"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              Profile
+              Setting
             </Text>
           </TouchableOpacity>
           <View className="pt-4">

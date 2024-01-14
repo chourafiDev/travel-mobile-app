@@ -1,16 +1,16 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { DESTINATIONS, FAVORITES, HOME, PROFILE } from "../constants/routes";
+import { DESTINATIONS, FAVORITES, HOME, SETTING } from "../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import { useRef } from "react";
 import { View } from "react-native";
 import { Animated, Dimensions } from "react-native";
+import { useColorScheme } from "nativewind";
 
 // Screens
 import HomeScreen from "../screens/app/HomeScreen";
 import DestinationsScreen from "../screens/app/DestinationsScreen";
 import FavoritesScreen from "../screens/app/FavoritesScreen";
-import ProfileScreen from "../screens/app/ProfileScreen";
-import { useColorScheme } from "nativewind";
+import SettingScreen from "../screens/app/SettingScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -142,8 +142,8 @@ export default function TabNavigator() {
           })}
         />
         <Tab.Screen
-          name={PROFILE}
-          component={ProfileScreen}
+          name={SETTING}
+          component={SettingScreen}
           options={{
             tabBarIcon: ({ focused }) => (
               <View
@@ -154,7 +154,7 @@ export default function TabNavigator() {
                 }}
               >
                 <Icon
-                  name="user"
+                  name="settings"
                   size={20}
                   color={focused ? "#23A892" : "gray"}
                 ></Icon>
