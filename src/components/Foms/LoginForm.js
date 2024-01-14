@@ -1,19 +1,22 @@
 import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { TextInput } from "react-native-gesture-handler";
 import { shadow } from "../../../utils/theme";
 import { useColorScheme } from "nativewind";
 import { useNavigation } from "@react-navigation/native";
 import { HOME_TAB, REGISTER } from "../../constants/routes";
+import Icon from "react-native-vector-icons/Feather";
 
 const LoginForm = () => {
   const { colorScheme } = useColorScheme();
   const navigation = useNavigation();
+
+  const [showPassword, setShowPassword] = useState(true);
   return (
     <View className="px-4 mt-16">
       {/* Header */}
-      <View className="mb-6">
+      <View className="mb-10">
         <Text
           className="text-dark dark:text-white text-2xl"
           style={{ fontFamily: "baiJamjuree-medium" }}
@@ -27,7 +30,7 @@ const LoginForm = () => {
           </Text>
         </Text>
         <Text
-          className="text-dark dark:text-white text-2xl"
+          className="text-dark dark:text-white text-2xl mt-1"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
           for Continue !
@@ -37,12 +40,17 @@ const LoginForm = () => {
       {/* Body */}
       <Animated.View
         entering={FadeInDown.delay(100).duration(1000).springify()}
-        className="w-full text-dark border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
+        className="w-full flex-row items-center border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-3"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
+        <Icon
+          name="mail"
+          size={15}
+          color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+        />
         <TextInput
           placeholder="Email address"
-          className="text-dark dark:text-white"
+          className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
@@ -52,18 +60,40 @@ const LoginForm = () => {
 
       <Animated.View
         entering={FadeInDown.delay(200).duration(1000).springify()}
-        className="w-full text-dark border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2 mb-10"
+        className="w-full flex-row items-center border border-dark/10 px-4 py-3 rounded-2xl bg-white dark:bg-dark-2"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
+        <Icon
+          name="lock"
+          size={17}
+          color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+        />
         <TextInput
           placeholder="Password"
-          className="text-dark dark:text-white"
+          secureTextEntry={showPassword}
+          className="text-dark dark:text-white flex-1 mx-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
+        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+          <Icon
+            name={showPassword ? "eye-off" : "eye"}
+            size={17}
+            color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+          />
+        </TouchableOpacity>
       </Animated.View>
+
+      <TouchableOpacity className="mb-10 mt-2 items-end">
+        <Text
+          className="text-dark/80"
+          style={{ fontFamily: "baiJamjuree-semibold" }}
+        >
+          Forgot password?
+        </Text>
+      </TouchableOpacity>
 
       {/* Footer */}
       <Animated.View
