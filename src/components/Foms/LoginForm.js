@@ -5,7 +5,7 @@ import { TextInput } from "react-native-gesture-handler";
 import { shadow } from "../../../utils/theme";
 import { useColorScheme } from "nativewind";
 import { useNavigation } from "@react-navigation/native";
-import { HOME_TAB, REGISTER } from "../../constants/routes";
+import { FORGOT_PASSWORD, HOME_TAB, REGISTER } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 
 const LoginForm = () => {
@@ -86,9 +86,12 @@ const LoginForm = () => {
         </TouchableOpacity>
       </Animated.View>
 
-      <TouchableOpacity className="mb-10 mt-2 items-end">
+      <TouchableOpacity
+        className="mb-10 mt-2 items-end"
+        onPress={() => navigation.navigate(FORGOT_PASSWORD)}
+      >
         <Text
-          className="text-dark/80"
+          className="text-dark/80 dark:text-white/80"
           style={{ fontFamily: "baiJamjuree-semibold" }}
         >
           Forgot password?
