@@ -17,10 +17,12 @@ import { shadow } from "../../../utils/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Search from "../../components/Search";
 import { DESTINATIONS } from "../../constants/routes";
+import { useColorScheme } from "nativewind";
 
 const HomeScreen = ({ navigation }) => {
-  // Select category
-  // catgeory
+  const { colorScheme } = useColorScheme();
+
+  // select catgeory
   const [selectedCategory, setSelectedCategory] = useState("");
   const handleSelectCategory = (item) => {
     if (selectedCategory === item) {
@@ -69,7 +71,7 @@ const HomeScreen = ({ navigation }) => {
               </View>
             </View>
             <TouchableOpacity
-              className="w-10 h-10 bg-white rounded-full items-center justify-center "
+              className="w-10 h-10 bg-white dark:bg-dark-2 rounded-full items-center justify-center "
               style={[shadow.boxShadow]}
               onPress={() => navigation.openDrawer()}
             >
@@ -79,7 +81,7 @@ const HomeScreen = ({ navigation }) => {
                   fontFamily: "baiJamjuree-bold",
                 }}
                 size={16}
-                color="#222B45"
+                color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
               />
             </TouchableOpacity>
           </View>
