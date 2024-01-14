@@ -4,11 +4,14 @@ import { bg2, light } from "../../../utils/assets";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import RegisterForm from "../../components/Foms/RegisterForm";
+import { useColorScheme } from "nativewind";
 
 export default function RegisterScreen() {
+  const { colorScheme } = useColorScheme();
+
   return (
     <View className="flex-1 bg-[#f8f8fa] dark:bg-dark">
-      <StatusBar style="light" />
+      <StatusBar style={colorScheme == "light" ? "dark" : "light"} />
 
       {/* Header */}
       <ImageBackground

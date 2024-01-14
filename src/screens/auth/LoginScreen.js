@@ -1,14 +1,23 @@
-import { View, ImageBackground, Image } from "react-native";
+import {
+  View,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import React from "react";
 import { bg2, light } from "../../../utils/assets";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
 import LoginForm from "../../components/Foms/LoginForm";
+import { useColorScheme } from "nativewind";
 
 export default function LoginScreen({ navigation }) {
+  const { colorScheme, toggleColorScheme } = useColorScheme();
+
   return (
     <View className="flex-1 bg-[#f8f8fa] dark:bg-dark">
-      <StatusBar style="light" />
+      <StatusBar style={colorScheme == "light" ? "dark" : "light"} />
 
       {/* Header */}
       <View className="">
@@ -39,6 +48,10 @@ export default function LoginScreen({ navigation }) {
           </Animated.Text>
         </ImageBackground>
       </View>
+
+      <TouchableOpacity onPress={toggleColorScheme}>
+        <Text>click</Text>
+      </TouchableOpacity>
 
       {/* Form */}
       <LoginForm />
