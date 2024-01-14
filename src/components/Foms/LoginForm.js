@@ -15,7 +15,7 @@ const LoginForm = () => {
       {/* Header */}
       <View className="mb-6">
         <Text
-          className="text-dark text-2xl"
+          className="text-dark dark:text-white text-2xl"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
           Welcome Back,{" "}
@@ -27,7 +27,7 @@ const LoginForm = () => {
           </Text>
         </Text>
         <Text
-          className="text-dark text-2xl"
+          className="text-dark dark:text-white text-2xl"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
           for Continue !
@@ -88,14 +88,14 @@ const LoginForm = () => {
         entering={FadeInDown.delay(500).duration(1000).springify()}
         className="py-3 flex-row items-center gap-3"
       >
-        <View className="bg-dark/10 flex-1 h-[1px]"></View>
+        <View className="bg-dark/10 dark:bg-white/10 flex-1 h-[1px]"></View>
         <Text
-          className="text-dark/40"
+          className="text-dark/40 dark:text-white/40"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
           Don't Have Account?
         </Text>
-        <View className="bg-dark/10 flex-1 h-[1px]"></View>
+        <View className="bg-dark/10 dark:bg-white/10 flex-1 h-[1px]"></View>
       </Animated.View>
 
       <Animated.View

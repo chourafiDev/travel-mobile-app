@@ -106,14 +106,14 @@ const RegisterForm = () => {
         entering={FadeInDown.delay(600).duration(1000).springify()}
         className="py-3 flex-row items-center gap-3"
       >
-        <View className="bg-dark/10 flex-1 h-[1px]"></View>
+        <View className="bg-dark/10 dark:bg-white/10 flex-1 h-[1px]"></View>
         <Text
-          className="text-dark/40"
+          className="text-dark/40 dark:text-white/40"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
           Have Account?
         </Text>
-        <View className="bg-dark/10 flex-1 h-[1px]"></View>
+        <View className="bg-dark/10 dark:bg-white/10 flex-1 h-[1px]"></View>
       </Animated.View>
       <Animated.View
         entering={FadeInDown.delay(600).duration(1000).springify()}
