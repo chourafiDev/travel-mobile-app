@@ -1,5 +1,6 @@
 const WELCOME = "Welcome";
 const LOGIN = "Login";
+const FORGOT_PASSWORD = "Forgot Password";
 const REGISTER = "Register";
 
 const HOME = "Home";
@@ -16,6 +17,7 @@ const PROFILE_DRAWER = "Profile drawer";
 export {
   WELCOME,
   LOGIN,
+  FORGOT_PASSWORD,
   REGISTER,
   HOME,
   DESTINATIONS,
