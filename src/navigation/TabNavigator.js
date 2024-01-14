@@ -66,7 +66,13 @@ export default function TabNavigator() {
                 <Icon
                   name="home"
                   size={20}
-                  color={focused ? "#23A892" : "#FBFBFB"}
+                  color={
+                    focused
+                      ? "#23A892"
+                      : colorScheme == "light"
+                      ? "#222B45"
+                      : "#FBFBFB"
+                  }
                 ></Icon>
               </View>
             ),
@@ -96,7 +102,13 @@ export default function TabNavigator() {
                 <Icon
                   name="map"
                   size={20}
-                  color={focused ? "#23A892" : "#FBFBFB"}
+                  color={
+                    focused
+                      ? "#23A892"
+                      : colorScheme == "light"
+                      ? "#222B45"
+                      : "#FBFBFB"
+                  }
                 ></Icon>
               </View>
             ),
@@ -126,7 +138,13 @@ export default function TabNavigator() {
                 <Icon
                   name="heart"
                   size={20}
-                  color={focused ? "#23A892" : "#FBFBFB"}
+                  color={
+                    focused
+                      ? "#23A892"
+                      : colorScheme == "light"
+                      ? "#222B45"
+                      : "#FBFBFB"
+                  }
                 ></Icon>
               </View>
             ),
@@ -156,7 +174,13 @@ export default function TabNavigator() {
                 <Icon
                   name="settings"
                   size={20}
-                  color={focused ? "#23A892" : "#FBFBFB"}
+                  color={
+                    focused
+                      ? "#23A892"
+                      : colorScheme == "light"
+                      ? "#222B45"
+                      : "#FBFBFB"
+                  }
                 ></Icon>
               </View>
             ),
