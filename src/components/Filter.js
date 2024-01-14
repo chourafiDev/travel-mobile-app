@@ -13,12 +13,13 @@ import {
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
 import { categories } from "../../utils/data";
-import Icon from "react-native-vector-icons/Feather";
 import DropDown from "./ui/DropDown";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useColorScheme } from "nativewind";
+import { LinearGradient } from "expo-linear-gradient";
+import Icon from "react-native-vector-icons/Feather";
 
-export default function Filter({ sheetRef }) {
+const Filter = ({ sheetRef }) => {
   const { colorScheme } = useColorScheme();
 
   const snapPoints = useMemo(() => ["90%"], []);
@@ -81,19 +82,6 @@ export default function Filter({ sheetRef }) {
   const toogleDatePicker = () => {
     setShowPicker(!showPicker);
   };
-
-  // const formatDate = (rawDate) => {
-  //   let date = new Date(rawDate);
-
-  //   let year = date.getFullYear();
-  //   let month = date.getMonth() + 1;
-  //   let day = date.getDate();
-
-  //   month = month < 10 ? `0${month}` : month;
-  //   day = day < 10 ? `0${day}` : day;
-
-  //   return `${day}-${month}-${year}`;
-  // };
 
   const onChangeDate = ({ type }, selectedDate) => {
     if (type == "set") {
@@ -281,10 +269,16 @@ export default function Filter({ sheetRef }) {
 
           <TouchableOpacity
             activeOpacity={0.8}
-            className="p-3 rounded-2xl bg-brand mt-3"
+            className="rounded-2xl overflow-hidden mt-3"
           >
+            <LinearGradient
+              colors={["#23a892", "#04c7a7"]}
+              className="w-full h-full absolute top-0 right-0"
+              start={{ x: 0.7, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
+            />
             <Text
-              className="text-white text-center text-[18px]"
+              className="text-white text-center text-[18px] py-3"
               style={{ fontFamily: "baiJamjuree-bold" }}
             >
               Apply Filter
@@ -295,7 +289,7 @@ export default function Filter({ sheetRef }) {
                 fontFamily: "baiJamjuree-bold",
                 position: "absolute",
                 right: 20,
-                bottom: "66%",
+                bottom: "33%",
               }}
               size={15}
               color="#FBFBFB"
@@ -305,4 +299,6 @@ export default function Filter({ sheetRef }) {
       </BottomSheetView>
     </BottomSheetModal>
   );
-}
+};
+
+export default Filter;
