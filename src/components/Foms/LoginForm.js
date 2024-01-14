@@ -7,6 +7,7 @@ import { useColorScheme } from "nativewind";
 import { useNavigation } from "@react-navigation/native";
 import { FORGOT_PASSWORD, HOME_TAB, REGISTER } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
+import GradientButton from "../ui/GradientButton";
 
 const LoginForm = () => {
   const { colorScheme } = useColorScheme();
@@ -102,19 +103,7 @@ const LoginForm = () => {
       <Animated.View
         entering={FadeInDown.delay(400).duration(1000).springify()}
       >
-        <TouchableOpacity
-          activeOpacity={0.8}
-          className="p-3 rounded-2xl bg-brand"
-          style={[colorScheme == "light" && shadow.boxShadow]}
-          onPress={() => navigation.navigate(HOME_TAB)}
-        >
-          <Text
-            className="text-white text-center text-[17px]"
-            style={{ fontFamily: "baiJamjuree-medium" }}
-          >
-            Login
-          </Text>
-        </TouchableOpacity>
+        <GradientButton label="Login" icon="" route={HOME_TAB} />
       </Animated.View>
 
       <Animated.View

@@ -5,6 +5,7 @@ import { shadow } from "../../utils/theme";
 import Filter from "./Filter";
 import { useColorScheme } from "nativewind";
 import { filter } from "../../utils/assets";
+import { LinearGradient } from "expo-linear-gradient";
 
 const Search = ({ withFilter, placeHolder }) => {
   const { colorScheme } = useColorScheme();
@@ -47,10 +48,16 @@ const Search = ({ withFilter, placeHolder }) => {
         </View>
         {withFilter && (
           <TouchableOpacity
-            className="bg-brand dark:bg-dark-2/60 justify-center items-center w-12 h-12 rounded-2xl"
+            className="bg-brand dark:bg-dark-2/60 justify-center items-center w-12 h-12 rounded-2xl overflow-hidden"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={handleSnapPress}
           >
+            <LinearGradient
+              colors={["#23a892", "#03b699"]}
+              className="w-full h-full absolute top-0 right-0"
+              start={{ x: 0.7, y: 0 }}
+              end={{ x: 0.5, y: 1 }}
+            />
             <Image source={filter} className="w-6 h-6" />
           </TouchableOpacity>
         )}

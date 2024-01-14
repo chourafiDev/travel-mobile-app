@@ -18,6 +18,7 @@ import { categories, destinations } from "../../../utils/data";
 import TopTabBar from "../../components/layout/TopTabBar";
 import Overview from "../../components/Overview";
 import Reviews from "../../components/Reviews/Reviews";
+import GradientButton from "../../components/ui/GradientButton";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -67,7 +68,7 @@ export default function DestinationScreen({ navigation }) {
           />
         </TouchableOpacity>
         <Text
-          className="text-dark text-xl"
+          className="text-dark dark:text-white text-xl"
           style={{ fontFamily: "baiJamjuree-bold" }}
         >
           {item.title}
@@ -150,34 +151,10 @@ export default function DestinationScreen({ navigation }) {
           end={{ x: 0.5, y: 0.4 }}
           className="absolute bottom-0 w-full h-28"
         />
-        <TouchableOpacity
-          activeOpacity={0.8}
-          className="p-3 rounded-2xl bg-brand my-2 mx-4"
-        >
-          <Text
-            className="text-white text-center text-[18px]"
-            style={{ fontFamily: "baiJamjuree-bold" }}
-          >
-            Book Now | $106{" "}
-            <Text
-              className="text-[14px]"
-              style={{ fontFamily: "baiJamjuree-medium" }}
-            >
-              per person
-            </Text>
-          </Text>
-          <Icon
-            name="credit-card"
-            style={{
-              fontFamily: "baiJamjuree-bold",
-              position: "absolute",
-              right: 20,
-              bottom: "66%",
-            }}
-            size={15}
-            color="#FBFBFB"
-          />
-        </TouchableOpacity>
+
+        <View className="my-2 mx-4">
+          <GradientButton label="Book Now | $106" icon="credit-card" route="" />
+        </View>
       </View>
     </SafeAreaView>
   );

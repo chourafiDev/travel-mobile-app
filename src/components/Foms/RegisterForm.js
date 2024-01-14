@@ -5,8 +5,9 @@ import { shadow } from "../../../utils/theme";
 import { useColorScheme } from "nativewind";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { LOGIN } from "../../constants/routes";
+import { HOME_TAB, LOGIN } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
+import GradientButton from "../ui/GradientButton";
 
 const RegisterForm = () => {
   const { colorScheme } = useColorScheme();
@@ -134,18 +135,11 @@ const RegisterForm = () => {
       <Animated.View
         entering={FadeInDown.delay(400).duration(1000).springify()}
       >
-        <TouchableOpacity
-          activeOpacity={0.8}
-          className="p-3 rounded-2xl bg-brand"
-          style={[colorScheme == "light" && shadow.boxShadow]}
+        <Animated.View
+          entering={FadeInDown.delay(400).duration(1000).springify()}
         >
-          <Text
-            className="text-white text-center text-[17px]"
-            style={{ fontFamily: "baiJamjuree-medium" }}
-          >
-            SignUp
-          </Text>
-        </TouchableOpacity>
+          <GradientButton label="Sign Up" icon="" route={HOME_TAB} />
+        </Animated.View>
       </Animated.View>
       <Animated.View
         entering={FadeInDown.delay(600).duration(1000).springify()}
