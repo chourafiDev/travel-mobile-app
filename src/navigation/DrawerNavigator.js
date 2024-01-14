@@ -3,9 +3,8 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { DESTINATION, HOME_TAB } from "../constants/routes";
 
 import CustomDrawer from "../components/layout/CustomDrawer";
+
 // Screens
-import FavoritesScreen from "../screens/app/FavoritesScreen";
-import ProfileScreen from "../screens/app/ProfileScreen";
 import TabNavigator from "./TabNavigator";
 import DestinationScreen from "../screens/app/DestinationScreen";
 
