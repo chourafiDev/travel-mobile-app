@@ -13,7 +13,7 @@ import LoginForm from "../../components/Foms/LoginForm";
 import { useColorScheme } from "nativewind";
 
 export default function LoginScreen({ navigation }) {
-  const { colorScheme, toggleColorScheme } = useColorScheme();
+  const { colorScheme } = useColorScheme();
 
   return (
     <View className="flex-1 bg-[#f8f8fa] dark:bg-dark">
@@ -48,10 +48,6 @@ export default function LoginScreen({ navigation }) {
           </Animated.Text>
         </ImageBackground>
       </View>
-
-      <TouchableOpacity onPress={toggleColorScheme}>
-        <Text>click</Text>
-      </TouchableOpacity>
 
       {/* Form */}
       <LoginForm />
