@@ -87,17 +87,21 @@ const LoginForm = () => {
         </TouchableOpacity>
       </Animated.View>
 
-      <TouchableOpacity
-        className="mb-10 mt-2 items-end"
-        onPress={() => navigation.navigate(FORGOT_PASSWORD)}
+      <Animated.View
+        entering={FadeInDown.delay(300).duration(1000).springify()}
       >
-        <Text
-          className="text-dark/80 dark:text-white/80"
-          style={{ fontFamily: "baiJamjuree-semibold" }}
+        <TouchableOpacity
+          className="mb-10 mt-2 items-end"
+          onPress={() => navigation.navigate(FORGOT_PASSWORD)}
         >
-          Forgot password?
-        </Text>
-      </TouchableOpacity>
+          <Text
+            className="text-dark/80 dark:text-white/80"
+            style={{ fontFamily: "baiJamjuree-semibold" }}
+          >
+            Forgot password?
+          </Text>
+        </TouchableOpacity>
+      </Animated.View>
 
       {/* Footer */}
       <Animated.View
