@@ -9,6 +9,7 @@ const DESTINATION = "Destination";
 const FAVORITES = "Favorites";
 const SETTING = "Setting";
 const PROFILE_INFO = "Profile info";
+const CHANGE_PASSWORD = "Change password";
 
 const HOME_TAB = "Home tab";
 const HOME_DRAWER = "Home drawer";
@@ -30,4 +31,5 @@ export {
   FAVORITES_DRAWER,
   SETTING_DRAWER,
   PROFILE_INFO,
+  CHANGE_PASSWORD,
 };
