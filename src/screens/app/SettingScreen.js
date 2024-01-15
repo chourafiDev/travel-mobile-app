@@ -6,7 +6,7 @@ import { useColorScheme } from "nativewind";
 import { shadow } from "../../../utils/theme";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { PROFILE_INFO } from "../../constants/routes";
+import { CHANGE_PASSWORD, PROFILE_INFO } from "../../constants/routes";
 
 export default function SettingScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
@@ -149,6 +149,9 @@ export default function SettingScreen({ navigation }) {
             activeOpacity={0.8}
             className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
             style={[colorScheme == "light" && shadow.boxShadow]}
+            onPress={() => {
+              navigation.navigate(CHANGE_PASSWORD);
+            }}
           >
             <View className="flex-row items-center">
               <View
