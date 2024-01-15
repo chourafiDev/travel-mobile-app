@@ -1,6 +1,11 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
-import { DESTINATION, HOME_TAB, PROFILE_INFO } from "../constants/routes";
+import {
+  CHANGE_PASSWORD,
+  DESTINATION,
+  HOME_TAB,
+  PROFILE_INFO,
+} from "../constants/routes";
 
 import CustomDrawer from "../components/layout/CustomDrawer";
 
@@ -8,6 +13,7 @@ import CustomDrawer from "../components/layout/CustomDrawer";
 import TabNavigator from "./TabNavigator";
 import DestinationScreen from "../screens/app/DestinationScreen";
 import EditProfileInfoScreen from "../screens/app/EditProfileInfoScreen";
+import ChangePasswordScreen from "../screens/app/ChangePasswordScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -50,6 +56,16 @@ function DrawerNavigator() {
         component={EditProfileInfoScreen}
         options={{
           title: "Profile info",
+          drawerIcon: ({ color }) => (
+            <Icon name="home-sharp" size={20} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={CHANGE_PASSWORD}
+        component={ChangePasswordScreen}
+        options={{
+          title: "Change password",
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
