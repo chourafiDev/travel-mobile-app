@@ -20,12 +20,14 @@ const user05 = require("../assets/images/04.png");
 const user06 = require("../assets/images/05.png");
 const user07 = require("../assets/images/06.jpg");
 const user08 = require("../assets/images/07.jpg");
+const luggage = require("../assets/images/luggage.jpg");
 
 export {
   welcome,
   user,
   bg1,
   bg2,
+  luggage,
   beach,
   camp,
   forest,
