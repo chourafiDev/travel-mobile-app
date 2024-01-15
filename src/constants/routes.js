@@ -6,8 +6,9 @@ const REGISTER = "Register";
 const HOME = "Home";
 const DESTINATIONS = "Destinations";
 const DESTINATION = "Destination";
-const SETTING = "Setting";
 const FAVORITES = "Favorites";
+const SETTING = "Setting";
+const PROFILE_INFO = "Profile info";
 
 const HOME_TAB = "Home tab";
 const HOME_DRAWER = "Home drawer";
@@ -28,4 +29,5 @@ export {
   HOME_DRAWER,
   FAVORITES_DRAWER,
   SETTING_DRAWER,
+  PROFILE_INFO,
 };
