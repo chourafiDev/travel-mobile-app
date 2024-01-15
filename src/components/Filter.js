@@ -22,7 +22,7 @@ import Icon from "react-native-vector-icons/Feather";
 const Filter = ({ sheetRef }) => {
   const { colorScheme } = useColorScheme();
 
-  const snapPoints = useMemo(() => ["90%"], []);
+  const snapPoints = useMemo(() => ["92%"], []);
 
   const renderBackdrop = useCallback((props) => {
     return (
@@ -127,14 +127,22 @@ const Filter = ({ sheetRef }) => {
             >
               Location
             </Text>
-            <TextInput
-              placeholder="Find the world..."
-              style={{ fontFamily: "baiJamjuree-regular" }}
-              className="w-full text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
-              placeholderTextColor={
-                colorScheme == "light" ? "#222B4580" : "#ffffff"
-              }
-            />
+
+            <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
+              <Icon
+                name="map-pin"
+                size={15}
+                color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+              />
+              <TextInput
+                placeholder="Find the world..."
+                className="text-dark dark:text-white flex-1 ml-3"
+                style={[{ fontFamily: "baiJamjuree-regular" }]}
+                placeholderTextColor={
+                  colorScheme == "light" ? "#222B4580" : "#ffffff"
+                }
+              />
+            </View>
           </View>
 
           <View className="mt-5">
@@ -212,17 +220,25 @@ const Filter = ({ sheetRef }) => {
             </Text>
 
             <Pressable onPress={toogleDatePicker}>
-              <TextInput
-                className="w-full text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
-                placeholder="Date"
-                editable={false}
-                value={startDate}
-                onChangeText={setStartDate}
-                onPressIn={toogleDatePicker}
-                placeholderTextColor={
-                  colorScheme == "light" ? "#222B4580" : "#ffffff"
-                }
-              />
+              <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
+                <Icon
+                  name="calendar"
+                  size={15}
+                  color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+                />
+                <TextInput
+                  placeholder="Date"
+                  editable={false}
+                  value={startDate}
+                  onChangeText={setStartDate}
+                  onPressIn={toogleDatePicker}
+                  className="text-dark dark:text-white flex-1 ml-3"
+                  style={[{ fontFamily: "baiJamjuree-regular" }]}
+                  placeholderTextColor={
+                    colorScheme == "light" ? "#222B4580" : "#ffffff"
+                  }
+                />
+              </View>
             </Pressable>
 
             {showPicker && (
@@ -244,26 +260,42 @@ const Filter = ({ sheetRef }) => {
               Price
             </Text>
             <View className="flex-row gap-3">
-              <TextInput
-                onChangeText={setMinPrice}
-                className="flex-1 text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
-                value={minPrice}
-                placeholder="Min"
-                keyboardType="numeric"
-                placeholderTextColor={
-                  colorScheme == "light" ? "#222B4580" : "#ffffff"
-                }
-              />
-              <TextInput
-                onChangeText={setMaxPrice}
-                className="flex-1 text-dark dark:text-white bg-white dark:bg-dark-2 border border-dark/10 px-3 py-2 rounded-2xl"
-                value={maxPrice}
-                placeholder="Max"
-                keyboardType="numeric"
-                placeholderTextColor={
-                  colorScheme == "light" ? "#222B4580" : "#ffffff"
-                }
-              />
+              <View className="flex-1 flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2 mb-3">
+                <Icon
+                  name="dollar-sign"
+                  size={15}
+                  color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+                />
+                <TextInput
+                  placeholder="Min"
+                  onChangeText={setMinPrice}
+                  value={minPrice}
+                  className="text-dark dark:text-white flex-1 ml-3"
+                  style={[{ fontFamily: "baiJamjuree-regular" }]}
+                  keyboardType="numeric"
+                  placeholderTextColor={
+                    colorScheme == "light" ? "#222B4580" : "#ffffff"
+                  }
+                />
+              </View>
+              <View className="flex-1 flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2 mb-3">
+                <Icon
+                  name="dollar-sign"
+                  size={15}
+                  color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+                />
+                <TextInput
+                  placeholder="Max"
+                  onChangeText={setMaxPrice}
+                  value={maxPrice}
+                  className="text-dark dark:text-white flex-1 ml-3"
+                  style={[{ fontFamily: "baiJamjuree-regular" }]}
+                  keyboardType="numeric"
+                  placeholderTextColor={
+                    colorScheme == "light" ? "#222B4580" : "#ffffff"
+                  }
+                />
+              </View>
             </View>
           </View>
 
