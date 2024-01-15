@@ -14,10 +14,10 @@ import Category from "../../components/Category";
 import { categories, destinations } from "../../../utils/data";
 import Destination from "../../components/Destination";
 import { shadow } from "../../../utils/theme";
-import { SafeAreaView } from "react-native-safe-area-context";
 import Search from "../../components/Search";
 import { DESTINATIONS, NOTIFICATION } from "../../constants/routes";
 import { useColorScheme } from "nativewind";
+import { StatusBar } from "expo-status-bar";
 
 const HomeScreen = ({ navigation }) => {
   const { colorScheme } = useColorScheme();
@@ -33,16 +33,18 @@ const HomeScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
+    <View className="flex-1 bg-[#f8f8fa] dark:bg-dark">
+      <StatusBar style={colorScheme == "light" ? "dark" : "light"} />
+
       <ScrollView showsVerticalScrollIndicator={false}>
         {/* Header */}
         <ImageBackground
           source={bg1}
           resizeMode="stretch"
-          className="h-40 w-full"
+          className="h-52 w-full"
         >
           <View
-            className="flex flex-row justify-between items-center px-4 pb-6 pt-8"
+            className="flex flex-row justify-between items-center px-4 pb-6 pt-14"
             style={[shadow.boxShadow]}
           >
             <View className="flex flex-row gap-3 items-center">
@@ -217,7 +219,7 @@ const HomeScreen = ({ navigation }) => {
           />
         </View>
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };
 
