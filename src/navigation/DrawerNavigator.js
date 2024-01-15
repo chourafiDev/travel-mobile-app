@@ -4,6 +4,7 @@ import {
   CHANGE_PASSWORD,
   DESTINATION,
   HOME_TAB,
+  NOTIFICATION,
   PROFILE_INFO,
 } from "../constants/routes";
 
@@ -14,6 +15,7 @@ import TabNavigator from "./TabNavigator";
 import DestinationScreen from "../screens/app/DestinationScreen";
 import EditProfileInfoScreen from "../screens/app/EditProfileInfoScreen";
 import ChangePasswordScreen from "../screens/app/ChangePasswordScreen";
+import NotificationScreen from "../screens/app/NotificationScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -66,6 +68,16 @@ function DrawerNavigator() {
         component={ChangePasswordScreen}
         options={{
           title: "Change password",
+          drawerIcon: ({ color }) => (
+            <Icon name="home-sharp" size={20} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={NOTIFICATION}
+        component={NotificationScreen}
+        options={{
+          title: "Notification",
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),

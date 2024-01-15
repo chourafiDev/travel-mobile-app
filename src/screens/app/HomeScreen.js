@@ -16,7 +16,7 @@ import Destination from "../../components/Destination";
 import { shadow } from "../../../utils/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Search from "../../components/Search";
-import { DESTINATIONS } from "../../constants/routes";
+import { DESTINATIONS, NOTIFICATION } from "../../constants/routes";
 import { useColorScheme } from "nativewind";
 
 const HomeScreen = ({ navigation }) => {
@@ -70,20 +70,36 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
               </View>
             </View>
-            <TouchableOpacity
-              className="w-10 h-10 bg-white dark:bg-dark-2 rounded-full items-center justify-center "
-              style={[shadow.boxShadow]}
-              onPress={() => navigation.openDrawer()}
-            >
-              <Icon
-                name="menu"
-                style={{
-                  fontFamily: "baiJamjuree-bold",
-                }}
-                size={16}
-                color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-              />
-            </TouchableOpacity>
+            <View className="flex-row items-center gap-1">
+              <TouchableOpacity
+                className="w-10 h-10 bg-white dark:bg-dark-2 rounded-l-2xl items-center justify-center "
+                style={[shadow.boxShadow]}
+                onPress={() => navigation.navigate(NOTIFICATION)}
+              >
+                <Icon
+                  name="bell"
+                  style={{
+                    fontFamily: "baiJamjuree-bold",
+                  }}
+                  size={16}
+                  color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                className="w-10 h-10 bg-white dark:bg-dark-2 rounded-r-2xl items-center justify-center "
+                style={[shadow.boxShadow]}
+                onPress={() => navigation.openDrawer()}
+              >
+                <Icon
+                  name="menu"
+                  style={{
+                    fontFamily: "baiJamjuree-bold",
+                  }}
+                  size={16}
+                  color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </ImageBackground>
 
