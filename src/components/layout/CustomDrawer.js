@@ -169,7 +169,7 @@ const CustomDrawer = ({ navigation }) => {
               className="text-dark dark:text-white text-[17px]"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              Help
+              Help Center
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
