@@ -4,10 +4,7 @@ import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { shadow } from "../../../utils/theme";
 import Icon from "react-native-vector-icons/Feather";
-import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { user } from "../../../utils/assets";
 import { HOME_TAB } from "../../constants/routes";
 import GradientButton from "../../components/ui/GradientButton";
