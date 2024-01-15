@@ -8,7 +8,7 @@ import {
   ImageBackground,
   FlatList,
 } from "react-native";
-import { bg1, user } from "../../../utils/assets";
+import { bg1, luggage, user } from "../../../utils/assets";
 import Icon from "react-native-vector-icons/Feather";
 import Category from "../../components/Category";
 import { categories, destinations } from "../../../utils/data";
@@ -88,12 +88,15 @@ const HomeScreen = ({ navigation }) => {
         </ImageBackground>
 
         <View className="px-4 mt-3 mb-6">
-          <Text
-            className="text-dark dark:text-white text-[28px] -mb-2"
-            style={{ fontFamily: "baiJamjuree-regular" }}
-          >
-            Explore <Text className="text-brand">Naural</Text>
-          </Text>
+          <View className="-mb-2 flex-row items-end gap-2">
+            <Text
+              className="text-dark dark:text-white text-[28px]"
+              style={{ fontFamily: "baiJamjuree-regular" }}
+            >
+              Explore <Text className="text-brand">Naural</Text>
+            </Text>
+            <Image source={luggage} className="w-20 h-8 rounded-xl mb-[10px]" />
+          </View>
           <Text
             className="text-dark dark:text-white font-semibold text-[30px]"
             style={{ fontFamily: "baiJamjuree-bold" }}
