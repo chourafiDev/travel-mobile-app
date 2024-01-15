@@ -1,12 +1,13 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
-import { DESTINATION, HOME_TAB } from "../constants/routes";
+import { DESTINATION, HOME_TAB, PROFILE_INFO } from "../constants/routes";
 
 import CustomDrawer from "../components/layout/CustomDrawer";
 
 // Screens
 import TabNavigator from "./TabNavigator";
 import DestinationScreen from "../screens/app/DestinationScreen";
+import EditProfileInfoScreen from "../screens/app/EditProfileInfoScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -39,6 +40,16 @@ function DrawerNavigator() {
         component={DestinationScreen}
         options={{
           title: "Destination",
+          drawerIcon: ({ color }) => (
+            <Icon name="home-sharp" size={20} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name={PROFILE_INFO}
+        component={EditProfileInfoScreen}
+        options={{
+          title: "Profile info",
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
