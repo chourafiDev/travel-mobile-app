@@ -1,14 +1,14 @@
 {
   "expo": {
-    "name": "travel-app",
-    "slug": "travel-app",
+    "name": "Journey waypoints",
+    "slug": "journey-waypoints",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "image": "./assets/splash-screen.png",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
@@ -23,14 +23,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": ["./assets/fonts/BaiJamjuree-Bold.ttf"]
-        }
-      ]
-    ]
+    }
   }
 }
