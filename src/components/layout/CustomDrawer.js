@@ -12,6 +12,7 @@ import {
   FAVORITES,
   HOME_TAB,
   SETTING,
+  USERS,
 } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -120,7 +121,7 @@ const CustomDrawer = ({ navigation }) => {
             }}
           >
             <Icon
-              name="user"
+              name="settings"
               size={19}
               color={colorScheme == "light" ? "#222B45B2" : "#778da9"}
             />
@@ -130,6 +131,25 @@ const CustomDrawer = ({ navigation }) => {
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
               Setting
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            className="flex-row space-x-5 items-center mb-4"
+            onPress={() => {
+              navigation.navigate(USERS);
+            }}
+          >
+            <Icon
+              name="user"
+              size={19}
+              color={colorScheme == "light" ? "#222B45B2" : "#778da9"}
+            />
+
+            <Text
+              className="text-dark dark:text-white text-[17px]"
+              style={{ fontFamily: "baiJamjuree-semibold" }}
+            >
+              Users
             </Text>
           </TouchableOpacity>
           <View className="pt-4">
@@ -152,6 +172,7 @@ const CustomDrawer = ({ navigation }) => {
             </TouchableOpacity>
           </View>
         </View>
+
         <View className="space-y-3 border-t-[1px] border-dark/5 dark:border-white/5 pt-4">
           <TouchableOpacity
             className="flex-row space-x-5 items-center"
