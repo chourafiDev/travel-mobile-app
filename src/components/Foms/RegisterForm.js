@@ -8,6 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { HOME_TAB, LOGIN } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import GradientButton from "../ui/GradientButton";
+import OutlineButton from "../ui/OutlineButton";
 
 const RegisterForm = () => {
   const { colorScheme } = useColorScheme();
@@ -163,22 +164,7 @@ const RegisterForm = () => {
       <Animated.View
         entering={FadeInDown.delay(600).duration(1000).springify()}
       >
-        <TouchableOpacity
-          activeOpacity={0.9}
-          onPress={() => navigation.navigate(LOGIN)}
-          className="bg-white border border-brand/80 px-4 py-3 rounded-2xl dark:bg-dark-2"
-          style={[
-            colorScheme == "light" && shadow.boxShadow,
-            { fontFamily: "baiJamjuree-regular" },
-          ]}
-        >
-          <Text
-            className="text-brand text-center text-[17px]"
-            style={{ fontFamily: "baiJamjuree-medium" }}
-          >
-            Login
-          </Text>
-        </TouchableOpacity>
+        <OutlineButton label="Login" type="primary" size="lg" />
       </Animated.View>
     </View>
   );
