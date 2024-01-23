@@ -1,7 +1,6 @@
 import AppNavigation from "./src/navigation";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
@@ -23,9 +22,7 @@ export default function App() {
   }
   return (
     <GestureHandlerRootView className="flex-1">
-      <BottomSheetModalProvider>
-        <AppNavigation />
-      </BottomSheetModalProvider>
+      <AppNavigation />
     </GestureHandlerRootView>
   );
 }
