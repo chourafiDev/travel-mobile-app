@@ -6,6 +6,7 @@ import {
   HOME_TAB,
   NOTIFICATION,
   PROFILE_INFO,
+  USERS,
 } from "../constants/routes";
 
 import CustomDrawer from "../components/layout/CustomDrawer";
@@ -16,6 +17,7 @@ import DestinationScreen from "../screens/app/DestinationScreen";
 import EditProfileInfoScreen from "../screens/app/EditProfileInfoScreen";
 import ChangePasswordScreen from "../screens/app/ChangePasswordScreen";
 import NotificationScreen from "../screens/app/NotificationScreen";
+import UsersScreen from "../screens/app/UsersScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -80,6 +82,17 @@ function DrawerNavigator() {
           title: "Notification",
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name={USERS}
+        component={UsersScreen}
+        options={{
+          title: "Users",
+          drawerIcon: ({ color }) => (
+            <Icon name="user" size={20} color={color} />
           ),
         }}
       />
