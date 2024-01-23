@@ -83,7 +83,7 @@ const EditProfileInfoScreen = ({ navigation }) => {
           entering={FadeInDown.delay(180).duration(1000).springify()}
         >
           <Text
-            className="text-dark text-lg mb-3"
+            className="text-dark dark:text-white text-lg mb-3"
             style={{ fontFamily: "baiJamjuree-semibold" }}
           >
             Profile Details
