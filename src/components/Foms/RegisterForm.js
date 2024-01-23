@@ -138,7 +138,13 @@ const RegisterForm = () => {
         <Animated.View
           entering={FadeInDown.delay(400).duration(1000).springify()}
         >
-          <GradientButton label="Sign Up" icon="" size="lg" route={HOME_TAB} />
+          <GradientButton
+            label="Sign Up"
+            icon=""
+            size="lg"
+            type="primary"
+            route={HOME_TAB}
+          />
         </Animated.View>
       </Animated.View>
       <Animated.View

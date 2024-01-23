@@ -300,7 +300,12 @@ const Filter = ({ sheetRef }) => {
           </View>
 
           <View className="mt-3">
-            <GradientButton label="Apply Filter" icon="filter" size="lg" />
+            <GradientButton
+              label="Apply Filter"
+              icon="filter"
+              type="primary"
+              size="lg"
+            />
           </View>
         </View>
       </BottomSheetView>

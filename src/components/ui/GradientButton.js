@@ -3,12 +3,8 @@ import { Text, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
 
-const GradientButton = ({ label, icon, route, size }) => {
+const GradientButton = ({ label, icon, route, size, type }) => {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
@@ -25,7 +21,9 @@ const GradientButton = ({ label, icon, route, size }) => {
       onPress={handleNavigate}
     >
       <LinearGradient
-        colors={["#23a892", "#00c3a4"]}
+        colors={
+          type == "primary" ? ["#23a892", "#00c3a4"] : ["#ef476f", "#f76587"]
+        }
         className="w-full h-full absolute top-0 right-0"
       />
       <Text

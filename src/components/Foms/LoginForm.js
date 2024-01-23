@@ -107,7 +107,13 @@ const LoginForm = () => {
       <Animated.View
         entering={FadeInDown.delay(400).duration(1000).springify()}
       >
-        <GradientButton label="Login" icon="" size="lg" route={HOME_TAB} />
+        <GradientButton
+          label="Login"
+          icon=""
+          size="lg"
+          type="primary"
+          route={HOME_TAB}
+        />
       </Animated.View>
 
       <Animated.View

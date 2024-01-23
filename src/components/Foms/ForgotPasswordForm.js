@@ -61,6 +61,7 @@ const ForgotPasswordForm = () => {
           label="Reset Password"
           icon=""
           size="lg"
+          type="primary"
           route={HOME_TAB}
         />
       </Animated.View>

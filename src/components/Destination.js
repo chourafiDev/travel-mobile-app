@@ -25,7 +25,7 @@ export default function Destination({
         className="absolute top-3 right-3 bg-white/80 backdrop-blur-md w-7 h-7 rounded-full z-10 justify-center items-center"
         style={[shadow.boxShadow]}
       >
-        <Icon name="heart" color="#e63946" size={16} />
+        <Icon name="heart" color="#ef476f" size={16} />
       </TouchableOpacity>
 
       <Image source={image} className="rounded-2xl w-full h-32" />
