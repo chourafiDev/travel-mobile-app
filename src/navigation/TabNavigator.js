@@ -115,8 +115,6 @@ export default function TabNavigator() {
               <LinearGradient
                 colors={["#23a892", "#00dbb7"]}
                 className="w-full h-full absolute top-0 right-0"
-                start={{ x: 0.7, y: 0 }}
-                end={{ x: 0.5, y: 1 }}
               />
               <IconFeather
                 name="globe"

@@ -96,8 +96,6 @@ export default function DestinationScreen({ navigation }) {
         <View>
           <LinearGradient
             colors={["transparent", "#222B4599"]}
-            start={{ x: 0.5, y: 0 }}
-            end={{ x: 0.5, y: 1 }}
             className="absolute bottom-0 h-28 w-full"
           />
           <View className="flex-row gap-2 items-center justify-center mb-3">
@@ -147,13 +145,18 @@ export default function DestinationScreen({ navigation }) {
             "transparent",
             colorScheme == "light" ? "#fbfbfbfb" : "#222B45",
           ]}
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.5, y: 0.4 }}
+          // start={{ x: 0.5, y: 0 }}
+          // end={{ x: 0.5, y: 0.4 }}
           className="absolute bottom-0 w-full h-28"
         />
 
         <View className="my-2 mx-4">
-          <GradientButton label="Book Now | $106" icon="credit-card" route="" />
+          <GradientButton
+            label="Book Now | $106"
+            icon="credit-card"
+            size="lg"
+            route=""
+          />
         </View>
       </View>
     </SafeAreaView>

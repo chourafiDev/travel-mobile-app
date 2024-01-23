@@ -16,7 +16,6 @@ import { categories } from "../../utils/data";
 import DropDown from "./ui/DropDown";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useColorScheme } from "nativewind";
-import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Feather";
 import GradientButton from "./ui/GradientButton";
 
