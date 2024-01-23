@@ -57,7 +57,12 @@ const ForgotPasswordForm = () => {
       <Animated.View
         entering={FadeInDown.delay(400).duration(1000).springify()}
       >
-        <GradientButton label="Reset Password" icon="" route={HOME_TAB} />
+        <GradientButton
+          label="Reset Password"
+          icon=""
+          size="lg"
+          route={HOME_TAB}
+        />
       </Animated.View>
     </View>
   );
