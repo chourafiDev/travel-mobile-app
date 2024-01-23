@@ -172,7 +172,13 @@ const EditProfileInfoScreen = ({ navigation }) => {
         entering={FadeInDown.delay(600).duration(1000).springify()}
         className="mt-auto mb-6"
       >
-        <GradientButton label="Edit" icon="edit-2" route={HOME_TAB} />
+        <GradientButton
+          label="Edit"
+          icon="edit-2"
+          size="lg"
+          type="primary"
+          route={HOME_TAB}
+        />
       </Animated.View>
     </View>
   );
