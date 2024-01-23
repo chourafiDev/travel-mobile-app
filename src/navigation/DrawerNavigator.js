@@ -5,6 +5,7 @@ import {
   CHANGE_PASSWORD,
   DESTINATION,
   HOME_DRAWER,
+  MANAGE_DESTINATIONS,
   NOTIFICATION,
   PROFILE_INFO,
   USERS,
@@ -20,6 +21,7 @@ import ChangePasswordScreen from "../screens/app/ChangePasswordScreen";
 import NotificationScreen from "../screens/app/NotificationScreen";
 import UsersScreen from "../screens/app/UsersScreen";
 import CategoriesScreen from "../screens/app/CategoriesScreen";
+import ManageDestinationsScreen from "../screens/app/ManageDestinationsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -106,6 +108,17 @@ function DrawerNavigator() {
           title: "Categories",
           drawerIcon: ({ color }) => (
             <Icon name="layers" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name={MANAGE_DESTINATIONS}
+        component={ManageDestinationsScreen}
+        options={{
+          title: "Manage Destinations",
+          drawerIcon: ({ color }) => (
+            <Icon name="columns" size={20} color={color} />
           ),
         }}
       />

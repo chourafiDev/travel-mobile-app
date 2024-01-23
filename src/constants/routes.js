@@ -13,6 +13,7 @@ const CHANGE_PASSWORD = "Change password";
 const NOTIFICATION = "Notification";
 const USERS = "Users";
 const CATEGORIES = "Categories";
+const MANAGE_DESTINATIONS = "Manage Destinations";
 
 const HOME_TAB = "Home tab";
 const HOME_DRAWER = "Home drawer";
@@ -38,4 +39,5 @@ export {
   NOTIFICATION,
   USERS,
   CATEGORIES,
+  MANAGE_DESTINATIONS,
 };
