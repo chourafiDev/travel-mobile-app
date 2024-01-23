@@ -1,5 +1,6 @@
 // images
 const welcome = require("../assets/images//welcome.jpg");
+const userDefault = require("../assets/images/user-default.png");
 const user = require("../assets/images/user.jpg");
 const bg1 = require("../assets/images/bg1.png");
 const bg2 = require("../assets/images/bg2.png");
@@ -25,6 +26,7 @@ const luggage = require("../assets/images/luggage.jpg");
 export {
   welcome,
   user,
+  userDefault,
   bg1,
   bg2,
   luggage,
