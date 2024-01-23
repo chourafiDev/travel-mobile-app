@@ -20,8 +20,6 @@ export default function WelcomeScreen() {
         <LinearGradient
           colors={["transparent", "#23A892"]}
           style={{ width: wp(100), height: hp(60) }}
-          start={{ x: 0.5, y: 0 }}
-          end={{ x: 0.5, y: 1 }}
           className="absolute bottom-0"
         />
         <View className="mb-4">
