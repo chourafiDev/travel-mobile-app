@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Feather";
 import { useNavigation } from "@react-navigation/native";
 
-const GradientButton = ({ label, icon, route }) => {
+const GradientButton = ({ label, icon, route, size }) => {
   const navigation = useNavigation();
 
   const handleNavigate = () => {
@@ -27,7 +27,9 @@ const GradientButton = ({ label, icon, route }) => {
         end={{ x: 0.5, y: 1 }}
       />
       <Text
-        className="text-white text-center text-[18px] py-3"
+        className={`text-white text-center text-[18px] ${
+          size == "lg" ? "py-3" : "py-1"
+        } `}
         style={{ fontFamily: "baiJamjuree-bold" }}
       >
         {label}
