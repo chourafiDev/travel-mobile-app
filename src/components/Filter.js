@@ -18,6 +18,7 @@ import DateTimePicker from "@react-native-community/datetimepicker";
 import { useColorScheme } from "nativewind";
 import { LinearGradient } from "expo-linear-gradient";
 import Icon from "react-native-vector-icons/Feather";
+import GradientButton from "./ui/GradientButton";
 
 const Filter = ({ sheetRef }) => {
   const { colorScheme } = useColorScheme();
@@ -299,34 +300,9 @@ const Filter = ({ sheetRef }) => {
             </View>
           </View>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            className="rounded-2xl overflow-hidden mt-3"
-          >
-            <LinearGradient
-              colors={["#23a892", "#00c3a4"]}
-              className="w-full h-full absolute top-0 right-0"
-              start={{ x: 0.7, y: 0 }}
-              end={{ x: 0.5, y: 1 }}
-            />
-            <Text
-              className="text-white text-center text-[18px] py-3"
-              style={{ fontFamily: "baiJamjuree-bold" }}
-            >
-              Apply Filter
-            </Text>
-            <Icon
-              name="filter"
-              style={{
-                fontFamily: "baiJamjuree-bold",
-                position: "absolute",
-                right: 20,
-                bottom: "33%",
-              }}
-              size={15}
-              color="#FBFBFB"
-            />
-          </TouchableOpacity>
+          <View className="mt-3">
+            <GradientButton label="Apply Filter" icon="filter" size="lg" />
+          </View>
         </View>
       </BottomSheetView>
     </BottomSheetModal>
