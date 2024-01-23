@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
 import {
+  CATEGORIES,
   CHANGE_PASSWORD,
   DESTINATION,
   HOME_DRAWER,
@@ -18,6 +19,7 @@ import EditProfileInfoScreen from "../screens/app/EditProfileInfoScreen";
 import ChangePasswordScreen from "../screens/app/ChangePasswordScreen";
 import NotificationScreen from "../screens/app/NotificationScreen";
 import UsersScreen from "../screens/app/UsersScreen";
+import CategoriesScreen from "../screens/app/CategoriesScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -93,6 +95,17 @@ function DrawerNavigator() {
           title: "Users",
           drawerIcon: ({ color }) => (
             <Icon name="user" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name={CATEGORIES}
+        component={CategoriesScreen}
+        options={{
+          title: "Categories",
+          drawerIcon: ({ color }) => (
+            <Icon name="layers" size={20} color={color} />
           ),
         }}
       />

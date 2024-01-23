@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { bg1, user } from "../../../utils/assets";
 import {
+  CATEGORIES,
   DESTINATIONS,
   FAVORITES,
   HOME,
@@ -153,6 +154,26 @@ const CustomDrawer = ({ navigation }) => {
               Users
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            className="flex-row space-x-5 items-center mb-4"
+            onPress={() => {
+              navigation.navigate(CATEGORIES);
+            }}
+          >
+            <Icon
+              name="layers"
+              size={19}
+              color={colorScheme == "light" ? "#222B45B2" : "#778da9"}
+            />
+
+            <Text
+              className="text-dark dark:text-white text-[17px]"
+              style={{ fontFamily: "baiJamjuree-semibold" }}
+            >
+              Categories
+            </Text>
+          </TouchableOpacity>
+
           <View className="pt-4">
             <TouchableOpacity
               activeOpacity={0.8}

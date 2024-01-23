@@ -12,6 +12,7 @@ const PROFILE_INFO = "Profile info";
 const CHANGE_PASSWORD = "Change password";
 const NOTIFICATION = "Notification";
 const USERS = "Users";
+const CATEGORIES = "Categories";
 
 const HOME_TAB = "Home tab";
 const HOME_DRAWER = "Home drawer";
@@ -36,4 +37,5 @@ export {
   CHANGE_PASSWORD,
   NOTIFICATION,
   USERS,
+  CATEGORIES,
 };
