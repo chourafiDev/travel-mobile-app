@@ -3,7 +3,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import {
   CHANGE_PASSWORD,
   DESTINATION,
-  HOME_TAB,
+  HOME_DRAWER,
   NOTIFICATION,
   PROFILE_INFO,
   USERS,
@@ -35,7 +35,7 @@ function DrawerNavigator() {
       }}
     >
       <Drawer.Screen
-        name={HOME_TAB}
+        name={HOME_DRAWER}
         component={TabNavigator}
         options={{
           title: "Home",

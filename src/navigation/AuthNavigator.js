@@ -2,10 +2,8 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import {
   FORGOT_PASSWORD,
-  HOME,
   HOME_TAB,
   LOGIN,
-  PROFILE,
   REGISTER,
   WELCOME,
 } from "../constants/routes";

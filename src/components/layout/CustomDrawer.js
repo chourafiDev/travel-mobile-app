@@ -10,6 +10,7 @@ import { bg1, user } from "../../../utils/assets";
 import {
   DESTINATIONS,
   FAVORITES,
+  HOME,
   HOME_TAB,
   SETTING,
   USERS,
@@ -60,7 +61,7 @@ const CustomDrawer = ({ navigation }) => {
           <TouchableOpacity
             className="flex-row space-x-5 items-center mb-4"
             onPress={() => {
-              navigation.navigate(HOME_TAB);
+              navigation.navigate(HOME);
             }}
           >
             <Icon

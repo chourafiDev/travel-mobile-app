@@ -4,7 +4,6 @@ import { View } from "react-native";
 import { useColorScheme } from "nativewind";
 
 import IconFeather from "react-native-vector-icons/Feather";
-import IconFoundation from "react-native-vector-icons/Foundation";
 
 // Screens
 import HomeScreen from "../screens/app/HomeScreen";
