@@ -122,3 +122,8 @@ export const notification = [
     description: "A new destination added",
   },
 ];
+
+export const roles = [
+  { key: "admin", value: "Admin" },
+  { key: "user", value: "User" },
+];
