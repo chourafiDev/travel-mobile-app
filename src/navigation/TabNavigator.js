@@ -115,11 +115,7 @@ export default function TabNavigator() {
                 colors={["#23a892", "#00dbb7"]}
                 className="w-full h-full absolute top-0 right-0"
               />
-              <IconFeather
-                name="globe"
-                size={23}
-                color={focused ? "#23A892" : "#FBFBFB"}
-              ></IconFeather>
+              <IconFeather name="globe" size={23} color="#FBFBFB"></IconFeather>
             </View>
           ),
         }}
