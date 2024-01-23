@@ -83,7 +83,7 @@ export default function DestinationScreen({ navigation }) {
               fontFamily: "baiJamjuree-bold",
             }}
             size={16}
-            color="#e63946"
+            color="#ef476f"
           />
         </TouchableOpacity>
       </View>
@@ -156,6 +156,7 @@ export default function DestinationScreen({ navigation }) {
             icon="credit-card"
             size="lg"
             route=""
+            type="primary"
           />
         </View>
       </View>
