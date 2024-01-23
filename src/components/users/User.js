@@ -6,7 +6,7 @@ const User = ({ user, handleSnapPressOpenEdit, handleSnapPressOpenDelete }) => {
   return (
     <View className="flex-row justify-between items-center border border-dark/10 dark:border-gray-1/5 px-2 py-3 rounded-xl">
       <View className="flex-row items-center gap-2">
-        <Image source={user.image} className="w-12 h-12 rounded-full" />
+        <Image source={user.image} className="w-12 h-12 rounded-2xl" />
 
         <View>
           <Text
