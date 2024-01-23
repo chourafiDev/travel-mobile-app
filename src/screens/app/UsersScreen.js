@@ -99,7 +99,7 @@ export default function UsersScreen({ navigation }) {
               className="text-white text-base"
               style={{ fontFamily: "baiJamjuree-bold" }}
             >
-              Users
+              Add
             </Text>
             <Icon name="plus" size={15} color="#FBFBFB" />
           </View>
