@@ -1,10 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import AuthNavigator from "./AuthNavigator";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <AuthNavigator />
+      <BottomSheetModalProvider>
+        <AuthNavigator />
+      </BottomSheetModalProvider>
     </NavigationContainer>
   );
 };
