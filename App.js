@@ -2,6 +2,9 @@ import AppNavigation from "./src/navigation";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { Provider } from "react-redux";
+import store from "./src/store";
+import Toast from "react-native-toast-message";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -21,8 +24,11 @@ export default function App() {
     SplashScreen.hideAsync();
   }
   return (
-    <GestureHandlerRootView className="flex-1">
-      <AppNavigation />
-    </GestureHandlerRootView>
+    <Provider store={store}>
+      <GestureHandlerRootView className="flex-1">
+        <AppNavigation />
+        <Toast />
+      </GestureHandlerRootView>
+    </Provider>
   );
 }
