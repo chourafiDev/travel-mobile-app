@@ -1,5 +1,5 @@
+import React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import React, { useState } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { TextInput } from "react-native-gesture-handler";
 import { shadow } from "../../../utils/theme";
@@ -8,12 +8,56 @@ import { useNavigation } from "@react-navigation/native";
 import { FORGOT_PASSWORD, HOME_TAB, REGISTER } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import GradientButton from "../ui/GradientButton";
+import { useLoginMutation } from "../../store/services/authApiSlice";
+import Toast from "react-native-toast-message";
+import { setCredentials } from "../../store/features/authSlice";
+import { useDispatch } from "react-redux";
 
 const LoginForm = () => {
   const { colorScheme } = useColorScheme();
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
   const [showPassword, setShowPassword] = useState(true);
+
+  // handle login
+  const [login, { isLoading, isSuccess }] = useLoginMutation();
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmitLogin = async () => {
+    if (!username || !password) {
+      Toast.show({
+        type: "error",
+        text1: "Username and password are required",
+      });
+    } else {
+      try {
+        const payload = { username, password };
+
+        const res = await login(payload).unwrap();
+        dispatch(setCredentials({ ...res }));
+      } catch (err) {
+        Toast.show({
+          type: "error",
+          text1: err.data?.message || err.error,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      Toast.show({
+        type: "success",
+        text1: "Login success",
+      });
+
+      navigation.navigate(HOME_TAB);
+    }
+  }, [isSuccess]);
+
   return (
     <View className="px-4 mt-16">
       {/* Header */}
@@ -45,12 +89,14 @@ const LoginForm = () => {
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
         <Icon
-          name="mail"
+          name="user"
           size={15}
           color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
         />
         <TextInput
-          placeholder="Email address"
+          placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
@@ -71,6 +117,8 @@ const LoginForm = () => {
         />
         <TextInput
           placeholder="Password"
+          value={password}
+          onChangeText={setPassword}
           secureTextEntry={showPassword}
           className="text-dark dark:text-white flex-1 mx-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
@@ -112,7 +160,8 @@ const LoginForm = () => {
           icon=""
           size="lg"
           type="primary"
-          route={HOME_TAB}
+          onPress={handleSubmitLogin}
+          isLoading={isLoading}
         />
       </Animated.View>
 
