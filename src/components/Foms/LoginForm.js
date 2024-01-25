@@ -49,6 +49,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (isSuccess) {
+      setUsername("");
+      setPassword("");
+
       Toast.show({
         type: "success",
         text1: "Login success",
