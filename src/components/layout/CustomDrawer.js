@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { bg1, user } from "../../../utils/assets";
+import { bg1, userDefault } from "../../../utils/assets";
 import {
   CATEGORIES,
   DESTINATIONS,
@@ -20,9 +20,11 @@ import {
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useColorScheme } from "nativewind";
+import { useSelector } from "react-redux";
 
 const CustomDrawer = ({ navigation }) => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
+  const { user } = useSelector((state) => state.auth);
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-dark">
@@ -38,7 +40,10 @@ const CustomDrawer = ({ navigation }) => {
             }}
             className="border-[2px] border-white w-20 h-20 rounded-full overflow-hidden"
           >
-            <Image source={user} className="w-full h-full" />
+            <Image
+              source={user.image ? user.image : userDefault}
+              className="w-full h-full"
+            />
           </TouchableOpacity>
 
           <View className="mt-3">
@@ -46,13 +51,13 @@ const CustomDrawer = ({ navigation }) => {
               className="text-[20px] text-white"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              Abdelmonaime Chourafi
+              {user.firstname} {user.lastname}
             </Text>
             <Text
               className="text-[18px] text-white/80 -mt-1"
               style={{ fontFamily: "baiJamjuree-regular" }}
             >
-              @chourafi
+              @{user.username}
             </Text>
           </View>
         </View>

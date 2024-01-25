@@ -8,7 +8,7 @@ import {
   ImageBackground,
   FlatList,
 } from "react-native";
-import { bg1, luggage, user } from "../../../utils/assets";
+import { bg1, luggage, userDefault } from "../../../utils/assets";
 import Icon from "react-native-vector-icons/Feather";
 import Category from "../../components/Category";
 import { categories, destinations } from "../../../utils/data";
@@ -18,9 +18,12 @@ import Search from "../../components/Search";
 import { DESTINATIONS, NOTIFICATION } from "../../constants/routes";
 import { useColorScheme } from "nativewind";
 import { StatusBar } from "expo-status-bar";
+import { useSelector } from "react-redux";
 
 const HomeScreen = ({ navigation }) => {
   const { colorScheme } = useColorScheme();
+
+  const { user } = useSelector((state) => state.auth);
 
   // select catgeory
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -55,7 +58,10 @@ const HomeScreen = ({ navigation }) => {
                 className="border-[2px] border-white w-16 h-16 rounded-full overflow-hidden"
                 style={[shadow.boxShadow]}
               >
-                <Image source={user} className="w-full h-full" />
+                <Image
+                  source={user.image ? user.image : userDefault}
+                  className="w-full h-full"
+                />
               </View>
               <View>
                 <Text
@@ -68,7 +74,7 @@ const HomeScreen = ({ navigation }) => {
                   className="text-white text-2xl"
                   style={{ fontFamily: "baiJamjuree-bold" }}
                 >
-                  @chourafi
+                  @{user.username}
                 </Text>
               </View>
             </View>
