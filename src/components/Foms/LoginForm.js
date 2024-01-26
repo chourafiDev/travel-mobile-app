@@ -56,8 +56,6 @@ const LoginForm = () => {
         type: "success",
         text1: "Login success",
       });
-
-      navigation.navigate(HOME_TAB);
     }
   }, [isSuccess]);
 
