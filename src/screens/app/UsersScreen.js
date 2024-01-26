@@ -11,9 +11,14 @@ import DeleteUser from "../../components/users/DeleteUser";
 import { usersList } from "../../../utils/data";
 import User from "../../components/users/User";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { useGetUsersQuery } from "../../store/services/usersApiSlice";
+import Loading from "../../components/Loading";
 
 export default function UsersScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
+
+  // fetch users
+  const { data: users, isLoading } = useGetUsersQuery();
 
   // Open modal add user
   const sheetRefAdd = useRef(null);
@@ -106,27 +111,31 @@ export default function UsersScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        className="px-3 mt-6"
-        showsVerticalScrollIndicator={false}
-        data={usersList}
-        renderItem={({ item, index }) => {
-          return (
-            <Animated.View entering={FadeInDown.delay(250 * index)}>
-              <User
-                key={item.id}
-                user={item}
-                handleSnapPressOpenEdit={handleSnapPressOpenEdit}
-                handleSnapPressOpenDelete={handleSnapPressOpenDelete}
-              />
-            </Animated.View>
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-        ListEmptyComponent={<Text>Not items found</Text>}
-        ListFooterComponent={<View className="h-3"></View>}
-        ItemSeparatorComponent={<View className="h-3"></View>}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          className="px-3 mt-6"
+          showsVerticalScrollIndicator={false}
+          data={users}
+          renderItem={({ item, index }) => {
+            return (
+              <Animated.View entering={FadeInDown.delay(250 * index)}>
+                <User
+                  key={item.id}
+                  user={item}
+                  handleSnapPressOpenEdit={handleSnapPressOpenEdit}
+                  handleSnapPressOpenDelete={handleSnapPressOpenDelete}
+                />
+              </Animated.View>
+            );
+          }}
+          keyExtractor={(item, index) => index.toString()}
+          ListEmptyComponent={<Text>Not items found</Text>}
+          ListFooterComponent={<View className="h-3"></View>}
+          ItemSeparatorComponent={<View className="h-3"></View>}
+        />
+      )}
 
       {/* Modal Add User */}
       <AddUser
