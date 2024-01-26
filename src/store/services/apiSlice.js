@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
   prepareHeaders: async (headers) => {
     const access_token = await getStoredData("@access_token");
     if (access_token) {
-      headers.set("Authorization", `Token ${access_token}`);
+      headers.set("Authorization", `Bearer ${access_token}`);
     }
     headers.set("Content-Type", "application/json");
     return headers;
