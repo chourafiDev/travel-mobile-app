@@ -22,7 +22,8 @@ const user06 = require("../assets/images/05.png");
 const user07 = require("../assets/images/06.jpg");
 const user08 = require("../assets/images/07.jpg");
 const luggage = require("../assets/images/luggage.jpg");
-const redAlert = require("../assets/images/red-alert.png");
+const alert = require("../assets/images/alert.png");
+const empty = require("../assets/images/empty.png");
 
 export {
   welcome,
@@ -48,5 +49,6 @@ export {
   user06,
   user07,
   user08,
-  redAlert,
+  alert,
+  empty,
 };
