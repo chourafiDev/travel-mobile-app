@@ -13,6 +13,7 @@ import User from "../../components/users/User";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useGetUsersQuery } from "../../store/services/usersApiSlice";
 import Loading from "../../components/Loading";
+import Empty from "../../components/Empty";
 
 export default function UsersScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
@@ -113,7 +114,7 @@ export default function UsersScreen({ navigation }) {
 
       {isLoading ? (
         <Loading />
-      ) : (
+      ) : users.length > 0 ? (
         <FlatList
           className="px-3 mt-6"
           showsVerticalScrollIndicator={false}
@@ -135,6 +136,8 @@ export default function UsersScreen({ navigation }) {
           ListFooterComponent={<View className="h-3"></View>}
           ItemSeparatorComponent={<View className="h-3"></View>}
         />
+      ) : (
+        <Empty />
       )}
 
       {/* Modal Add User */}
