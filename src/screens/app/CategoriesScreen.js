@@ -8,12 +8,17 @@ import { LinearGradient } from "expo-linear-gradient";
 import AddCategory from "../../components/categories/AddCategory";
 import EditCategory from "../../components/categories/EditCategory";
 import DeleteCategory from "../../components/categories/DeleteCategory";
-import { categories } from "../../../utils/data";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Category from "../../components/categories/Category";
+import { useGetCatgoriesQuery } from "../../store/services/categoriesApiSlice";
+import Loading from "../../components/Loading";
+import Empty from "../../components/Empty";
 
 export default function CategoriesScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
+
+  // fetch categories
+  const { data: categories, isLoading } = useGetCatgoriesQuery();
 
   // Open modal add category
   const sheetRefAdd = useRef(null);
@@ -106,27 +111,33 @@ export default function CategoriesScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        className="px-3 mt-6"
-        showsVerticalScrollIndicator={false}
-        data={categories}
-        renderItem={({ item, index }) => {
-          return (
-            <Animated.View entering={FadeInDown.delay(250 * index)}>
-              <Category
-                key={item.id}
-                category={item}
-                handleSnapPressOpenEdit={handleSnapPressOpenEdit}
-                handleSnapPressOpenDelete={handleSnapPressOpenDelete}
-              />
-            </Animated.View>
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-        ListEmptyComponent={<Text>Not items found</Text>}
-        ListFooterComponent={<View className="h-3"></View>}
-        ItemSeparatorComponent={<View className="h-3"></View>}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : categories.length > 0 ? (
+        <FlatList
+          className="px-3 mt-6"
+          showsVerticalScrollIndicator={false}
+          data={categories}
+          renderItem={({ item, index }) => {
+            return (
+              <Animated.View entering={FadeInDown.delay(250 * index)}>
+                <Category
+                  key={item.id}
+                  category={item}
+                  handleSnapPressOpenEdit={handleSnapPressOpenEdit}
+                  handleSnapPressOpenDelete={handleSnapPressOpenDelete}
+                />
+              </Animated.View>
+            );
+          }}
+          keyExtractor={(item, index) => index.toString()}
+          ListEmptyComponent={<Text>Not items found</Text>}
+          ListFooterComponent={<View className="h-3"></View>}
+          ItemSeparatorComponent={<View className="h-3"></View>}
+        />
+      ) : (
+        <Empty />
+      )}
 
       {/* Modal Add Category */}
       <AddCategory
