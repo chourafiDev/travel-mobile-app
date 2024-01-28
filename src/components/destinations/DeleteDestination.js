@@ -8,7 +8,7 @@ import {
 import { useColorScheme } from "nativewind";
 import { Image, Text, View } from "react-native";
 import GradientButton from "../ui/GradientButton";
-import { redAlert } from "../../../utils/assets";
+import { alert } from "../../../utils/assets";
 import OutlineButton from "../ui/OutlineButton";
 
 const DeleteDestination = ({ sheetRef, handleSnapPressCloseDelete }) => {
@@ -40,7 +40,7 @@ const DeleteDestination = ({ sheetRef, handleSnapPressCloseDelete }) => {
     >
       <BottomSheetView>
         <View className="px-4 h-full pb-2">
-          <Image source={redAlert} className="w-16 h-16 mx-auto" />
+          <Image source={alert} className="w-16 h-16 mx-auto" />
           <Text
             className="text-dark dark:text-white text-2xl text-center my-4"
             style={{ fontFamily: "baiJamjuree-bold" }}
