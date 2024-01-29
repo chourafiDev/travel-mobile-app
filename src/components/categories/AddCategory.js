@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   BottomSheetBackdrop,
@@ -10,6 +10,8 @@ import { useColorScheme } from "nativewind";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import GradientButton from "../ui/GradientButton";
 import * as ImagePicker from "expo-image-picker";
+import { useCreateCatgorieMutation } from "../../store/services/categoriesApiSlice";
+import Toast from "react-native-toast-message";
 
 const AddCategory = ({ sheetRef, handleSnapPressCloseAdd }) => {
   const { colorScheme } = useColorScheme();
@@ -49,6 +51,41 @@ const AddCategory = ({ sheetRef, handleSnapPressCloseAdd }) => {
       setImage(imageUri);
     }
   };
+
+  // handle create category
+  const [content, setContent] = useState(null);
+
+  const [createCategory, { isLoading, isSuccess }] =
+    useCreateCatgorieMutation();
+
+  const submitCategory = async () => {
+    try {
+      const data = {
+        content,
+        image,
+      };
+
+      await createCategory(data).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setContent("");
+      setImage("");
+      handleSnapPressCloseAdd();
+
+      Toast.show({
+        type: "success",
+        text1: "Category created successfully",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <BottomSheetModal
@@ -113,6 +150,8 @@ const AddCategory = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="title"
+                  value={content}
+                  onChangeText={setContent}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -123,7 +162,14 @@ const AddCategory = ({ sheetRef, handleSnapPressCloseAdd }) => {
             </View>
           </View>
 
-          <GradientButton label="Add" icon="plus" type="primary" size="lg" />
+          <GradientButton
+            label="Add"
+            icon="plus"
+            type="primary"
+            size="lg"
+            isLoading={isLoading}
+            onPress={submitCategory}
+          />
         </View>
       </BottomSheetView>
     </BottomSheetModal>
