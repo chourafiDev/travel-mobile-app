@@ -8,14 +8,11 @@ import {
 } from "react-native";
 import { bg1, userDefault } from "../../../utils/assets";
 import {
-  CATEGORIES,
   DESTINATIONS,
   FAVORITES,
   HOME,
   HOME_TAB,
-  MANAGE_DESTINATIONS,
   SETTING,
-  USERS,
 } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -147,70 +144,6 @@ const CustomDrawer = ({ navigation }) => {
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
               Setting
-            </Text>
-          </TouchableOpacity>
-
-          <Text
-            className="text-dark/50 dark:text-white text-[17px] mb-4 border-b-[.6px] border-dark/10 pb-1"
-            style={{ fontFamily: "baiJamjuree-semibold" }}
-          >
-            Management
-          </Text>
-          <TouchableOpacity
-            className="flex-row space-x-5 items-center mb-4"
-            onPress={() => {
-              navigation.navigate(USERS);
-            }}
-          >
-            <Icon
-              name="user"
-              size={19}
-              color={colorScheme == "light" ? "#222B45B2" : "#778da9"}
-            />
-
-            <Text
-              className="text-dark dark:text-white text-[17px]"
-              style={{ fontFamily: "baiJamjuree-semibold" }}
-            >
-              Users
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="flex-row space-x-5 items-center mb-4"
-            onPress={() => {
-              navigation.navigate(CATEGORIES);
-            }}
-          >
-            <Icon
-              name="layers"
-              size={19}
-              color={colorScheme == "light" ? "#222B45B2" : "#778da9"}
-            />
-
-            <Text
-              className="text-dark dark:text-white text-[17px]"
-              style={{ fontFamily: "baiJamjuree-semibold" }}
-            >
-              Categories
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="flex-row space-x-5 items-center mb-4"
-            onPress={() => {
-              navigation.navigate(MANAGE_DESTINATIONS);
-            }}
-          >
-            <Icon
-              name="columns"
-              size={19}
-              color={colorScheme == "light" ? "#222B45B2" : "#778da9"}
-            />
-
-            <Text
-              className="text-dark dark:text-white text-[17px]"
-              style={{ fontFamily: "baiJamjuree-semibold" }}
-            >
-              Manage Destinations
             </Text>
           </TouchableOpacity>
 
