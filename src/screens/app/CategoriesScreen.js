@@ -20,8 +20,6 @@ export default function CategoriesScreen({ navigation }) {
   // fetch categories
   const { data: categories, isLoading } = useGetCatgoriesQuery();
 
-  console.log("categories.length", categories?.length);
-
   // Open modal add category
   const sheetRefAdd = useRef(null);
   const handleSnapPressOpenAdd = () => {
