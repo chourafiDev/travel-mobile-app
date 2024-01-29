@@ -18,7 +18,7 @@ export const categoriesApiSlice = apiSliceWithTag.injectEndpoints({
       },
       providesTags: ["categories"],
     }),
-    createCatgorie: builder.mutation({
+    createCatgory: builder.mutation({
       query: (data) => {
         return {
           url: `${CATEGORIES_URL}/create`,
@@ -29,8 +29,34 @@ export const categoriesApiSlice = apiSliceWithTag.injectEndpoints({
       },
       invalidatesTags: ["categories"],
     }),
+    updateCatgory: builder.mutation({
+      query: ({ id, data }) => {
+        console.log("{ id, data }", { id, data });
+        return {
+          url: `${CATEGORIES_URL}/${id}`,
+          method: "PATCH",
+          body: data,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["categories"],
+    }),
+    deleteCatgory: builder.mutation({
+      query: (id) => {
+        return {
+          url: `${CATEGORIES_URL}/${id}`,
+          method: "DELETE",
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["categories"],
+    }),
   }),
 });
 
-export const { useGetCategoriesQuery, useCreateCatgorieMutation } =
-  categoriesApiSlice;
+export const {
+  useGetCategoriesQuery,
+  useCreateCatgoryMutation,
+  useUpdateCatgoryMutation,
+  useDeleteCatgoryMutation,
+} = categoriesApiSlice;
