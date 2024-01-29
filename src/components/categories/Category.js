@@ -10,13 +10,16 @@ const Category = ({
   return (
     <View className="flex-row justify-between items-center border border-dark/10 dark:border-gray-1/5 px-2 py-3 rounded-xl">
       <View className="flex-row items-center gap-4">
-        <Image source={category.image} className="w-12 h-12 rounded-2xl" />
+        <Image
+          source={{ uri: category?.imageUrl }}
+          className="w-12 h-12 rounded-2xl"
+        />
 
         <Text
           className="text-dark/60 dark:text-white/60 text-base"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
-          {category.title}
+          {category?.content}
         </Text>
       </View>
 
