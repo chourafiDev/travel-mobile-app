@@ -10,7 +10,7 @@ import { useColorScheme } from "nativewind";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import GradientButton from "../ui/GradientButton";
 import * as ImagePicker from "expo-image-picker";
-import { useCreateCatgorieMutation } from "../../store/services/categoriesApiSlice";
+import { useCreateCatgoryMutation } from "../../store/services/categoriesApiSlice";
 import Toast from "react-native-toast-message";
 
 const AddCategory = ({ sheetRef, handleSnapPressCloseAdd }) => {
@@ -55,8 +55,7 @@ const AddCategory = ({ sheetRef, handleSnapPressCloseAdd }) => {
   // handle create category
   const [content, setContent] = useState(null);
 
-  const [createCategory, { isLoading, isSuccess }] =
-    useCreateCatgorieMutation();
+  const [createCategory, { isLoading, isSuccess }] = useCreateCatgoryMutation();
 
   const submitCategory = async () => {
     try {
