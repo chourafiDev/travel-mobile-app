@@ -4,7 +4,7 @@ import { empty } from "../../utils/assets";
 
 const Empty = () => {
   return (
-    <View className="bg-[#f8f8fa] dark:bg-dark flex-1 justify-center items-center">
+    <View className="bg-[#f8f8fa] dark:bg-dark h-full justify-center items-center">
       <Image source={empty} className="w-16 h-16" />
       <Text
         className="text-dark dark:text-white text-base text-center mt-3"
