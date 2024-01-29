@@ -13,6 +13,7 @@ import {
   PROFILE_INFO,
   USERS,
 } from "../../constants/routes";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function SettingScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
@@ -101,7 +102,7 @@ export default function SettingScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <View className="px-4 mt-4 space-y-3">
+      <ScrollView className="px-4 my-4 space-y-3">
         <Animated.View
           entering={FadeInDown.delay(100).duration(1000).springify()}
         >
@@ -582,7 +583,7 @@ export default function SettingScreen({ navigation }) {
             </View>
           </TouchableOpacity>
         </Animated.View>
-      </View>
+      </ScrollView>
     </View>
   );
 }
