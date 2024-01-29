@@ -132,6 +132,7 @@ export default function CategoriesScreen({ navigation }) {
               </Animated.View>
             );
           }}
+          contentContainerStyle={{ flexGrow: 1 }}
           ListEmptyComponent={<Empty />}
           ListFooterComponent={<View className="h-3"></View>}
           ItemSeparatorComponent={<View className="h-3"></View>}
