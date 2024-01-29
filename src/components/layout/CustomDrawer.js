@@ -21,10 +21,18 @@ import Icon from "react-native-vector-icons/Feather";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { clearCredentials } from "../../store/features/authSlice";
 
 const CustomDrawer = ({ navigation }) => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
   const { user } = useSelector((state) => state.auth);
+
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    dispatch(clearCredentials());
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-dark">
@@ -249,9 +257,7 @@ const CustomDrawer = ({ navigation }) => {
           </TouchableOpacity>
           <TouchableOpacity
             className="flex-row space-x-5 items-center"
-            onPress={() => {
-              navigation.navigate(HOME_TAB);
-            }}
+            onPress={handleLogout}
           >
             <Icon
               name="log-out"
