@@ -130,6 +130,7 @@ export default function CategoriesScreen({ navigation }) {
               </Animated.View>
             );
           }}
+          keyExtractor={(item) => item.id.toString()}
           contentContainerStyle={{ flexGrow: 1 }}
           ListEmptyComponent={<Empty />}
           ListFooterComponent={<View className="h-3"></View>}
