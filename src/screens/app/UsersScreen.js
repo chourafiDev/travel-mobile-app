@@ -8,7 +8,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import AddUser from "../../components/users/AddUser";
 import EditUser from "../../components/users/EditUser";
 import DeleteUser from "../../components/users/DeleteUser";
-import { usersList } from "../../../utils/data";
 import User from "../../components/users/User";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useGetUsersQuery } from "../../store/services/usersApiSlice";
@@ -81,7 +80,7 @@ export default function UsersScreen({ navigation }) {
             className="text-brand text-xl"
             style={{ fontFamily: "baiJamjuree-bold" }}
           >
-            10
+            {users && users.length}
           </Text>
           <Text
             className="text-dark dark:text-white text-xl"
@@ -114,7 +113,7 @@ export default function UsersScreen({ navigation }) {
 
       {isLoading ? (
         <Loading />
-      ) : users.length > 0 ? (
+      ) : (
         <FlatList
           className="px-3 mt-6"
           showsVerticalScrollIndicator={false}
@@ -131,13 +130,11 @@ export default function UsersScreen({ navigation }) {
               </Animated.View>
             );
           }}
-          keyExtractor={(item, index) => index.toString()}
-          ListEmptyComponent={<Text>Not items found</Text>}
+          contentContainerStyle={{ flexGrow: 1 }}
+          ListEmptyComponent={<Empty />}
           ListFooterComponent={<View className="h-3"></View>}
           ItemSeparatorComponent={<View className="h-3"></View>}
         />
-      ) : (
-        <Empty />
       )}
 
       {/* Modal Add User */}
