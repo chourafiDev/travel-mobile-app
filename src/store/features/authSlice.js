@@ -17,6 +17,7 @@ export const fetchAuthData = createAsyncThunk(
       return {
         access_token: access_token || "",
         user: user,
+        isSignedIn: true,
         status: "idle",
         error: null,
       };
@@ -30,6 +31,7 @@ export const fetchAuthData = createAsyncThunk(
 const initialState = {
   access_token: "",
   user: {},
+  isSignedIn: false,
   status: "idle",
   error: null,
 };
@@ -43,6 +45,7 @@ const authSlice = createSlice({
 
       state.access_token = access_token;
       state.user = user;
+      state.isSignedIn = true;
 
       storeData("@access_token", access_token);
       storeData("@user", JSON.stringify(user));
@@ -51,6 +54,7 @@ const authSlice = createSlice({
     clearCredentials: (state) => {
       state.access_token = "";
       state.user = {};
+      state.isSignedIn = false;
       removeStoredData("@access_token");
       removeStoredData("@user");
     },
@@ -64,10 +68,12 @@ const authSlice = createSlice({
         state.status = "succeeded";
         state.access_token = action.payload.access_token;
         state.user = action.payload.user;
+        state.isSignedIn = true;
       })
       .addCase(fetchAuthData.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+        state.isSignedIn = false;
       });
   },
 });
