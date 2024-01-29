@@ -6,11 +6,9 @@ import { shadow } from "../../../utils/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import AddCategory from "../../components/categories/AddCategory";
-import EditCategory from "../../components/categories/EditCategory";
-import DeleteCategory from "../../components/categories/DeleteCategory";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Category from "../../components/categories/Category";
-import { useGetCatgoriesQuery } from "../../store/services/categoriesApiSlice";
+import { useGetCategoriesQuery } from "../../store/services/categoriesApiSlice";
 import Loading from "../../components/Loading";
 import Empty from "../../components/Empty";
 
@@ -18,7 +16,7 @@ export default function CategoriesScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
 
   // fetch categories
-  const { data: categories, isLoading } = useGetCatgoriesQuery();
+  const { data: categories, isLoading } = useGetCategoriesQuery();
 
   // Open modal add category
   const sheetRefAdd = useRef(null);
@@ -27,24 +25,6 @@ export default function CategoriesScreen({ navigation }) {
   };
   const handleSnapPressCloseAdd = () => {
     sheetRefAdd.current?.close();
-  };
-
-  // Open modal add category
-  const sheetRefEdit = useRef(null);
-  const handleSnapPressOpenEdit = () => {
-    sheetRefEdit.current?.present();
-  };
-  const handleSnapPressCloseEdit = () => {
-    sheetRefEdit.current?.close();
-  };
-
-  // Open modal add category
-  const sheetRefDelete = useRef(null);
-  const handleSnapPressOpenDelete = () => {
-    sheetRefDelete.current?.present();
-  };
-  const handleSnapPressCloseDelete = () => {
-    sheetRefDelete.current?.close();
   };
 
   return (
@@ -121,12 +101,7 @@ export default function CategoriesScreen({ navigation }) {
           renderItem={({ item, index }) => {
             return (
               <Animated.View entering={FadeInDown.delay(250 * index)}>
-                <Category
-                  key={item.id}
-                  category={item}
-                  handleSnapPressOpenEdit={handleSnapPressOpenEdit}
-                  handleSnapPressOpenDelete={handleSnapPressOpenDelete}
-                />
+                <Category key={item.id} category={item} />
               </Animated.View>
             );
           }}
@@ -142,18 +117,6 @@ export default function CategoriesScreen({ navigation }) {
       <AddCategory
         sheetRef={sheetRefAdd}
         handleSnapPressCloseAdd={handleSnapPressCloseAdd}
-      />
-
-      {/* Modal Edit Category */}
-      <EditCategory
-        sheetRef={sheetRefEdit}
-        handleSnapPressCloseEdit={handleSnapPressCloseEdit}
-      />
-
-      {/* Modal Dlete Category */}
-      <DeleteCategory
-        sheetRef={sheetRefDelete}
-        handleSnapPressCloseDelete={handleSnapPressCloseDelete}
       />
     </SafeAreaView>
   );
