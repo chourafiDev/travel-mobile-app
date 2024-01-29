@@ -2,9 +2,13 @@ import { apiSlice } from "./apiSlice";
 
 const CATEGORIES_URL = "categories";
 
-export const categoriesApiSlice = apiSlice.injectEndpoints({
+const apiSliceWithTag = apiSlice.enhanceEndpoints({
+  addTagTypes: ["categories"],
+});
+
+export const categoriesApiSlice = apiSliceWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getCatgories: builder.query({
+    getCategories: builder.query({
       query: () => {
         return {
           url: `${CATEGORIES_URL}`,
@@ -12,8 +16,21 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
           credentials: "include",
         };
       },
+      providesTags: ["categories"],
+    }),
+    createCatgorie: builder.mutation({
+      query: (data) => {
+        return {
+          url: `${CATEGORIES_URL}/create`,
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["categories"],
     }),
   }),
 });
 
-export const { useGetCatgoriesQuery } = categoriesApiSlice;
+export const { useGetCategoriesQuery, useCreateCatgorieMutation } =
+  categoriesApiSlice;
