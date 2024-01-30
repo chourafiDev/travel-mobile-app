@@ -6,8 +6,6 @@ import { shadow } from "../../../utils/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import AddUser from "../../components/users/AddUser";
-import EditUser from "../../components/users/EditUser";
-import DeleteUser from "../../components/users/DeleteUser";
 import User from "../../components/users/User";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { useGetUsersQuery } from "../../store/services/usersApiSlice";
@@ -27,24 +25,6 @@ export default function UsersScreen({ navigation }) {
   };
   const handleSnapPressCloseAdd = () => {
     sheetRefAdd.current?.close();
-  };
-
-  // Open modal add user
-  const sheetRefEdit = useRef(null);
-  const handleSnapPressOpenEdit = () => {
-    sheetRefEdit.current?.present();
-  };
-  const handleSnapPressCloseEdit = () => {
-    sheetRefEdit.current?.close();
-  };
-
-  // Open modal add user
-  const sheetRefDelete = useRef(null);
-  const handleSnapPressOpenDelete = () => {
-    sheetRefDelete.current?.present();
-  };
-  const handleSnapPressCloseDelete = () => {
-    sheetRefDelete.current?.close();
   };
 
   return (
@@ -121,12 +101,7 @@ export default function UsersScreen({ navigation }) {
           renderItem={({ item, index }) => {
             return (
               <Animated.View entering={FadeInDown.delay(250 * index)}>
-                <User
-                  key={item.id}
-                  user={item}
-                  handleSnapPressOpenEdit={handleSnapPressOpenEdit}
-                  handleSnapPressOpenDelete={handleSnapPressOpenDelete}
-                />
+                <User key={item.id} user={item} />
               </Animated.View>
             );
           }}
@@ -142,18 +117,6 @@ export default function UsersScreen({ navigation }) {
       <AddUser
         sheetRef={sheetRefAdd}
         handleSnapPressCloseAdd={handleSnapPressCloseAdd}
-      />
-
-      {/* Modal Edit User */}
-      <EditUser
-        sheetRef={sheetRefEdit}
-        handleSnapPressCloseEdit={handleSnapPressCloseEdit}
-      />
-
-      {/* Modal Dlete User */}
-      <DeleteUser
-        sheetRef={sheetRefDelete}
-        handleSnapPressCloseDelete={handleSnapPressCloseDelete}
       />
     </SafeAreaView>
   );
