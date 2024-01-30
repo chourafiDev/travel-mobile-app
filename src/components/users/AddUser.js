@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   BottomSheetBackdrop,
@@ -10,8 +10,10 @@ import { useColorScheme } from "nativewind";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import GradientButton from "../../components/ui/GradientButton";
 import { roles } from "../../../utils/data";
-import { userDefault } from "../../../utils/assets";
+import { defaultImage } from "../../../utils/assets";
 import * as ImagePicker from "expo-image-picker";
+import Toast from "react-native-toast-message";
+import { useCreateUserMutation } from "../../store/services/usersApiSlice";
 
 const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
   const { colorScheme } = useColorScheme();
@@ -62,6 +64,54 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
     }
   };
 
+  // handle create user
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [firstName, setFirstName] = useState(null);
+  const [lastName, setLastName] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const [createUser, { isLoading, isSuccess }] = useCreateUserMutation();
+
+  const submitUser = async () => {
+    try {
+      const data = {
+        username,
+        email,
+        firstName,
+        lastName,
+        password,
+        role,
+        image,
+      };
+
+      await createUser(data).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setUsername("");
+      setEmail("");
+      setFirstName("");
+      setLastName("");
+      setPassword("");
+      setRole("");
+      setImage("");
+      handleSnapPressCloseAdd();
+
+      Toast.show({
+        type: "success",
+        text1: "User created successfully",
+      });
+    }
+  }, [isSuccess]);
+
   return (
     <BottomSheetModal
       ref={sheetRef}
@@ -91,7 +141,7 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                   />
                 ) : (
                   <Image
-                    source={userDefault}
+                    source={defaultImage}
                     className="h-full w-full rounded-full"
                   />
                 )}
@@ -120,6 +170,8 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                   color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
                 />
                 <TextInput
+                  value={username}
+                  onChangeText={setUsername}
                   placeholder="username"
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
@@ -146,6 +198,8 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="first name"
+                  value={firstName}
+                  onChangeText={setFirstName}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -171,6 +225,8 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="last name"
+                  value={lastName}
+                  onChangeText={setLastName}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -196,6 +252,8 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="email"
+                  value={email}
+                  onChangeText={setEmail}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -252,6 +310,8 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="username"
+                  value={password}
+                  onChangeText={setPassword}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -262,7 +322,14 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
             </View>
           </View>
 
-          <GradientButton label="Add" icon="plus" type="primary" size="lg" />
+          <GradientButton
+            label="Add"
+            icon="plus"
+            type="primary"
+            size="lg"
+            isLoading={isLoading}
+            onPress={submitUser}
+          />
         </View>
       </BottomSheetView>
     </BottomSheetModal>
