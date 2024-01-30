@@ -8,7 +8,7 @@ import {
   ImageBackground,
   FlatList,
 } from "react-native";
-import { bg1, luggage, userDefault } from "../../../utils/assets";
+import { bg1, luggage, defaultImage } from "../../../utils/assets";
 import Icon from "react-native-vector-icons/Feather";
 import Category from "../../components/Category";
 import { categories, destinations } from "../../../utils/data";
@@ -59,7 +59,7 @@ const HomeScreen = ({ navigation }) => {
                 style={[shadow.boxShadow]}
               >
                 <Image
-                  source={user.image ? user.image : userDefault}
+                  source={user.image ? user.image : defaultImage}
                   className="w-full h-full"
                 />
               </View>

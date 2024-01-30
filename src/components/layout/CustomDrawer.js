@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ImageBackground,
 } from "react-native";
-import { bg1, userDefault } from "../../../utils/assets";
+import { bg1, defaultImage } from "../../../utils/assets";
 import {
   DESTINATIONS,
   FAVORITES,
@@ -46,7 +46,7 @@ const CustomDrawer = ({ navigation }) => {
             className="border-[2px] border-white w-20 h-20 rounded-full overflow-hidden"
           >
             <Image
-              source={user.image ? user.image : userDefault}
+              source={user.image ? user.image : defaultImage}
               className="w-full h-full"
             />
           </TouchableOpacity>

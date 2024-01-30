@@ -1,16 +1,20 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
-import { userDefault } from "../../../utils/assets";
+import { defaultImage } from "../../../utils/assets";
 
 const User = ({ user, handleSnapPressOpenEdit, handleSnapPressOpenDelete }) => {
   return (
     <View className="flex-row justify-between items-center border border-dark/10 dark:border-gray-1/5 px-2 py-3 rounded-xl">
       <View className="flex-row items-center gap-2">
-        <Image
-          source={user.image ? user.image : userDefault}
-          className="w-12 h-12 rounded-2xl"
-        />
+        {user.imageUrl ? (
+          <Image
+            source={{ uri: user.imageUrl }}
+            className="w-12 h-12 rounded-2xl"
+          />
+        ) : (
+          <Image source={defaultImage} className="w-12 h-12 rounded-2xl" />
+        )}
 
         <View>
           <Text
