@@ -43,7 +43,7 @@ const CustomDrawer = ({ navigation }) => {
             onPress={() => {
               navigation.navigate(SETTING);
             }}
-            className="border-[2px] border-white w-20 h-20 rounded-full overflow-hidden"
+            className="border-[2px] border-white w-16 h-16 rounded-[14px] overflow-hidden"
           >
             <Image
               source={user.image ? user.image : defaultImage}

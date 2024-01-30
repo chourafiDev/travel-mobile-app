@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }) => {
                 onPress={() => {
                   navigation.navigate(PROFILE);
                 }}
-                className="border-[2px] border-white w-16 h-16 rounded-full overflow-hidden"
+                className="border-[2px] border-white w-14 h-14 rounded-[14px] overflow-hidden"
                 style={[shadow.boxShadow]}
               >
                 <Image
@@ -68,7 +68,7 @@ const HomeScreen = ({ navigation }) => {
                   className="text-white/80 text-lg"
                   style={{ fontFamily: "baiJamjuree-medium" }}
                 >
-                  Welcome 👋
+                  👋 Welcome
                 </Text>
                 <Text
                   className="text-white text-2xl"
