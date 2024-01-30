@@ -31,7 +31,6 @@ export const categoriesApiSlice = apiSliceWithTag.injectEndpoints({
     }),
     updateCatgory: builder.mutation({
       query: ({ id, data }) => {
-        console.log("{ id, data }", { id, data });
         return {
           url: `${CATEGORIES_URL}/${id}`,
           method: "PATCH",
