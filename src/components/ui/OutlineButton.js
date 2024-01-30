@@ -16,7 +16,7 @@ const OutlineButton = ({ label, route, size, type, onPress }) => {
       <Text
         className={`${
           type == "primary" ? "text-brand" : "text-danger-100"
-        } text-center text-[18px] ${size == "lg" ? "py-3" : "py-1"} `}
+        } text-center text-[18px] ${size == "lg" ? "py-[10px]" : "py-1"} `}
         style={{ fontFamily: "baiJamjuree-bold" }}
       >
         {label}
