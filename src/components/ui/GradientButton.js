@@ -7,7 +7,9 @@ const GradientButton = ({ label, icon, size, type, onPress, isLoading }) => {
   return (
     <TouchableOpacity
       activeOpacity={0.8}
-      className="rounded-2xl overflow-hidden"
+      className={`rounded-2xl overflow-hidden border ${
+        type == "primary" ? "border-brand" : "border-danger-100"
+      } `}
       onPress={onPress}
       disabled={isLoading}
     >
