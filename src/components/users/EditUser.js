@@ -1,5 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
-
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   BottomSheetBackdrop,
   BottomSheetModal,
@@ -10,13 +9,15 @@ import { useColorScheme } from "nativewind";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import GradientButton from "../../components/ui/GradientButton";
 import { roles } from "../../../utils/data";
-import { userDefault } from "../../../utils/assets";
+import { defaultImage } from "../../../utils/assets";
 import * as ImagePicker from "expo-image-picker";
+import Toast from "react-native-toast-message";
+import { useUpdateUserMutation } from "../../store/services/usersApiSlice";
 
-const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
+const EditUser = ({ sheetRef, user, handleSnapPressCloseEdit }) => {
   const { colorScheme } = useColorScheme();
 
-  const snapPoints = useMemo(() => ["92%"], []);
+  const snapPoints = useMemo(() => ["84%"], []);
 
   const renderBackdrop = useCallback((props) => {
     return (
@@ -29,7 +30,7 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
   }, []);
 
   // roles
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState(user.role);
   const handleSelectRole = (item) => {
     if (role === item) {
       setRole("");
@@ -40,6 +41,9 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
 
   // handle image
   const [image, setImage] = useState(null);
+  const [imagePrev, setImagePrev] = useState(
+    user?.imageUrl ? user?.imageUrl : ""
+  );
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
@@ -59,8 +63,50 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
       let imageUri = `data:image/${extensionImg};base64,${base64}`;
 
       setImage(imageUri);
+      setImagePrev(imageUri);
     }
   };
+
+  // handle update user
+  const [username, setUsername] = useState(user?.username);
+  const [email, setEmail] = useState(user?.email);
+  const [firstName, setFirstName] = useState(user?.firstName);
+  const [lastName, setLastName] = useState(user?.lastName);
+
+  const [updateUser, { isLoading, isSuccess }] = useUpdateUserMutation();
+
+  const submitUpdateUser = async () => {
+    try {
+      const data = {
+        username,
+        email,
+        firstName,
+        lastName,
+        role,
+        image,
+      };
+
+      const payload = { id: user.id, data };
+      await updateUser(payload).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setImage("");
+      handleSnapPressCloseEdit();
+
+      Toast.show({
+        type: "success",
+        text1: "User updated successfully",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <BottomSheetModal
@@ -84,17 +130,11 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
               </Text>
 
               <View className="h-20 w-20 relative">
-                {image ? (
-                  <Image
-                    source={{ uri: image }}
-                    className="h-full w-full rounded-full"
-                  />
-                ) : (
-                  <Image
-                    source={userDefault}
-                    className="h-full w-full rounded-full"
-                  />
-                )}
+                <Image
+                  source={imagePrev ? { uri: imagePrev } : defaultImage}
+                  className="h-full w-full rounded-2xl"
+                />
+
                 <TouchableOpacity
                   activeOpacity={0.8}
                   className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-brand justify-center items-center"
@@ -120,6 +160,8 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
                   color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
                 />
                 <TextInput
+                  value={username}
+                  onChangeText={setUsername}
                   placeholder="username"
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
@@ -146,6 +188,8 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
                 />
                 <TextInput
                   placeholder="first name"
+                  value={firstName}
+                  onChangeText={setFirstName}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -171,6 +215,8 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
                 />
                 <TextInput
                   placeholder="last name"
+                  value={lastName}
+                  onChangeText={setLastName}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -196,6 +242,8 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
                 />
                 <TextInput
                   placeholder="email"
+                  value={email}
+                  onChangeText={setEmail}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -235,34 +283,16 @@ const EditUser = ({ sheetRef, handleSnapPressCloseEdit }) => {
                 ))}
               </View>
             </View>
-
-            <View>
-              <Text
-                className="text-dark dark:text-white text-[17px] mb-1"
-                style={{ fontFamily: "baiJamjuree-medium" }}
-              >
-                Password
-              </Text>
-
-              <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
-                <Icon
-                  name="key"
-                  size={15}
-                  color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
-                />
-                <TextInput
-                  placeholder="username"
-                  className="text-dark dark:text-white flex-1 ml-3"
-                  style={[{ fontFamily: "baiJamjuree-regular" }]}
-                  placeholderTextColor={
-                    colorScheme == "light" ? "#222B4580" : "#ffffff"
-                  }
-                />
-              </View>
-            </View>
           </View>
 
-          <GradientButton label="Edit" icon="edit-2" type="primary" size="lg" />
+          <GradientButton
+            label="Edit"
+            icon="edit-2"
+            type="primary"
+            size="lg"
+            isLoading={isLoading}
+            onPress={submitUpdateUser}
+          />
         </View>
       </BottomSheetView>
     </BottomSheetModal>
