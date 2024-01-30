@@ -29,6 +29,17 @@ export const usersApiSlice = apiSliceWithTag.injectEndpoints({
       },
       invalidatesTags: ["users"],
     }),
+    updateUser: builder.mutation({
+      query: ({ id, data }) => {
+        return {
+          url: `${USERS_URL}/${id}`,
+          method: "PUT",
+          body: data,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["users"],
+    }),
     deleteUser: builder.mutation({
       query: (id) => {
         return {
@@ -42,5 +53,9 @@ export const usersApiSlice = apiSliceWithTag.injectEndpoints({
   }),
 });
 
-export const { useGetUsersQuery, useCreateUserMutation, useDeleteUserMutation } =
-  usersApiSlice;
+export const {
+  useGetUsersQuery,
+  useCreateUserMutation,
+  useUpdateUserMutation,
+  useDeleteUserMutation,
+} = usersApiSlice;
