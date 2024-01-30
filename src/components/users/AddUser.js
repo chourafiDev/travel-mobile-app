@@ -137,12 +137,12 @@ const AddUser = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 {image ? (
                   <Image
                     source={{ uri: image }}
-                    className="h-full w-full rounded-full"
+                    className="h-full w-full rounded-2xl"
                   />
                 ) : (
                   <Image
                     source={defaultImage}
-                    className="h-full w-full rounded-full"
+                    className="h-full w-full rounded-2xl"
                   />
                 )}
                 <TouchableOpacity
