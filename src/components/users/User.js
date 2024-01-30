@@ -1,40 +1,36 @@
-import React, { memo, useRef } from "react";
+import React, { memo, useCallback, useRef } from "react";
 import { View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { defaultImage } from "../../../utils/assets";
 import EditUser from "./EditUser";
 import DeleteUser from "./DeleteUser";
 
-const User = memo(({ user }) => {
+const User = ({ user }) => {
   // Open modal edit user
   const sheetRefEdit = useRef(null);
-  const handleSnapPressOpenEdit = () => {
+  const handleSnapPressOpenEdit = useCallback(() => {
     sheetRefEdit.current?.present();
-  };
-  const handleSnapPressCloseEdit = () => {
+  }, []);
+  const handleSnapPressCloseEdit = useCallback(() => {
     sheetRefEdit.current?.close();
-  };
+  }, []);
 
   // Open modal delete user
   const sheetRefDelete = useRef(null);
-  const handleSnapPressOpenDelete = () => {
+  const handleSnapPressOpenDelete = useCallback(() => {
     sheetRefDelete.current?.present();
-  };
-  const handleSnapPressCloseDelete = () => {
+  }, []);
+  const handleSnapPressCloseDelete = useCallback(() => {
     sheetRefDelete.current?.close();
-  };
+  }, []);
   return (
     <>
       <View className="flex-row justify-between items-center border border-dark/10 dark:border-gray-1/5 px-2 py-3 rounded-xl">
         <View className="flex-row items-center gap-2 w-48">
-          {user.imageUrl ? (
-            <Image
-              source={{ uri: user.imageUrl }}
-              className="w-12 h-12 rounded-2xl"
-            />
-          ) : (
-            <Image source={defaultImage} className="w-12 h-12 rounded-2xl" />
-          )}
+          <Image
+            source={user.imageUrl ? { uri: user.imageUrl } : defaultImage}
+            className="w-12 h-12 rounded-2xl"
+          />
 
           <View>
             <Text
@@ -94,6 +90,6 @@ const User = memo(({ user }) => {
       />
     </>
   );
-});
+};
 
 export default User;
