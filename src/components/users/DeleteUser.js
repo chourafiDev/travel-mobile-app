@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import {
   BottomSheetBackdrop,
@@ -10,8 +10,10 @@ import { Image, Text, View } from "react-native";
 import GradientButton from "../../components/ui/GradientButton";
 import { alert } from "../../../utils/assets";
 import OutlineButton from "../ui/OutlineButton";
+import { useDeleteUserMutation } from "../../store/services/usersApiSlice";
+import Toast from "react-native-toast-message";
 
-const DeleteUser = ({ sheetRef, handleSnapPressCloseDelete }) => {
+const DeleteUser = ({ sheetRef, userId, handleSnapPressCloseDelete }) => {
   const { colorScheme } = useColorScheme();
 
   const snapPoints = useMemo(() => ["35%"], []);
@@ -25,6 +27,31 @@ const DeleteUser = ({ sheetRef, handleSnapPressCloseDelete }) => {
       />
     );
   }, []);
+
+  // handle delete user
+  const [deleteUser, { isLoading, isSuccess }] = useDeleteUserMutation();
+
+  const submitDeleteUser = async () => {
+    try {
+      await deleteUser(userId).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleSnapPressCloseDelete();
+
+      Toast.show({
+        type: "success",
+        text1: "User deleted successfully",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <BottomSheetModal
@@ -62,7 +89,13 @@ const DeleteUser = ({ sheetRef, handleSnapPressCloseDelete }) => {
 
           <View className="flex-row gap-3 mt-5">
             <View className="flex-1">
-              <GradientButton label="Yes, delete it" type="danger" size="lg" />
+              <GradientButton
+                label="Yes, delete it"
+                type="danger"
+                size="lg"
+                isLoading={isLoading}
+                onPress={submitDeleteUser}
+              />
             </View>
             <View className="flex-1">
               <OutlineButton
