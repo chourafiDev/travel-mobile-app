@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import {
   BottomSheetBackdrop,
@@ -10,8 +10,14 @@ import { Image, Text, View } from "react-native";
 import GradientButton from "../ui/GradientButton";
 import { alert } from "../../../utils/assets";
 import OutlineButton from "../ui/OutlineButton";
+import { useDeleteDestinationMutation } from "../../store/services/destinationsApiSlice";
+import Toast from "react-native-toast-message";
 
-const DeleteDestination = ({ sheetRef, handleSnapPressCloseDelete }) => {
+const DeleteDestination = ({
+  destinationId,
+  sheetRef,
+  handleSnapPressCloseDelete,
+}) => {
   const { colorScheme } = useColorScheme();
 
   const snapPoints = useMemo(() => ["35%"], []);
@@ -25,6 +31,32 @@ const DeleteDestination = ({ sheetRef, handleSnapPressCloseDelete }) => {
       />
     );
   }, []);
+
+  // handle delete category
+  const [deleteDestination, { isLoading, isSuccess }] =
+    useDeleteDestinationMutation();
+
+  const submitDeleteDestination = async () => {
+    try {
+      await deleteDestination(destinationId).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      handleSnapPressCloseDelete();
+
+      Toast.show({
+        type: "success",
+        text1: "Destination deleted successfully",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <BottomSheetModal
@@ -62,7 +94,13 @@ const DeleteDestination = ({ sheetRef, handleSnapPressCloseDelete }) => {
 
           <View className="flex-row gap-3 mt-5">
             <View className="flex-1">
-              <GradientButton label="Yes, delete it" type="danger" size="lg" />
+              <GradientButton
+                label="Yes, delete it"
+                type="danger"
+                size="lg"
+                isLoading={isLoading}
+                onPress={submitDeleteDestination}
+              />
             </View>
             <View className="flex-1">
               <OutlineButton
