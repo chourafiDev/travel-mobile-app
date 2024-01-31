@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { welcome } from "../../utils/assets";
+import { LOGIN } from "../../src/constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 
 export default function WelcomeScreen() {
@@ -48,7 +49,7 @@ export default function WelcomeScreen() {
         </View>
         <TouchableOpacity
           activeOpacity={0.9}
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.navigate(LOGIN)}
           className="p-3 rounded-lg bg-white"
         >
           <Text
