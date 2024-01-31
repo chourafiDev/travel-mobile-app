@@ -45,10 +45,7 @@ const CustomDrawer = ({ navigation }) => {
             }}
             className="border-[2px] border-white w-16 h-16 rounded-[14px] overflow-hidden"
           >
-            <Image
-              source={user.image ? user.image : defaultImage}
-              className="w-full h-full"
-            />
+            <Image source={{ uri: user.image }} className="w-full h-full" />
           </TouchableOpacity>
 
           <View className="mt-3">
