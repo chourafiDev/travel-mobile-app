@@ -5,15 +5,18 @@ import { useColorScheme } from "nativewind";
 import { shadow } from "../../../utils/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import AddDestination from "../../components/destinations/AddDestination";
-import EditDestination from "../../components/destinations/EditDestination";
-import DeleteDestination from "../../components/destinations/DeleteDestination";
-import { destinations } from "../../../utils/data";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { useGetDestinationsQuery } from "../../store/services/destinationsApiSlice";
 import Destination from "../../components/destinations/Destination";
+import AddDestination from "../../components/destinations/AddDestination";
+import Empty from "../../components/Empty";
+import Loading from "../../components/Loading";
 
 export default function ManageDestinationsScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
+
+  // fetch destinations
+  const { data: destinations, isLoading } = useGetDestinationsQuery();
 
   // Open modal add destination
   const sheetRefAdd = useRef(null);
@@ -22,24 +25,6 @@ export default function ManageDestinationsScreen({ navigation }) {
   };
   const handleSnapPressCloseAdd = () => {
     sheetRefAdd.current?.close();
-  };
-
-  // Open modal add destination
-  const sheetRefEdit = useRef(null);
-  const handleSnapPressOpenEdit = () => {
-    sheetRefEdit.current?.present();
-  };
-  const handleSnapPressCloseEdit = () => {
-    sheetRefEdit.current?.close();
-  };
-
-  // Open modal add destination
-  const sheetRefDelete = useRef(null);
-  const handleSnapPressOpenDelete = () => {
-    sheetRefDelete.current?.present();
-  };
-  const handleSnapPressCloseDelete = () => {
-    sheetRefDelete.current?.close();
   };
 
   return (
@@ -75,7 +60,7 @@ export default function ManageDestinationsScreen({ navigation }) {
             className="text-brand text-xl"
             style={{ fontFamily: "baiJamjuree-bold" }}
           >
-            10
+            {destinations && destinations.length}
           </Text>
           <Text
             className="text-dark dark:text-white text-xl"
@@ -106,44 +91,32 @@ export default function ManageDestinationsScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        className="px-3 mt-6"
-        showsVerticalScrollIndicator={false}
-        data={destinations}
-        renderItem={({ item, index }) => {
-          return (
-            <Animated.View entering={FadeInDown.delay(250 * index)}>
-              <Destination
-                key={item.id}
-                destination={item}
-                handleSnapPressOpenEdit={handleSnapPressOpenEdit}
-                handleSnapPressOpenDelete={handleSnapPressOpenDelete}
-              />
-            </Animated.View>
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-        ListEmptyComponent={<Text>Not items found</Text>}
-        ListFooterComponent={<View className="h-3"></View>}
-        ItemSeparatorComponent={<View className="h-3"></View>}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          className="px-3 mt-6"
+          showsVerticalScrollIndicator={false}
+          data={destinations}
+          renderItem={({ item, index }) => {
+            return (
+              <Animated.View entering={FadeInDown.delay(250 * index)}>
+                <Destination key={item.id} destination={item} />
+              </Animated.View>
+            );
+          }}
+          keyExtractor={(item) => item.id.toString()}
+          contentContainerStyle={{ flexGrow: 1 }}
+          ListEmptyComponent={<Empty />}
+          ListFooterComponent={<View className="h-3"></View>}
+          ItemSeparatorComponent={<View className="h-3"></View>}
+        />
+      )}
 
       {/* Modal Add Destination */}
       <AddDestination
         sheetRef={sheetRefAdd}
         handleSnapPressCloseAdd={handleSnapPressCloseAdd}
-      />
-
-      {/* Modal Edit Destination */}
-      <EditDestination
-        sheetRef={sheetRefEdit}
-        handleSnapPressCloseEdit={handleSnapPressCloseEdit}
-      />
-
-      {/* Modal Dlete Destination */}
-      <DeleteDestination
-        sheetRef={sheetRefDelete}
-        handleSnapPressCloseDelete={handleSnapPressCloseDelete}
       />
     </SafeAreaView>
   );
