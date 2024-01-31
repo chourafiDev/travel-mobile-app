@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import {
   BottomSheetBackdrop,
@@ -10,6 +10,9 @@ import { useColorScheme } from "nativewind";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import GradientButton from "../ui/GradientButton";
 import * as ImagePicker from "expo-image-picker";
+import { useGetCategoriesQuery } from "../../store/services/categoriesApiSlice";
+import { useCreateDestinationMutation } from "../../store/services/destinationsApiSlice";
+import Toast from "react-native-toast-message";
 
 const AddDestination = ({ sheetRef, handleSnapPressCloseAdd }) => {
   const { colorScheme } = useColorScheme();
@@ -25,6 +28,19 @@ const AddDestination = ({ sheetRef, handleSnapPressCloseAdd }) => {
       />
     );
   }, []);
+
+  // fetch categories
+  const { data: categories } = useGetCategoriesQuery();
+
+  // handle select category
+  const [category, setCategory] = useState("");
+  const handleSelectCategory = (item) => {
+    if (category === item) {
+      setCategory("");
+    } else {
+      setCategory(item);
+    }
+  };
 
   // handle image
   const [images, setImages] = useState([]);
@@ -53,6 +69,52 @@ const AddDestination = ({ sheetRef, handleSnapPressCloseAdd }) => {
       setImages(imageUri);
     }
   };
+
+  // handle create destination
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [price, setPrice] = useState(null);
+  const [duration, setDuration] = useState(null);
+
+  const [createDestination, { isLoading, isSuccess }] =
+    useCreateDestinationMutation();
+
+  const submitDestination = async () => {
+    try {
+      const data = {
+        title,
+        description,
+        categoryId: Number(category),
+        price: Number(price),
+        duration: Number(duration),
+        images,
+      };
+
+      await createDestination(data).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setTitle("");
+      setDescription("");
+      setPrice("");
+      setDuration("");
+      setCategory("");
+      setImages([]);
+      handleSnapPressCloseAdd();
+
+      Toast.show({
+        type: "success",
+        text1: "Destination created successfully",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <BottomSheetModal
@@ -121,6 +183,8 @@ const AddDestination = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="title"
+                  value={title}
+                  onChangeText={setTitle}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   placeholderTextColor={
@@ -146,6 +210,8 @@ const AddDestination = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 />
                 <TextInput
                   placeholder="description"
+                  value={description}
+                  onChangeText={setDescription}
                   className="text-dark dark:text-white flex-1 ml-3"
                   numberOfLines={6}
                   style={[
@@ -168,56 +234,107 @@ const AddDestination = ({ sheetRef, handleSnapPressCloseAdd }) => {
                 className="text-dark dark:text-white text-[17px] mb-1"
                 style={{ fontFamily: "baiJamjuree-medium" }}
               >
-                Price
+                Categeory
               </Text>
 
-              <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
-                <Icon
-                  name="dollar-sign"
-                  size={15}
-                  color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
-                />
-
-                <TextInput
-                  placeholder="price"
-                  className="text-dark dark:text-white flex-1 ml-3"
-                  style={[{ fontFamily: "baiJamjuree-regular" }]}
-                  keyboardType="numeric"
-                  placeholderTextColor={
-                    colorScheme == "light" ? "#222B4580" : "#ffffff"
-                  }
-                />
+              <View className="flex-row gap-2 flex-wrap">
+                {categories &&
+                  categories.map(({ id, content, imageUrl }) => (
+                    <TouchableOpacity
+                      onPress={() => handleSelectCategory(id)}
+                      activeOpacity={0.6}
+                      key={id}
+                      className={`flex-row items-center text-base p-1 rounded-xl border ${
+                        category === id
+                          ? "bg-brand/10 border-brand/40"
+                          : "bg-gray-100 dark:bg-dark-2 border-gray-100 dark:border-gray-1/5"
+                      }`}
+                    >
+                      <Image
+                        source={{ uri: imageUrl }}
+                        className="w-9 h-9 rounded-xl mr-2"
+                      />
+                      <Text
+                        className={`pr-2 ${
+                          category === id ? "text-brand" : "text-gray-400"
+                        }`}
+                        style={{ fontFamily: "baiJamjuree-semibold" }}
+                      >
+                        {content}
+                      </Text>
+                    </TouchableOpacity>
+                  ))}
               </View>
             </View>
 
-            <View>
-              <Text
-                className="text-dark dark:text-white text-[17px] mb-1"
-                style={{ fontFamily: "baiJamjuree-medium" }}
-              >
-                Duration
-              </Text>
+            <View className="flex-row gap-x-2">
+              <View className="flex-1">
+                <Text
+                  className="text-dark dark:text-white text-[17px] mb-1"
+                  style={{ fontFamily: "baiJamjuree-medium" }}
+                >
+                  Price
+                </Text>
 
-              <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
-                <Icon
-                  name="clock"
-                  size={15}
-                  color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
-                />
-                <TextInput
-                  placeholder="duration"
-                  className="text-dark dark:text-white flex-1 ml-3"
-                  style={[{ fontFamily: "baiJamjuree-regular" }]}
-                  keyboardType="numeric"
-                  placeholderTextColor={
-                    colorScheme == "light" ? "#222B4580" : "#ffffff"
-                  }
-                />
+                <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
+                  <Icon
+                    name="dollar-sign"
+                    size={15}
+                    color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+                  />
+
+                  <TextInput
+                    placeholder="price"
+                    value={price}
+                    onChangeText={setPrice}
+                    className="text-dark dark:text-white flex-1 ml-3"
+                    style={[{ fontFamily: "baiJamjuree-regular" }]}
+                    keyboardType="numeric"
+                    placeholderTextColor={
+                      colorScheme == "light" ? "#222B4580" : "#ffffff"
+                    }
+                  />
+                </View>
+              </View>
+
+              <View className="flex-1">
+                <Text
+                  className="text-dark dark:text-white text-[17px] mb-1"
+                  style={{ fontFamily: "baiJamjuree-medium" }}
+                >
+                  Duration
+                </Text>
+
+                <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
+                  <Icon
+                    name="clock"
+                    size={15}
+                    color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+                  />
+                  <TextInput
+                    placeholder="duration"
+                    value={duration}
+                    onChangeText={setDuration}
+                    className="text-dark dark:text-white flex-1 ml-3"
+                    style={[{ fontFamily: "baiJamjuree-regular" }]}
+                    keyboardType="numeric"
+                    placeholderTextColor={
+                      colorScheme == "light" ? "#222B4580" : "#ffffff"
+                    }
+                  />
+                </View>
               </View>
             </View>
           </View>
 
-          <GradientButton label="Add" icon="plus" type="primary" size="lg" />
+          <GradientButton
+            label="Add"
+            icon="plus"
+            type="primary"
+            size="lg"
+            isLoading={isLoading}
+            onPress={submitDestination}
+          />
         </View>
       </BottomSheetView>
     </BottomSheetModal>
