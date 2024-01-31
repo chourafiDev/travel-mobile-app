@@ -58,10 +58,7 @@ const HomeScreen = ({ navigation }) => {
                 className="border-[2px] border-white w-14 h-14 rounded-[14px] overflow-hidden"
                 style={[shadow.boxShadow]}
               >
-                <Image
-                  source={user.image ? user.image : defaultImage}
-                  className="w-full h-full"
-                />
+                <Image source={{ uri: user.image }} className="w-full h-full" />
               </View>
               <View>
                 <Text
