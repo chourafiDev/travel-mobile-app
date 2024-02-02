@@ -104,13 +104,13 @@ const Overview = ({ destination }) => {
               className="text-dark/60 dark:text-white/60 text-base"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
-              Address
+              Destination
             </Text>
             <Text
               className="text-dark dark:text-white text-[17px] -mt-1"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              {destination.address}
+              {destination.destination}
             </Text>
           </View>
         </Animated.View>
