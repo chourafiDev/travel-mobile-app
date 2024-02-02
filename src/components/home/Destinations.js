@@ -4,6 +4,7 @@ import { DESTINATIONS } from "../../constants/routes";
 import Destination from "../Destination";
 import { useGetDestinationsQuery } from "../../store/services/destinationsApiSlice";
 import Empty from "../Empty";
+import Loading from "../Loading";
 
 const Destinations = () => {
   // fetch destinations
@@ -31,25 +32,31 @@ const Destinations = () => {
         </TouchableOpacity>
       </View>
 
-      <FlatList
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ flexGrow: 1 }}
-        data={destinations}
-        renderItem={({ item }) => {
-          return (
-            <View className="flex-1 flex-col pb-4 w-56">
-              <Destination key={item.title} destination={item} />
+      {isLoading ? (
+        <View className="h-20">
+          <Loading />
+        </View>
+      ) : (
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ flexGrow: 1 }}
+          data={destinations}
+          renderItem={({ item }) => {
+            return (
+              <View className="flex-1 flex-col pb-4 w-56">
+                <Destination key={item.title} destination={item} />
+              </View>
+            );
+          }}
+          ItemSeparatorComponent={<View className="w-3"></View>}
+          ListEmptyComponent={
+            <View className="justify-center items-center h-28 w-full">
+              <Empty />
             </View>
-          );
-        }}
-        ItemSeparatorComponent={<View className="w-3"></View>}
-        ListEmptyComponent={
-          <View className="justify-center items-center h-28 w-full">
-            <Empty />
-          </View>
-        }
-      />
+          }
+        />
+      )}
     </View>
   );
 };
