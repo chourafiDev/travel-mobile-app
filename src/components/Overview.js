@@ -4,16 +4,16 @@ import { ScrollView } from "react-native-gesture-handler";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/Feather";
 
-const Overview = () => {
+const Overview = ({ destination }) => {
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
       className="bg-[#f8f8fa] dark:bg-dark"
     >
-      <View className="flex-row justify-between items-center">
+      <View className="flex-row justify-between items-center mb-3">
         <Animated.View
           entering={FadeInDown.delay(40)}
-          className="flex-row items-center gap-3"
+          className="flex-row items-center gap-3 w-32"
         >
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -37,17 +37,17 @@ const Overview = () => {
               Duration
             </Text>
             <Text
-              className="text-dark dark:text-white text-[18px] -mt-1"
+              className="text-dark dark:text-white text-[17px] -mt-1"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              2 Days
+              {destination.duration} Days
             </Text>
           </View>
         </Animated.View>
 
         <Animated.View
           entering={FadeInDown.delay(40)}
-          className="flex-row items-center gap-3"
+          className="flex-row items-center gap-3 w-32"
         >
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -71,10 +71,80 @@ const Overview = () => {
               Rating
             </Text>
             <Text
-              className="text-dark dark:text-white text-[18px] -mt-1"
+              className="text-dark dark:text-white text-[17px] -mt-1"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              4.2 out of 5
+              4.2/5
+            </Text>
+          </View>
+        </Animated.View>
+      </View>
+
+      <View className="flex-row justify-between items-center">
+        <Animated.View
+          entering={FadeInDown.delay(60)}
+          className="flex-row items-center gap-3 w-32"
+        >
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            activeOpacity={0.8}
+            className="bg-gray-1 dark:bg-dark-2 w-10 h-10 rounded-xl items-center justify-center"
+          >
+            <Icon
+              name="map-pin"
+              style={{
+                fontFamily: "baiJamjuree-bold",
+              }}
+              size={18}
+              color="#23A892"
+            />
+          </TouchableOpacity>
+          <View>
+            <Text
+              className="text-dark/60 dark:text-white/60 text-base"
+              style={{ fontFamily: "baiJamjuree-medium" }}
+            >
+              Address
+            </Text>
+            <Text
+              className="text-dark dark:text-white text-[17px] -mt-1"
+              style={{ fontFamily: "baiJamjuree-semibold" }}
+            >
+              {destination.address}
+            </Text>
+          </View>
+        </Animated.View>
+
+        <Animated.View
+          entering={FadeInDown.delay(60)}
+          className="flex-row items-center gap-3 w-32"
+        >
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            activeOpacity={0.8}
+            className="bg-gray-1 dark:bg-dark-2  w-10 h-10 rounded-xl items-center justify-center"
+          >
+            <Icon
+              name="layers"
+              style={{
+                fontFamily: "baiJamjuree-bold",
+              }}
+              size={18}
+              color="#23A892"
+            />
+          </TouchableOpacity>
+          <View>
+            <Text
+              className="text-dark/60 dark:text-white/60 text-base"
+              style={{ fontFamily: "baiJamjuree-medium" }}
+            >
+              Catgeory
+            </Text>
+            <Text
+              className="text-dark dark:text-white text-[17px] -mt-1"
+              style={{ fontFamily: "baiJamjuree-semibold" }}
+            >
+              {destination.category.content}
             </Text>
           </View>
         </Animated.View>
@@ -97,18 +167,7 @@ const Overview = () => {
             fontFamily: "baiJamjuree-light",
           }}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged scrambled it to make a type specimen
-          book. It has survived not only five centuries, but also the leap into
-          electronic typesetting, remaining essentially unchanged five
-          centuries, but also the leap into electronic typesetting, remaining
-          essentially unchanged scrambled it to make a type specimen book. It
-          has survived not only five centuries, but also the leap into
-          electronic typesetting, remaining essentially unchanged.
+          {destination.description}
         </Animated.Text>
       </View>
 
