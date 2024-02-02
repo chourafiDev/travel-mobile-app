@@ -50,6 +50,7 @@ const Destinations = () => {
             );
           }}
           ItemSeparatorComponent={<View className="w-3"></View>}
+          keyExtractor={(item) => item.id.toString()}
           ListEmptyComponent={
             <View className="justify-center items-center h-28 w-full">
               <Empty />
