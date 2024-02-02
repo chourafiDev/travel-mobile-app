@@ -4,7 +4,7 @@ import { shadow } from "../../../utils/theme";
 import { useColorScheme } from "nativewind";
 
 export default function Category({
-  category: { content, imageUrl },
+  category: { content, imageUrl, destinationCount },
   selectedCategory,
   handleSelectCategory,
 }) {
@@ -31,6 +31,8 @@ export default function Category({
           style={{ fontFamily: "baiJamjuree-semibold" }}
         >
           {content}
+          {"  "}
+          <Text className="text-brand">({destinationCount})</Text>
         </Text>
       </View>
     </TouchableOpacity>
