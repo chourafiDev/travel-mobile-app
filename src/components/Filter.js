@@ -156,26 +156,27 @@ const Filter = ({ sheetRef }) => {
               Category
             </Text>
             <View className="flex-row gap-2 flex-wrap">
-              {categories.map(({ id, content }) => (
-                <TouchableOpacity
-                  onPress={() => handleSelectCategory(content)}
-                  activeOpacity={0.6}
-                  key={id}
-                  className={` text-base px-5 py-[10px] rounded-full border ${
-                    category === content
-                      ? "bg-brand/10 border-brand/40"
-                      : "bg-gray-100 dark:bg-dark-2 border-gray-100 dark:border-gray-1/5"
-                  }`}
-                >
-                  <Text
-                    className={`${
-                      category === content ? "text-brand" : "text-gray-400"
+              {categories &&
+                categories.map(({ id, content }) => (
+                  <TouchableOpacity
+                    onPress={() => handleSelectCategory(content)}
+                    activeOpacity={0.6}
+                    key={id}
+                    className={` text-base px-5 py-[10px] rounded-full border ${
+                      category === content
+                        ? "bg-brand/10 border-brand/40"
+                        : "bg-gray-100 dark:bg-dark-2 border-gray-100 dark:border-gray-1/5"
                     }`}
                   >
-                    {content}
-                  </Text>
-                </TouchableOpacity>
-              ))}
+                    <Text
+                      className={`${
+                        category === content ? "text-brand" : "text-gray-400"
+                      }`}
+                    >
+                      {content}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
             </View>
           </View>
 
