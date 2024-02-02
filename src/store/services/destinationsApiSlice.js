@@ -18,6 +18,16 @@ export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
       },
       providesTags: ["destinations"],
     }),
+    getDestination: builder.query({
+      query: (id) => {
+        return {
+          url: `${DESTINATIONS_URL}/${id}`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["destinations"],
+    }),
     createDestination: builder.mutation({
       query: (data) => {
         return {
@@ -55,6 +65,7 @@ export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
 
 export const {
   useGetDestinationsQuery,
+  useGetDestinationQuery,
   useCreateDestinationMutation,
   useUpdateDestinationMutation,
   useDeleteDestinationMutation,
