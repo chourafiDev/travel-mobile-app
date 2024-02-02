@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { DESTINATION } from "../constants/routes";
 
 export default function Destination({
-  destination: { title, destination, image },
+  destination: { title, images, address },
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
@@ -21,14 +21,31 @@ export default function Destination({
         navigation.navigate(DESTINATION);
       }}
     >
-      <TouchableOpacity
-        className="absolute top-3 right-3 bg-white/80 backdrop-blur-md w-7 h-7 rounded-full z-10 justify-center items-center"
-        style={[shadow.boxShadow]}
-      >
-        <Icon name="heart" color="#ef476f" size={16} />
-      </TouchableOpacity>
+      <View className="absolute top-3 right-3 z-10 flex-row gap-x-1">
+        <TouchableOpacity
+          className="bg-white/80 backdrop-blur-md h-7 rounded-xl justify-center items-center flex-row gap-x-1 pr-2 pl-1"
+          style={[shadow.boxShadow]}
+        >
+          <Text
+            className="text-dark dark:text-white text-base"
+            style={{ fontFamily: "baiJamjuree-semibold" }}
+          >
+            {images.length}
+          </Text>
+          <Icon name="image" color="#23A892" size={16} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          className="bg-white/80 backdrop-blur-md w-7 h-7 rounded-xl justify-center items-center"
+          style={[shadow.boxShadow]}
+        >
+          <Icon name="heart" color="#ef476f" size={16} />
+        </TouchableOpacity>
+      </View>
 
-      <Image source={image} className="rounded-2xl w-full h-32" />
+      <Image
+        source={{ uri: images[0].imageUrl }}
+        className="rounded-2xl w-full h-32"
+      />
       <Text
         className="text-dark dark:text-white text-base mt-4"
         style={{ fontFamily: "baiJamjuree-semibold" }}
@@ -48,7 +65,7 @@ export default function Destination({
           className="text-dark/60 dark:text-white/60"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
-          {destination}
+          {address}
         </Text>
       </View>
     </TouchableOpacity>
