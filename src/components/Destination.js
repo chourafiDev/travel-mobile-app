@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { DESTINATION } from "../constants/routes";
 
 export default function Destination({
-  destination: { title, images, address },
+  destination: { id, title, images, address },
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
@@ -18,7 +18,9 @@ export default function Destination({
       style={[colorScheme == "light" && shadow.boxShadow]}
       activeOpacity={0.8}
       onPress={() => {
-        navigation.navigate(DESTINATION);
+        navigation.navigate(DESTINATION, {
+          destinationId: id,
+        });
       }}
     >
       <View className="absolute top-3 right-3 z-10 flex-row gap-x-1">
