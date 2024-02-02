@@ -37,17 +37,19 @@ const Categories = ({ setSelectedCategory, selectedCategory }) => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{
-          paddingBottom: 20,
-        }}
-      >
-        {isLoading ? (
+      {isLoading ? (
+        <View className="pb-5">
           <Loading />
-        ) : (
-          categories.map((category) => {
+        </View>
+      ) : (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            paddingBottom: 20,
+          }}
+        >
+          {categories.map((category) => {
             return (
               <Category
                 key={category?.id}
@@ -56,9 +58,9 @@ const Categories = ({ setSelectedCategory, selectedCategory }) => {
                 handleSelectCategory={handleSelectCategory}
               />
             );
-          })
-        )}
-      </ScrollView>
+          })}
+        </ScrollView>
+      )}
     </View>
   );
 };
