@@ -12,40 +12,40 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ImageView from "react-native-image-viewing";
 import { useColorScheme } from "nativewind";
 import Icon from "react-native-vector-icons/Feather";
-import { categories, destinations } from "../../../utils/data";
 
 // Components
 import TopTabBar from "../../components/layout/TopTabBar";
 import Overview from "../../components/Overview";
 import Reviews from "../../components/Reviews/Reviews";
 import GradientButton from "../../components/ui/GradientButton";
+import { useGetDestinationQuery } from "../../store/services/destinationsApiSlice";
+import Loading from "../../components/Loading";
 
 const Tab = createMaterialTopTabNavigator();
 
-export default function DestinationScreen({ navigation }) {
+export default function DestinationScreen({ route, navigation }) {
   const { colorScheme } = useColorScheme();
+  const { destinationId } = route.params;
 
-  const item = destinations[0];
+  // fetch destination
+  const { data: destination, isLoading } =
+    useGetDestinationQuery(destinationId);
 
-  const images = [
-    {
-      uri: "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4",
-    },
-    {
-      uri: "https://images.unsplash.com/photo-1573273787173-0eb81a833b34",
-    },
-    {
-      uri: "https://images.unsplash.com/photo-1569569970363-df7b6160d111",
-    },
-  ];
+  const destinationImages = destination?.images?.map((image) => {
+    return { uri: image.imageUrl };
+  });
 
   const [visible, setIsVisible] = useState(false);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
       {/* Modal images */}
       <ImageView
-        images={images}
+        images={destinationImages}
         imageIndex={0}
         visible={visible}
         onRequestClose={() => setIsVisible(false)}
@@ -71,7 +71,7 @@ export default function DestinationScreen({ navigation }) {
           className="text-dark dark:text-white text-xl"
           style={{ fontFamily: "baiJamjuree-bold" }}
         >
-          {item.title}
+          {destination.title}
         </Text>
         <TouchableOpacity
           onPress={() => navigation.navigate(FAVORITES)}
@@ -90,7 +90,7 @@ export default function DestinationScreen({ navigation }) {
 
       {/* Images */}
       <ImageBackground
-        source={item.image}
+        source={destinationImages[0]}
         className="h-72 rounded-3xl justify-end overflow-hidden mx-4"
       >
         <View>
@@ -100,9 +100,9 @@ export default function DestinationScreen({ navigation }) {
           />
           <View className="flex-row gap-2 items-center justify-center mb-3">
             <View className="flex-row gap-x-2">
-              {categories.slice(0, 3).map(({ image }) => (
+              {destinationImages.slice(0, 2).map((image) => (
                 <View
-                  key={image}
+                  key={image.uri}
                   className="border-[3px] border-white/70 rounded-xl overflow-hidden w-14 h-14"
                 >
                   <Image source={image} className="w-full h-full" />
@@ -119,13 +119,9 @@ export default function DestinationScreen({ navigation }) {
                 className="text-white text-lg z-10 absolute top-[14px] left-[14px]"
                 style={{ fontFamily: "baiJamjuree-bold" }}
               >
-                +6
+                +{destinationImages.length - 2}
               </Text>
-              <Image
-                key={item.image}
-                source={item.image}
-                className="w-full h-full"
-              />
+              <Image source={destinationImages[3]} className="w-full h-full" />
             </TouchableOpacity>
           </View>
         </View>
@@ -134,7 +130,10 @@ export default function DestinationScreen({ navigation }) {
       {/* Top Tab */}
       <View className="px-4 mt-6 flex-1">
         <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
-          <Tab.Screen name="Overview" component={Overview} />
+          <Tab.Screen
+            name="Overview"
+            children={() => <Overview destination={destination} />}
+          />
           <Tab.Screen name="Reviews" component={Reviews} />
         </Tab.Navigator>
       </View>
@@ -145,14 +144,12 @@ export default function DestinationScreen({ navigation }) {
             "transparent",
             colorScheme == "light" ? "#fbfbfbfb" : "#222B45",
           ]}
-          // start={{ x: 0.5, y: 0 }}
-          // end={{ x: 0.5, y: 0.4 }}
           className="absolute bottom-0 w-full h-28"
         />
 
         <View className="my-2 mx-4">
           <GradientButton
-            label="Book Now | $106"
+            label={`Book Now | $${destination.price}`}
             icon="credit-card"
             size="lg"
             route=""
