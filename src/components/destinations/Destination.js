@@ -79,7 +79,7 @@ const Destination = ({ destination }) => {
             className="text-brand text-[15px]"
             style={{ fontFamily: "baiJamjuree-medium" }}
           >
-            Island
+            {destination.category.content}
           </Text>
         </View>
 
