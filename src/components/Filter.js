@@ -12,17 +12,20 @@ import {
   BottomSheetModal,
   BottomSheetView,
 } from "@gorhom/bottom-sheet";
-import { categories } from "../../utils/data";
 import DropDown from "./ui/DropDown";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { useColorScheme } from "nativewind";
 import Icon from "react-native-vector-icons/Feather";
 import GradientButton from "./ui/GradientButton";
+import { useGetCategoriesQuery } from "../store/services/categoriesApiSlice";
 
 const Filter = ({ sheetRef }) => {
   const { colorScheme } = useColorScheme();
 
   const snapPoints = useMemo(() => ["92%"], []);
+
+  // fetch categories
+  const { data: categories } = useGetCategoriesQuery();
 
   const renderBackdrop = useCallback((props) => {
     return (
@@ -153,23 +156,23 @@ const Filter = ({ sheetRef }) => {
               Category
             </Text>
             <View className="flex-row gap-2 flex-wrap">
-              {categories.map(({ title }) => (
+              {categories.map(({ id, content }) => (
                 <TouchableOpacity
-                  onPress={() => handleSelectCategory(title)}
+                  onPress={() => handleSelectCategory(content)}
                   activeOpacity={0.6}
-                  key={title}
+                  key={id}
                   className={` text-base px-5 py-[10px] rounded-full border ${
-                    category === title
+                    category === content
                       ? "bg-brand/10 border-brand/40"
                       : "bg-gray-100 dark:bg-dark-2 border-gray-100 dark:border-gray-1/5"
                   }`}
                 >
                   <Text
                     className={`${
-                      category === title ? "text-brand" : "text-gray-400"
+                      category === content ? "text-brand" : "text-gray-400"
                     }`}
                   >
-                    {title}
+                    {content}
                   </Text>
                 </TouchableOpacity>
               ))}
