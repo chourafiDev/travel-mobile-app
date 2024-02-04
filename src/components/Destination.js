@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 import { DESTINATION } from "../constants/routes";
 
 export default function Destination({
-  destination: { id, title, images, address },
+  destination: { id, title, images, destination },
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
@@ -67,7 +67,7 @@ export default function Destination({
           className="text-dark/60 dark:text-white/60"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
-          {address}
+          {destination}
         </Text>
       </View>
     </TouchableOpacity>
