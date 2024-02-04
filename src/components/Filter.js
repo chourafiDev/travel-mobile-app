@@ -157,7 +157,7 @@ const Filter = ({ sheetRef }) => {
             </Text>
             <View className="flex-row gap-2 flex-wrap">
               {categories &&
-                categories.map(({ id, content }) => (
+                categories?.map(({ id, content }) => (
                   <TouchableOpacity
                     onPress={() => handleSelectCategory(content)}
                     activeOpacity={0.6}
