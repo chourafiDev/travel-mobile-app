@@ -16,6 +16,12 @@ import {
   user08,
 } from "./assets";
 
+export const steps = [
+  { id: "01", name: "Images" },
+  { id: "02", name: "Information (1)" },
+  { id: "03", name: "Information (2)" },
+];
+
 export const categories = [
   { title: "Beach", image: beach },
   { title: "Camp", image: camp },
