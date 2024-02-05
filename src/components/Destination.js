@@ -1,16 +1,69 @@
-import { View, Text, Image, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import React, { useEffect } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { shadow } from "../../utils/theme";
 import { useColorScheme } from "nativewind";
 import { useNavigation } from "@react-navigation/native";
 import { DESTINATION } from "../constants/routes";
+import { emptyHeart, fullHeart } from "../../utils/assets";
+import {
+  useFavoriteMutation,
+  useUnfavoriteMutation,
+} from "../store/services/favoritesApiSlice";
+import Toast from "react-native-toast-message";
 
 export default function Destination({
-  destination: { id, title, images, destination },
+  destination: { id, title, images, destination, isFavorite },
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
+
+  // handle favorite and unfavorite destination
+  const [
+    favorite,
+    { isLoading: isFavoriteLoading, isSuccess: isFavoriteSuccess },
+  ] = useFavoriteMutation();
+  const [
+    unfavorite,
+    { isLoading: isUnfavoriteLoading, isSuccess: isUnfavoriteSuccess },
+  ] = useUnfavoriteMutation();
+
+  const submitFavoriteOrUnfavorite = async () => {
+    try {
+      if (isFavorite) {
+        await unfavorite(id).unwrap();
+      } else {
+        await favorite({ destinationId: Number(id) }).unwrap();
+      }
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isFavoriteSuccess) {
+      Toast.show({
+        type: "success",
+        text1: "Destination Favorited Successfully",
+      });
+    }
+
+    if (isUnfavoriteSuccess) {
+      Toast.show({
+        type: "success",
+        text1: "Destination Unfavorited Successfully",
+      });
+    }
+  }, [isFavoriteSuccess, isUnfavoriteSuccess]);
 
   return (
     <TouchableOpacity
@@ -23,26 +76,20 @@ export default function Destination({
         });
       }}
     >
-      <View className="absolute top-3 right-3 z-10 flex-row gap-x-1">
-        <TouchableOpacity
-          className="bg-white/80 backdrop-blur-md h-7 rounded-xl justify-center items-center flex-row gap-x-1 pr-2 pl-1"
-          style={[shadow.boxShadow]}
-        >
-          <Text
-            className="text-dark dark:text-white text-base"
-            style={{ fontFamily: "baiJamjuree-semibold" }}
-          >
-            {images.length}
-          </Text>
-          <Icon name="image" color="#23A892" size={16} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          className="bg-white/80 backdrop-blur-md w-7 h-7 rounded-xl justify-center items-center"
-          style={[shadow.boxShadow]}
-        >
-          <Icon name="heart" color="#ef476f" size={16} />
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        className="absolute top-3 right-3 z-40 bg-white backdrop-blur-md w-7 h-7 rounded-full justify-center items-center"
+        style={[shadow.boxShadow]}
+        onPress={submitFavoriteOrUnfavorite}
+      >
+        {isFavoriteLoading || isUnfavoriteLoading ? (
+          <ActivityIndicator size="small" color="#ef476f" />
+        ) : (
+          <Image
+            source={isFavorite ? fullHeart : emptyHeart}
+            className="w-4 h-4"
+          />
+        )}
+      </TouchableOpacity>
 
       <Image
         source={{ uri: images[0].imageUrl }}
