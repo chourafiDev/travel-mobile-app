@@ -1,16 +1,28 @@
 import React from "react";
-import { View, Text, TouchableOpacity, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  FlatList,
+  Dimensions,
+  StyleSheet,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Feather";
 import { FAVORITES } from "../../constants/routes";
-import { destinations } from "../../../utils/data";
-import Destination from "../../components/Destination";
 import Search from "../../components/Search";
 import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import { useGetDestinationsQuery } from "../../store/services/destinationsApiSlice";
+import Loading from "../../components/Loading";
+import Empty from "../../components/Empty";
+import Destination from "../../components/Destination";
 
 export default function DestinationsScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
+
+  // fetch destinations
+  const { data: destinations, isLoading } = useGetDestinationsQuery();
 
   return (
     <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
@@ -59,32 +71,47 @@ export default function DestinationsScreen({ navigation }) {
           className="text-dark/70 dark:text-white/70 text-base"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
-          23 Destination are found
+          {destinations.length} Destination are found
         </Text>
       </View>
 
       {/* Destinations */}
-      <FlatList
-        className="px-3"
-        showsVerticalScrollIndicator={false}
-        numColumns={2}
-        data={destinations}
-        renderItem={({ item, index }) => {
-          return (
-            <Animated.View
-              entering={FadeInDown.delay(250 * index)}
-              className={`flex-1 flex-col mx-1 ${index % 2 != 0 && "mt-6"} ${
-                (index + 1) % 2 == 0 && "mt-5"
-              }`}
-            >
-              <Destination key={item.title} destination={item} />
-            </Animated.View>
-          );
-        }}
-        keyExtractor={(item, index) => index.toString()}
-        ListEmptyComponent={<Text>Not items found</Text>}
-        ListFooterComponent={<View className="h-5"></View>}
-      />
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          className="px-3"
+          showsVerticalScrollIndicator={false}
+          numColumns={2}
+          data={destinations}
+          renderItem={({ item, index }) => {
+            return (
+              <Animated.View
+                entering={FadeInDown.delay(250 * index)}
+                style={styles.listContainer}
+                className={`mx-1 ${index % 2 != 0 && "mt-6"} ${
+                  (index + 1) % 2 == 0 && "mt-5"
+                }`}
+              >
+                <Destination key={item.title} destination={item} />
+              </Animated.View>
+            );
+          }}
+          keyExtractor={(item) => item.id.toString()}
+          ListEmptyComponent={
+            <View className="justify-center items-center h-28 w-full">
+              <Empty />
+            </View>
+          }
+          ListFooterComponent={<View className="h-5"></View>}
+        />
+      )}
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  listContainer: {
+    width: Dimensions.get("window").width / 2 - 20,
+  },
+});
