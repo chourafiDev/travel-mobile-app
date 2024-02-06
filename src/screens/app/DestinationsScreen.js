@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -6,6 +6,7 @@ import {
   FlatList,
   Dimensions,
   StyleSheet,
+  RefreshControl,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Icon from "react-native-vector-icons/Feather";
@@ -22,7 +23,16 @@ export default function DestinationsScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
 
   // fetch destinations
-  const { data: destinations, isLoading } = useGetDestinationsQuery();
+  const { data: destinations, isLoading, refetch } = useGetDestinationsQuery();
+
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = React.useCallback(() => {
+    refetch();
+    setTimeout(() => {
+      setRefreshing(false);
+    }, 2000);
+  }, []);
 
   return (
     <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
@@ -82,6 +92,7 @@ export default function DestinationsScreen({ navigation }) {
         <FlatList
           className="px-3"
           showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ flexGrow: 1 }}
           numColumns={2}
           data={destinations}
           renderItem={({ item, index }) => {
@@ -93,17 +104,20 @@ export default function DestinationsScreen({ navigation }) {
                   (index + 1) % 2 == 0 && "mt-5"
                 }`}
               >
-                <Destination key={item.title} destination={item} />
+                <Destination
+                  key={item.title}
+                  destination={item}
+                  refetch={refetch}
+                />
               </Animated.View>
             );
           }}
           keyExtractor={(item) => item.id.toString()}
-          ListEmptyComponent={
-            <View className="justify-center items-center h-28 w-full">
-              <Empty />
-            </View>
-          }
+          ListEmptyComponent={<Empty />}
           ListFooterComponent={<View className="h-5"></View>}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
         />
       )}
     </SafeAreaView>
