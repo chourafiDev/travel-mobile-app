@@ -3,7 +3,7 @@ import React from "react";
 import { bg2, light } from "../../../utils/assets";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
-import RegisterForm from "../../components/Foms/RegisterForm";
+import RegisterForm from "../../components/AuthForms/RegisterForm";
 import { useColorScheme } from "nativewind";
 
 export default function RegisterScreen() {

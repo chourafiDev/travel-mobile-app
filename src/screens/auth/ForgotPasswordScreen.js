@@ -1,17 +1,10 @@
-import {
-  View,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-  Text,
-} from "react-native";
+import { View, ImageBackground, Image } from "react-native";
 import React from "react";
 import { bg2, light } from "../../../utils/assets";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
-import LoginForm from "../../components/Foms/LoginForm";
 import { useColorScheme } from "nativewind";
-import ForgotPasswordForm from "../../components/Foms/ForgotPasswordForm";
+import ForgotPasswordForm from "../../components/AuthForms/ForgotPasswordForm";
 
 export default function ForgotPasswordScreen({ navigation }) {
   const { colorScheme } = useColorScheme();

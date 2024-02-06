@@ -9,7 +9,7 @@ import React from "react";
 import { bg2, light } from "../../../utils/assets";
 import { StatusBar } from "expo-status-bar";
 import Animated, { FadeInUp } from "react-native-reanimated";
-import LoginForm from "../../components/Foms/LoginForm";
+import LoginForm from "../../components/AuthForms/LoginForm";
 import { useColorScheme } from "nativewind";
 
 export default function LoginScreen({ navigation }) {
