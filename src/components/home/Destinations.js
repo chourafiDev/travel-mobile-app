@@ -2,13 +2,17 @@ import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import React from "react";
 import { DESTINATIONS } from "../../constants/routes";
 import Destination from "../Destination";
-import { useGetDestinationsQuery } from "../../store/services/destinationsApiSlice";
+import { useGetTopDestinationsQuery } from "../../store/services/destinationsApiSlice";
 import Empty from "../Empty";
 import Loading from "../Loading";
 
 const Destinations = () => {
   // fetch destinations
-  const { data: destinations, isLoading, refetch } = useGetDestinationsQuery();
+  const {
+    data: destinations,
+    isLoading,
+    refetch,
+  } = useGetTopDestinationsQuery();
 
   return (
     <View className="px-4 mt-6 space-y-5">
