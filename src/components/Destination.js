@@ -20,6 +20,7 @@ import Toast from "react-native-toast-message";
 
 export default function Destination({
   destination: { id, title, images, destination, isFavorite },
+  refetch,
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
@@ -51,6 +52,7 @@ export default function Destination({
 
   useEffect(() => {
     if (isFavoriteSuccess) {
+      refetch();
       Toast.show({
         type: "success",
         text1: "Destination Favorited Successfully",
@@ -58,6 +60,7 @@ export default function Destination({
     }
 
     if (isUnfavoriteSuccess) {
+      refetch();
       Toast.show({
         type: "success",
         text1: "Destination Unfavorited Successfully",
@@ -95,6 +98,7 @@ export default function Destination({
         source={{ uri: images[0].imageUrl }}
         className="rounded-2xl w-full h-32"
       />
+
       <Text
         className="text-dark dark:text-white text-base mt-4"
         style={{ fontFamily: "baiJamjuree-semibold" }}
