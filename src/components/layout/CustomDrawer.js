@@ -20,6 +20,7 @@ import { useColorScheme } from "nativewind";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { clearCredentials } from "../../store/features/authSlice";
+import { useGetProfileQuery } from "../../store/services/profileApiSlice";
 
 const CustomDrawer = ({ navigation }) => {
   const { colorScheme, toggleColorScheme } = useColorScheme();
@@ -30,6 +31,9 @@ const CustomDrawer = ({ navigation }) => {
   const handleLogout = () => {
     dispatch(clearCredentials());
   };
+
+  // fetch profile info
+  const { data: profile } = useGetProfileQuery();
 
   return (
     <SafeAreaView className="flex-1 bg-white dark:bg-dark">
@@ -45,7 +49,10 @@ const CustomDrawer = ({ navigation }) => {
             }}
             className="border-[2px] border-white w-16 h-16 rounded-[14px] overflow-hidden"
           >
-            <Image source={{ uri: user.image }} className="w-full h-full" />
+            <Image
+              source={{ uri: profile?.imageUrl }}
+              className="w-full h-full"
+            />
           </TouchableOpacity>
 
           <View className="mt-3">
@@ -53,13 +60,13 @@ const CustomDrawer = ({ navigation }) => {
               className="text-[20px] text-white"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              {user.firstname} {user.lastname}
+              {profile?.firstName} {profile?.lastName}
             </Text>
             <Text
               className="text-[18px] text-white/80 -mt-1"
               style={{ fontFamily: "baiJamjuree-regular" }}
             >
-              @{user.username}
+              @{profile?.username}
             </Text>
           </View>
         </View>
