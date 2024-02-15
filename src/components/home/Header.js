@@ -9,14 +9,15 @@ import {
 import { bg1, luggage } from "../../../utils/assets";
 import { shadow } from "../../../utils/theme";
 import { NOTIFICATION } from "../../constants/routes";
-import { useSelector } from "react-redux";
 import Icon from "react-native-vector-icons/Feather";
 import { useColorScheme } from "nativewind";
+import { useGetProfileQuery } from "../../store/services/profileApiSlice";
 
 const Header = ({ navigation }) => {
   const { colorScheme } = useColorScheme();
 
-  const { user } = useSelector((state) => state.auth);
+  // fetch profile info
+  const { data: profileInfo } = useGetProfileQuery();
 
   return (
     <>
@@ -37,7 +38,10 @@ const Header = ({ navigation }) => {
               className="border-[2px] border-white w-14 h-14 rounded-[14px] overflow-hidden"
               style={[shadow.boxShadow]}
             >
-              <Image source={{ uri: user.image }} className="w-full h-full" />
+              <Image
+                source={{ uri: profileInfo?.imageUrl }}
+                className="w-full h-full"
+              />
             </View>
             <View>
               <Text
@@ -50,7 +54,7 @@ const Header = ({ navigation }) => {
                 className="text-white text-2xl"
                 style={{ fontFamily: "baiJamjuree-bold" }}
               >
-                @{user.username}
+                @{profileInfo?.username}
               </Text>
             </View>
           </View>
