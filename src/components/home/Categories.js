@@ -49,7 +49,7 @@ const Categories = ({ setSelectedCategory, selectedCategory }) => {
             paddingBottom: 20,
           }}
         >
-          {categories.map((category) => {
+          {categories?.map((category) => {
             return (
               <Category
                 key={category?.id}
