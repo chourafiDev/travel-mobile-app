@@ -1,6 +1,5 @@
 import { View, Text, TouchableOpacity, Image, Switch } from "react-native";
-import React, { useState } from "react";
-import { user } from "../../../utils/assets";
+import React, { useRef, useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { useColorScheme } from "nativewind";
 import { shadow } from "../../../utils/theme";
@@ -14,6 +13,8 @@ import {
   USERS,
 } from "../../constants/routes";
 import { ScrollView } from "react-native-gesture-handler";
+import ChangeImage from "../../components/ChangeImage";
+import { useGetProfileQuery } from "../../store/services/profileApiSlice";
 
 export default function SettingScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
@@ -21,6 +22,20 @@ export default function SettingScreen({ navigation }) {
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
+
+  // fetch profile info
+  const { data: profile } = useGetProfileQuery();
+
+  // Open modal change image
+  const [image, setImage] = useState(null);
+  const sheetRef = useRef(null);
+
+  const handleSnapOpenPress = () => {
+    sheetRef.current?.present();
+  };
+  const handleSnapClosePress = () => {
+    sheetRef.current?.close();
+  };
 
   return (
     <View
@@ -61,7 +76,10 @@ export default function SettingScreen({ navigation }) {
         ]}
       >
         <View className="flex-row items-center gap-3">
-          <Image source={user} className="w-14 h-14 rounded-full" />
+          <Image
+            source={{ uri: image ? image : profile?.imageUrl }}
+            className="w-14 h-14 rounded-[14px]"
+          />
           <View>
             <Text
               className="text-lg text-dark dark:text-white"
@@ -69,7 +87,7 @@ export default function SettingScreen({ navigation }) {
                 fontFamily: "baiJamjuree-bold",
               }}
             >
-              Abdelmonaime Chourafi
+              {profile?.firstName} {profile?.lastName}
             </Text>
             <Text
               className="text-sm text-dark/60 dark:text-white/60"
@@ -77,13 +95,14 @@ export default function SettingScreen({ navigation }) {
                 fontFamily: "baiJamjuree-medium",
               }}
             >
-              @chourafi_abdelmonaime
+              @{profile?.username}
             </Text>
           </View>
         </View>
 
         <TouchableOpacity
           activeOpacity={0.5}
+          onPress={handleSnapOpenPress}
           className="bg-brand dark:bg-brand w-9 h-9 rounded-lg items-center justify-center"
         >
           <Text
@@ -584,6 +603,14 @@ export default function SettingScreen({ navigation }) {
           </TouchableOpacity>
         </Animated.View>
       </ScrollView>
+
+      {/* Modal change image */}
+      <ChangeImage
+        handleSnapClosePress={handleSnapClosePress}
+        sheetRef={sheetRef}
+        setImage={setImage}
+        image={image}
+      />
     </View>
   );
 }
