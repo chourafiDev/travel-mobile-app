@@ -1,17 +1,103 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { shadow } from "../../../utils/theme";
 import Icon from "react-native-vector-icons/Feather";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { user } from "../../../utils/assets";
-import { HOME_TAB } from "../../constants/routes";
+import { defaultImage } from "../../../utils/assets";
 import GradientButton from "../../components/ui/GradientButton";
+import {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+} from "../../store/services/profileApiSlice";
+import Toast from "react-native-toast-message";
+import Loading from "../../components/Loading";
+import * as ImagePicker from "expo-image-picker";
 
 const EditProfileInfoScreen = ({ navigation }) => {
   const { colorScheme } = useColorScheme();
   const insets = useSafeAreaInsets();
+
+  // fetch profile info
+  const { data: profile, isLoading: isProfileLoad } = useGetProfileQuery();
+
+  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [image, setImage] = useState(null);
+  const [imagePrev, setImagePrev] = useState();
+
+  useEffect(() => {
+    if (profile) {
+      setUsername(profile?.username);
+      setFirstName(profile?.firstName);
+      setLastName(profile?.lastName);
+      setEmail(profile?.email);
+      setImagePrev(profile?.imageUrl);
+    }
+  }, [profile]);
+
+  // Upload Image and Get base64
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      base64: true,
+      quality: 1,
+    });
+
+    const { uri, base64 } = result.assets[0];
+
+    if (!result.canceled) {
+      const dotIndex = uri.lastIndexOf(".");
+      const extensionImg = uri.slice(dotIndex + 1).toLowerCase();
+
+      let imageUri = `data:image/${extensionImg};base64,${base64}`;
+
+      setImage(imageUri);
+      setImagePrev(imageUri);
+    }
+  };
+
+  // Edit profile
+  const [updateProfile, { isLoading, isSuccess }] = useUpdateProfileMutation();
+
+  const submitUpdateProfile = async () => {
+    try {
+      const data = {
+        username,
+        email,
+        firstName,
+        lastName,
+        image,
+      };
+
+      console.log(data);
+      // const payload = { id: user.id, data };
+      await updateProfile(data).unwrap();
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      Toast.show({
+        type: "success",
+        text1: "Profile updated successfully",
+      });
+    }
+  }, [isSuccess]);
+
+  if (isProfileLoad) {
+    return <Loading />;
+  }
 
   return (
     <View
@@ -64,9 +150,15 @@ const EditProfileInfoScreen = ({ navigation }) => {
             style={[colorScheme == "light" && shadow.boxShadow]}
             className="items-center mt-3 mb-2"
           >
-            <Image source={user} className="w-20 h-20 rounded-full" />
+            <Image
+              source={imagePrev ? { uri: imagePrev } : defaultImage}
+              className="w-20 h-20 rounded-full"
+            />
           </View>
-          <TouchableOpacity className="bg-gray-1 dark:bg-dark px-4 py-2 rounded-xl">
+          <TouchableOpacity
+            onPress={pickImage}
+            className="bg-gray-1 dark:bg-dark px-4 py-2 rounded-xl"
+          >
             <Text
               className="text-dark/60 dark:text-white/60"
               style={{ fontFamily: "baiJamjuree-semibold" }}
@@ -102,6 +194,8 @@ const EditProfileInfoScreen = ({ navigation }) => {
           <TextInput
             placeholder="Username"
             className="text-dark dark:text-white flex-1 ml-3"
+            value={username}
+            onChangeText={setUsername}
             style={[{ fontFamily: "baiJamjuree-regular" }]}
             placeholderTextColor={
               colorScheme == "light" ? "#222B4580" : "#ffffff"
@@ -121,6 +215,8 @@ const EditProfileInfoScreen = ({ navigation }) => {
           <TextInput
             placeholder="First Name"
             className="text-dark dark:text-white flex-1 ml-3"
+            value={firstName}
+            onChangeText={setFirstName}
             style={[{ fontFamily: "baiJamjuree-regular" }]}
             placeholderTextColor={
               colorScheme == "light" ? "#222B4580" : "#ffffff"
@@ -140,6 +236,8 @@ const EditProfileInfoScreen = ({ navigation }) => {
           <TextInput
             placeholder="Last Name"
             className="text-dark dark:text-white flex-1 ml-3"
+            value={lastName}
+            onChangeText={setLastName}
             style={[{ fontFamily: "baiJamjuree-regular" }]}
             placeholderTextColor={
               colorScheme == "light" ? "#222B4580" : "#ffffff"
@@ -159,6 +257,8 @@ const EditProfileInfoScreen = ({ navigation }) => {
           <TextInput
             placeholder="Email address"
             className="text-dark dark:text-white flex-1 ml-3"
+            value={email}
+            onChangeText={setEmail}
             style={[{ fontFamily: "baiJamjuree-regular" }]}
             placeholderTextColor={
               colorScheme == "light" ? "#222B4580" : "#ffffff"
@@ -175,9 +275,10 @@ const EditProfileInfoScreen = ({ navigation }) => {
         <GradientButton
           label="Edit"
           icon="edit-2"
-          size="lg"
           type="primary"
-          route={HOME_TAB}
+          size="lg"
+          isLoading={isLoading}
+          onPress={submitUpdateProfile}
         />
       </Animated.View>
     </View>
