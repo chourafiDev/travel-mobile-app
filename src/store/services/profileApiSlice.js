@@ -40,7 +40,23 @@ export const profileApiSlice = apiSliceWithTag.injectEndpoints({
       },
       invalidatesTags: ["profile"],
     }),
+    changePassword: builder.mutation({
+      query: (data) => {
+        return {
+          url: `${PROFILE_URL}/change-password`,
+          method: "PATCH",
+          body: data,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["profile"],
+    }),
   }),
 });
 
-export const { useGetProfileQuery, useUpdateProfileMutation, useUpdateImageProfileMutation } = profileApiSlice;
+export const {
+  useGetProfileQuery,
+  useUpdateProfileMutation,
+  useUpdateImageProfileMutation,
+  useChangePasswordMutation,
+} = profileApiSlice;

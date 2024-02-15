@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
@@ -6,11 +6,55 @@ import { shadow } from "../../../utils/theme";
 import Icon from "react-native-vector-icons/Feather";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import GradientButton from "../../components/ui/GradientButton";
-import { HOME_TAB } from "../../constants/routes";
+import { useChangePasswordMutation } from "../../store/services/profileApiSlice";
+import Toast from "react-native-toast-message";
 
 const ChangePasswordScreen = ({ navigation }) => {
   const { colorScheme } = useColorScheme();
   const insets = useSafeAreaInsets();
+
+  const [showOldPassword, setShowOldPassword] = useState(true);
+  const [showNewPassword, setShowNewPassword] = useState(true);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(true);
+
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [changePassword, { isLoading, isSuccess }] =
+    useChangePasswordMutation();
+
+  const submitChangePassword = async () => {
+    try {
+      if (newPassword !== confirmPassword) {
+        Toast.show({
+          type: "error",
+          text1: "password must match with confirm password",
+        });
+      } else {
+        const data = {
+          oldPassword,
+          newPassword,
+        };
+
+        await changePassword(data).unwrap();
+      }
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      Toast.show({
+        type: "success",
+        text1: "Password updated successfully",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <View
@@ -67,12 +111,23 @@ const ChangePasswordScreen = ({ navigation }) => {
         />
         <TextInput
           placeholder="Old Password"
+          value={oldPassword}
+          onChangeText={setOldPassword}
+          secureTextEntry={showOldPassword}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
+
+        <TouchableOpacity onPress={() => setShowOldPassword(!showOldPassword)}>
+          <Icon
+            name={showOldPassword ? "eye-off" : "eye"}
+            size={15}
+            color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+          />
+        </TouchableOpacity>
       </Animated.View>
 
       <Animated.View
@@ -87,12 +142,23 @@ const ChangePasswordScreen = ({ navigation }) => {
         />
         <TextInput
           placeholder="New Password"
+          value={newPassword}
+          onChangeText={setNewPassword}
+          secureTextEntry={showNewPassword}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
+
+        <TouchableOpacity onPress={() => setShowNewPassword(!showNewPassword)}>
+          <Icon
+            name={showNewPassword ? "eye-off" : "eye"}
+            size={15}
+            color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+          />
+        </TouchableOpacity>
       </Animated.View>
 
       <Animated.View
@@ -107,16 +173,28 @@ const ChangePasswordScreen = ({ navigation }) => {
         />
         <TextInput
           placeholder="Confirme Password"
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          secureTextEntry={showConfirmPassword}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
             colorScheme == "light" ? "#222B4580" : "#ffffff"
           }
         />
+
+        <TouchableOpacity
+          onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+        >
+          <Icon
+            name={showConfirmPassword ? "eye-off" : "eye"}
+            size={15}
+            color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+          />
+        </TouchableOpacity>
       </Animated.View>
 
       {/* Footer */}
-
       <Animated.View
         entering={FadeInDown.delay(400).duration(1000).springify()}
         className="mt-auto mb-6"
@@ -124,9 +202,10 @@ const ChangePasswordScreen = ({ navigation }) => {
         <GradientButton
           label="Edit"
           icon="edit-2"
-          size="lg"
           type="primary"
-          route={HOME_TAB}
+          size="lg"
+          isLoading={isLoading}
+          onPress={submitChangePassword}
         />
       </Animated.View>
     </View>
