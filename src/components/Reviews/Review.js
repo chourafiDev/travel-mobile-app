@@ -1,12 +1,12 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-import Icon from "react-native-vector-icons/Feather";
 import { useColorScheme } from "nativewind";
 import { shadow } from "../../../utils/theme";
+import moment from "moment";
+import { AntDesign } from "@expo/vector-icons";
 
-const Review = ({ user: { name, image, date, review } }) => {
+const Review = ({ review }) => {
   const { colorScheme } = useColorScheme();
-
   return (
     <View
       className="bg-white dark:bg-dark-2 rounded-xl p-3 mb-3"
@@ -14,48 +14,44 @@ const Review = ({ user: { name, image, date, review } }) => {
     >
       <View className="flex-row justify-between items-center">
         <View className="flex-row items-center gap-3">
-          <Image source={image} className="w-10 h-10 rounded-full" />
+          <View className="w-14 h-14 rounded-[14px] border border-gray-1 dark:border-dark p-1">
+            <Image
+              source={{ uri: review.user.imageUrl }}
+              className="h-full w-full rounded-[10px]"
+            />
+          </View>
           <View>
             <Text
-              className="text-dark dark:text-white text-lg"
+              className="text-dark dark:text-white text-base"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              {name}
+              {review.user.firstName} {review.user.lastName}
             </Text>
             <Text
               className="text-dark/60 dark:text-white/60 text-sm"
               style={{ fontFamily: "baiJamjuree-regular" }}
             >
-              {date}
+              {moment(review.createdAt).fromNow()}
             </Text>
           </View>
         </View>
 
-        <View className="flex-row items-center gap-2">
-          <Icon
-            name="star"
-            style={{
-              fontFamily: "baiJamjuree-bold",
-            }}
-            size={18}
-            color="#23A892"
-          />
+        <View className="flex-row items-center gap-x-1">
+          <AntDesign name="star" size={20} color="#fca311" />
           <Text
-            className="text-dark dark:text-white text-base"
+            className="text-dark dark:text-white text-base mt-1"
             style={{ fontFamily: "baiJamjuree-semibold" }}
           >
-            {review}
+            {review.rating}
           </Text>
         </View>
       </View>
 
       <Text
-        className="text-dark dark:text-white text-[15px] mt-3 leading-6"
+        className="text-dark/50 dark:text-white/50 text-[15px] mt-3 leading-6"
         style={{ fontFamily: "baiJamjuree-regular" }}
       >
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry. Lorem Ipsum has been the industry's standard dummy text ever
-        since the 1500s.
+        {review.content}
       </Text>
     </View>
   );
