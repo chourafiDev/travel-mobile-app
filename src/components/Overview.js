@@ -5,6 +5,14 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import Icon from "react-native-vector-icons/Feather";
 
 const Overview = ({ destination }) => {
+  const ratings = destination.reviews.map(({ rating }) => rating);
+
+  // Calculate the sum of ratings
+  const sumOfRatings = ratings.reduce((total, rating) => total + rating, 0);
+
+  // Calculate the average rating
+  const averageRating = sumOfRatings / ratings.length;
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -74,7 +82,7 @@ const Overview = ({ destination }) => {
               className="text-dark dark:text-white text-[17px] -mt-1"
               style={{ fontFamily: "baiJamjuree-semibold" }}
             >
-              4.2/5
+              {ratings.length > 0 ? averageRating : "_ "}/5
             </Text>
           </View>
         </Animated.View>
