@@ -215,143 +215,147 @@ export default function SettingScreen({ navigation }) {
           </TouchableOpacity>
         </Animated.View>
 
-        <Animated.View
-          entering={FadeInDown.delay(200).duration(1000).springify()}
-        >
-          <TouchableOpacity
-            activeOpacity={0.8}
-            className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
-            style={[colorScheme == "light" && shadow.boxShadow]}
-            onPress={() => {
-              navigation.navigate(USERS);
-            }}
-          >
-            <View className="flex-row items-center">
-              <View
+        {profile.role == "admin" && (
+          <>
+            <Animated.View
+              entering={FadeInDown.delay(200).duration(1000).springify()}
+            >
+              <TouchableOpacity
                 activeOpacity={0.8}
-                className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
-              >
-                <Icon
-                  name="users"
-                  style={{
-                    fontFamily: "baiJamjuree-bold",
-                  }}
-                  size={16}
-                  color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-                />
-              </View>
-              <Text
-                className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
-                style={{ fontFamily: "baiJamjuree-semibold" }}
-              >
-                Manage Users
-              </Text>
-            </View>
-
-            <View activeOpacity={0.8}>
-              <Icon
-                name="chevron-right"
-                style={{
-                  fontFamily: "baiJamjuree-bold",
+                className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
+                style={[colorScheme == "light" && shadow.boxShadow]}
+                onPress={() => {
+                  navigation.navigate(USERS);
                 }}
-                size={16}
-                color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-              />
-            </View>
-          </TouchableOpacity>
-        </Animated.View>
+              >
+                <View className="flex-row items-center">
+                  <View
+                    activeOpacity={0.8}
+                    className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
+                  >
+                    <Icon
+                      name="users"
+                      style={{
+                        fontFamily: "baiJamjuree-bold",
+                      }}
+                      size={16}
+                      color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                    />
+                  </View>
+                  <Text
+                    className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
+                    style={{ fontFamily: "baiJamjuree-semibold" }}
+                  >
+                    Manage Users
+                  </Text>
+                </View>
 
-        <Animated.View
-          entering={FadeInDown.delay(200).duration(1000).springify()}
-        >
-          <TouchableOpacity
-            activeOpacity={0.8}
-            className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
-            style={[colorScheme == "light" && shadow.boxShadow]}
-            onPress={() => {
-              navigation.navigate(CATEGORIES);
-            }}
-          >
-            <View className="flex-row items-center">
-              <View
+                <View activeOpacity={0.8}>
+                  <Icon
+                    name="chevron-right"
+                    style={{
+                      fontFamily: "baiJamjuree-bold",
+                    }}
+                    size={16}
+                    color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Animated.View>
+
+            <Animated.View
+              entering={FadeInDown.delay(200).duration(1000).springify()}
+            >
+              <TouchableOpacity
                 activeOpacity={0.8}
-                className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
-              >
-                <Icon
-                  name="layers"
-                  style={{
-                    fontFamily: "baiJamjuree-bold",
-                  }}
-                  size={16}
-                  color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-                />
-              </View>
-              <Text
-                className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
-                style={{ fontFamily: "baiJamjuree-semibold" }}
-              >
-                Manage Categories
-              </Text>
-            </View>
-
-            <View activeOpacity={0.8}>
-              <Icon
-                name="chevron-right"
-                style={{
-                  fontFamily: "baiJamjuree-bold",
+                className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
+                style={[colorScheme == "light" && shadow.boxShadow]}
+                onPress={() => {
+                  navigation.navigate(CATEGORIES);
                 }}
-                size={16}
-                color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-              />
-            </View>
-          </TouchableOpacity>
-        </Animated.View>
+              >
+                <View className="flex-row items-center">
+                  <View
+                    activeOpacity={0.8}
+                    className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
+                  >
+                    <Icon
+                      name="layers"
+                      style={{
+                        fontFamily: "baiJamjuree-bold",
+                      }}
+                      size={16}
+                      color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                    />
+                  </View>
+                  <Text
+                    className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
+                    style={{ fontFamily: "baiJamjuree-semibold" }}
+                  >
+                    Manage Categories
+                  </Text>
+                </View>
 
-        <Animated.View
-          entering={FadeInDown.delay(200).duration(1000).springify()}
-        >
-          <TouchableOpacity
-            activeOpacity={0.8}
-            className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
-            style={[colorScheme == "light" && shadow.boxShadow]}
-            onPress={() => {
-              navigation.navigate(MANAGE_DESTINATIONS);
-            }}
-          >
-            <View className="flex-row items-center">
-              <View
+                <View activeOpacity={0.8}>
+                  <Icon
+                    name="chevron-right"
+                    style={{
+                      fontFamily: "baiJamjuree-bold",
+                    }}
+                    size={16}
+                    color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Animated.View>
+
+            <Animated.View
+              entering={FadeInDown.delay(200).duration(1000).springify()}
+            >
+              <TouchableOpacity
                 activeOpacity={0.8}
-                className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
-              >
-                <Icon
-                  name="columns"
-                  style={{
-                    fontFamily: "baiJamjuree-bold",
-                  }}
-                  size={16}
-                  color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-                />
-              </View>
-              <Text
-                className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
-                style={{ fontFamily: "baiJamjuree-semibold" }}
-              >
-                Manage Destinations
-              </Text>
-            </View>
-
-            <View activeOpacity={0.8}>
-              <Icon
-                name="chevron-right"
-                style={{
-                  fontFamily: "baiJamjuree-bold",
+                className="w-full flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
+                style={[colorScheme == "light" && shadow.boxShadow]}
+                onPress={() => {
+                  navigation.navigate(MANAGE_DESTINATIONS);
                 }}
-                size={16}
-                color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-              />
-            </View>
-          </TouchableOpacity>
-        </Animated.View>
+              >
+                <View className="flex-row items-center">
+                  <View
+                    activeOpacity={0.8}
+                    className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
+                  >
+                    <Icon
+                      name="columns"
+                      style={{
+                        fontFamily: "baiJamjuree-bold",
+                      }}
+                      size={16}
+                      color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                    />
+                  </View>
+                  <Text
+                    className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
+                    style={{ fontFamily: "baiJamjuree-semibold" }}
+                  >
+                    Manage Destinations
+                  </Text>
+                </View>
+
+                <View activeOpacity={0.8}>
+                  <Icon
+                    name="chevron-right"
+                    style={{
+                      fontFamily: "baiJamjuree-bold",
+                    }}
+                    size={16}
+                    color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                  />
+                </View>
+              </TouchableOpacity>
+            </Animated.View>
+          </>
+        )}
 
         <Animated.View
           entering={FadeInDown.delay(300).duration(1000).springify()}
