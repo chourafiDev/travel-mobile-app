@@ -1,19 +1,66 @@
 import { View, Text, TextInput } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import { shadow } from "../../../utils/theme";
 import { useColorScheme } from "nativewind";
 import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { HOME_TAB, LOGIN } from "../../constants/routes";
+import { LOGIN } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
 import GradientButton from "../ui/GradientButton";
 import OutlineButton from "../ui/OutlineButton";
+import Toast from "react-native-toast-message";
+import { useRegisterMutation } from "../../store/services/authApiSlice";
 
 const RegisterForm = () => {
   const { colorScheme } = useColorScheme();
   const navigation = useNavigation();
   const [showPassword, setShowPassword] = useState(true);
+
+  // handle register
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [register, { isLoading, isSuccess }] = useRegisterMutation();
+
+  const handleSubmitRegsiter = async () => {
+    if (!username || !firstName || !lastName || !email || !password) {
+      Toast.show({
+        type: "error",
+        text1: "All fields are required",
+      });
+    } else {
+      try {
+        const payload = { username, firstName, lastName, email, password };
+        await register(payload).unwrap();
+      } catch (err) {
+        Toast.show({
+          type: "error",
+          text1: err.data?.message || err.error,
+        });
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      setUsername("");
+      setFirstName("");
+      setLastName("");
+      setEmail("");
+      setPassword("");
+
+      navigation.navigate(LOGIN);
+
+      Toast.show({
+        type: "success",
+        text1: "Register success",
+      });
+    }
+  }, [isSuccess]);
 
   return (
     <View className="px-4 mt-4">
@@ -40,6 +87,8 @@ const RegisterForm = () => {
         />
         <TextInput
           placeholder="Username"
+          value={username}
+          onChangeText={setUsername}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
@@ -59,6 +108,8 @@ const RegisterForm = () => {
         />
         <TextInput
           placeholder="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
@@ -78,6 +129,8 @@ const RegisterForm = () => {
         />
         <TextInput
           placeholder="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
@@ -97,6 +150,8 @@ const RegisterForm = () => {
         />
         <TextInput
           placeholder="Email address"
+          value={email}
+          onChangeText={setEmail}
           className="text-dark dark:text-white flex-1 ml-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
@@ -117,6 +172,8 @@ const RegisterForm = () => {
         <TextInput
           placeholder="Password"
           secureTextEntry={showPassword}
+          value={password}
+          onChangeText={setPassword}
           className="text-dark dark:text-white flex-1 mx-3"
           style={[{ fontFamily: "baiJamjuree-regular" }]}
           placeholderTextColor={
@@ -144,7 +201,8 @@ const RegisterForm = () => {
             icon=""
             size="lg"
             type="primary"
-            route={HOME_TAB}
+            onPress={handleSubmitRegsiter}
+            isLoading={isLoading}
           />
         </Animated.View>
       </Animated.View>
