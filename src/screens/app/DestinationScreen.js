@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
   ImageBackground,
   TouchableOpacity,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
@@ -20,6 +21,13 @@ import Reviews from "../../components/Reviews/Reviews";
 import GradientButton from "../../components/ui/GradientButton";
 import { useGetDestinationQuery } from "../../store/services/destinationsApiSlice";
 import Loading from "../../components/Loading";
+import {
+  useFavoriteMutation,
+  useUnfavoriteMutation,
+} from "../../store/services/favoritesApiSlice";
+import { emptyHeart, fullHeart } from "../../../utils/assets";
+import { shadow } from "../../../utils/theme";
+import Toast from "react-native-toast-message";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -28,14 +36,60 @@ export default function DestinationScreen({ route, navigation }) {
   const { destinationId } = route.params;
 
   // fetch destination
-  const { data: destination, isLoading } =
-    useGetDestinationQuery(destinationId);
+  const {
+    data: destination,
+    isLoading,
+    refetch,
+  } = useGetDestinationQuery(destinationId);
 
   const destinationImages = destination?.images?.map((image) => {
     return { uri: image.imageUrl };
   });
 
   const [visible, setIsVisible] = useState(false);
+
+  // handle favorite and unfavorite destination
+  const [
+    favorite,
+    { isLoading: isFavoriteLoading, isSuccess: isFavoriteSuccess },
+  ] = useFavoriteMutation();
+  const [
+    unfavorite,
+    { isLoading: isUnfavoriteLoading, isSuccess: isUnfavoriteSuccess },
+  ] = useUnfavoriteMutation();
+
+  const submitFavoriteOrUnfavorite = async () => {
+    try {
+      if (destination.isFavorite) {
+        await unfavorite(destinationId).unwrap();
+      } else {
+        await favorite({ destinationId: Number(destinationId) }).unwrap();
+      }
+    } catch (err) {
+      Toast.show({
+        type: "error",
+        text1: err.data?.message || err.error,
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (isFavoriteSuccess) {
+      refetch();
+      Toast.show({
+        type: "success",
+        text1: "Destination Favorited Successfully",
+      });
+    }
+
+    if (isUnfavoriteSuccess) {
+      refetch();
+      Toast.show({
+        type: "success",
+        text1: "Destination Unfavorited Successfully",
+      });
+    }
+  }, [isFavoriteSuccess, isUnfavoriteSuccess]);
 
   if (isLoading) {
     return <Loading />;
@@ -74,17 +128,18 @@ export default function DestinationScreen({ route, navigation }) {
           {destination.title}
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate(FAVORITES)}
+          style={[shadow.boxShadow]}
+          onPress={submitFavoriteOrUnfavorite}
           className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
         >
-          <Icon
-            name="heart"
-            style={{
-              fontFamily: "baiJamjuree-bold",
-            }}
-            size={16}
-            color="#ef476f"
-          />
+          {isFavoriteLoading || isUnfavoriteLoading ? (
+            <ActivityIndicator size="small" color="#ef476f" />
+          ) : (
+            <Image
+              source={destination.isFavorite ? fullHeart : emptyHeart}
+              className="w-4 h-4"
+            />
+          )}
         </TouchableOpacity>
       </View>
 
@@ -134,7 +189,10 @@ export default function DestinationScreen({ route, navigation }) {
             name="Overview"
             children={() => <Overview destination={destination} />}
           />
-          <Tab.Screen name="Reviews" component={Reviews} />
+          <Tab.Screen
+            name="Reviews"
+            children={() => <Reviews destinationId={destination.id} />}
+          />
         </Tab.Navigator>
       </View>
 
