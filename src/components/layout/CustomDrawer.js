@@ -50,7 +50,10 @@ const CustomDrawer = ({ navigation }) => {
             className="border-[2px] border-white w-16 h-16 rounded-[14px] overflow-hidden"
           >
             <Image
-              source={{ uri: profile?.imageUrl }}
+              // source={{ uri: profile?.imageUrl }}
+              source={
+                profile?.imageUrl ? { uri: profile?.imageUrl } : defaultImage
+              }
               className="w-full h-full"
             />
           </TouchableOpacity>
