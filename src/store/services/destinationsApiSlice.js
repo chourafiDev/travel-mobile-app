@@ -9,9 +9,45 @@ const apiSliceWithTag = apiSlice.enhanceEndpoints({
 export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
   endpoints: (builder) => ({
     getDestinations: builder.query({
-      query: () => {
+      query: (filterQuery) => {
+        const { search, destination, minPrice, maxPrice, duration, category } =
+          filterQuery;
+        let url = DESTINATIONS_URL;
+
+        if (search) {
+          url += `?search=${search}`;
+        }
+
+        if (destination) {
+          url += `${search ? "&" : "?"}destination=${destination}`;
+        }
+
+        if (minPrice) {
+          url += `${search || destination ? "&" : "?"}minPrice=${minPrice}`;
+        }
+
+        if (maxPrice) {
+          url += `${
+            search || destination || minPrice ? "&" : "?"
+          }maxPrice=${maxPrice}`;
+        }
+
+        if (duration) {
+          url += `${
+            search || destination || minPrice || maxPrice ? "&" : "?"
+          }duration=${duration}`;
+        }
+
+        if (category) {
+          url += `${
+            search || destination || minPrice || maxPrice || duration
+              ? "&"
+              : "?"
+          }category=${category}`;
+        }
+
         return {
-          url: `${DESTINATIONS_URL}`,
+          url,
           method: "GET",
           credentials: "include",
         };
