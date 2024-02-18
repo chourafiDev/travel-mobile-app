@@ -6,7 +6,7 @@ import {
   Image,
   TouchableOpacity,
 } from "react-native";
-import { bg1, luggage } from "../../../utils/assets";
+import { bg1, defaultImage, luggage } from "../../../utils/assets";
 import { shadow } from "../../../utils/theme";
 import { NOTIFICATION } from "../../constants/routes";
 import Icon from "react-native-vector-icons/Feather";
@@ -39,7 +39,11 @@ const Header = ({ navigation }) => {
               style={[shadow.boxShadow]}
             >
               <Image
-                source={{ uri: profileInfo?.imageUrl }}
+                source={
+                  profileInfo?.imageUrl
+                    ? { uri: profileInfo?.imageUrl }
+                    : defaultImage
+                }
                 className="w-full h-full"
               />
             </View>

@@ -15,6 +15,7 @@ import {
 import { ScrollView } from "react-native-gesture-handler";
 import ChangeImage from "../../components/ChangeImage";
 import { useGetProfileQuery } from "../../store/services/profileApiSlice";
+import { defaultImage } from "../../../utils/assets";
 
 export default function SettingScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
@@ -77,7 +78,7 @@ export default function SettingScreen({ navigation }) {
       >
         <View className="flex-row items-center gap-3">
           <Image
-            source={{ uri: image ? image : profile?.imageUrl }}
+            source={image ? { uri: image } : defaultImage}
             className="w-14 h-14 rounded-[14px]"
           />
           <View>
