@@ -18,12 +18,19 @@ import { useGetDestinationsQuery } from "../../store/services/destinationsApiSli
 import Loading from "../../components/Loading";
 import Empty from "../../components/Empty";
 import Destination from "../../components/Destination";
+import { useSelector } from "react-redux";
 
 export default function DestinationsScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
 
+  const { filterQuery } = useSelector((state) => state.filterDestinations);
+
   // fetch destinations
-  const { data: destinations, isLoading, refetch } = useGetDestinationsQuery();
+  const {
+    data: destinations,
+    isLoading,
+    refetch,
+  } = useGetDestinationsQuery(filterQuery);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -37,7 +44,7 @@ export default function DestinationsScreen({ navigation }) {
   return (
     <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
       {/* header */}
-      <View className="flex-row justify-between items-center px-4 mt-3 mb-4">
+      <View className="flex-row justify-between items-center px-4 mt-3 mb-2">
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           activeOpacity={0.8}
@@ -81,7 +88,7 @@ export default function DestinationsScreen({ navigation }) {
           className="text-dark/70 dark:text-white/70 text-base"
           style={{ fontFamily: "baiJamjuree-medium" }}
         >
-          {destinations.length} Destination are found
+          {destinations?.length} Destination are found
         </Text>
       </View>
 
