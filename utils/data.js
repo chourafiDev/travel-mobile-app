@@ -216,3 +216,12 @@ export const usersList = [
     image: user08,
   },
 ];
+
+export const durations = [
+  { label: "Any", value: "any" },
+  { label: "1 Day Tour", value: "1" },
+  { label: "2 Days Tour", value: "2" },
+  { label: "3 Days Tour", value: "3" },
+  { label: "4 Days Tour", value: "4" },
+  { label: "5 Days Tour", value: "5" },
+];
