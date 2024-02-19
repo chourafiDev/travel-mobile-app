@@ -19,9 +19,14 @@ import Loading from "../../components/Loading";
 import Empty from "../../components/Empty";
 import Destination from "../../components/Destination";
 import { useSelector } from "react-redux";
+import { Ionicons } from "@expo/vector-icons";
+import { shadow } from "../../../utils/theme";
+import { setFilterQuery } from "../../store/features/filterDestinationsSlice";
+import { useDispatch } from "react-redux";
 
 export default function DestinationsScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
+  const dispatch = useDispatch();
 
   const { filterQuery } = useSelector((state) => state.filterDestinations);
 
@@ -82,6 +87,139 @@ export default function DestinationsScreen({ navigation }) {
 
       {/* Search */}
       <Search withFilter={true} placeHolder="Find the world..." />
+
+      <View className="px-4 pt-4 flex-row flex-wrap gap-2">
+        {filterQuery.category && (
+          <TouchableOpacity
+            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+            onPress={() =>
+              dispatch(setFilterQuery({ ...filterQuery, category: "" }))
+            }
+          >
+            <View className="mr-2">
+              <Text
+                className="text-dark/40 dark:text-white/40 text-xs"
+                style={{ fontFamily: "baiJamjuree-medium" }}
+              >
+                Category
+              </Text>
+              <Text
+                className="text-dark/70 dark:text-white/70 text-sm"
+                style={{ fontFamily: "baiJamjuree-semibold" }}
+              >
+                {filterQuery.category}
+              </Text>
+            </View>
+            <Ionicons name="close" size={15} color="#415a77" />
+          </TouchableOpacity>
+        )}
+
+        {filterQuery.destination && (
+          <TouchableOpacity
+            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+            onPress={() =>
+              dispatch(setFilterQuery({ ...filterQuery, destination: "" }))
+            }
+          >
+            <View className="mr-2">
+              <Text
+                className="text-dark/40 dark:text-white/40 text-xs"
+                style={{ fontFamily: "baiJamjuree-medium" }}
+              >
+                Destination
+              </Text>
+              <Text
+                className="text-dark/70 dark:text-white/70 text-sm"
+                style={{ fontFamily: "baiJamjuree-semibold" }}
+              >
+                {filterQuery.destination}
+              </Text>
+            </View>
+            <Ionicons name="close" size={15} color="#415a77" />
+          </TouchableOpacity>
+        )}
+
+        {filterQuery.duration && (
+          <TouchableOpacity
+            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+            onPress={() =>
+              dispatch(setFilterQuery({ ...filterQuery, duration: "" }))
+            }
+          >
+            <View className="mr-2">
+              <Text
+                className="text-dark/40 dark:text-white/40 text-xs"
+                style={{ fontFamily: "baiJamjuree-medium" }}
+              >
+                Duration
+              </Text>
+              <Text
+                className="text-dark/70 dark:text-white/70 text-sm"
+                style={{ fontFamily: "baiJamjuree-semibold" }}
+              >
+                {filterQuery.duration}{" "}
+                {filterQuery.duration > 1 ? "days tour" : "day tour"}
+              </Text>
+            </View>
+            <Ionicons name="close" size={15} color="#415a77" />
+          </TouchableOpacity>
+        )}
+
+        {filterQuery.maxPrice && (
+          <TouchableOpacity
+            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+            onPress={() =>
+              dispatch(setFilterQuery({ ...filterQuery, maxPrice: "" }))
+            }
+          >
+            <View className="mr-2">
+              <Text
+                className="text-dark/40 dark:text-white/40 text-xs"
+                style={{ fontFamily: "baiJamjuree-medium" }}
+              >
+                Max price
+              </Text>
+              <Text
+                className="text-dark/70 dark:text-white/70 text-sm"
+                style={{ fontFamily: "baiJamjuree-semibold" }}
+              >
+                {filterQuery.maxPrice}
+              </Text>
+            </View>
+            <Ionicons name="close" size={15} color="#415a77" />
+          </TouchableOpacity>
+        )}
+
+        {filterQuery.minPrice && (
+          <TouchableOpacity
+            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+            onPress={() =>
+              dispatch(setFilterQuery({ ...filterQuery, minPrice: "" }))
+            }
+          >
+            <View className="mr-2">
+              <Text
+                className="text-dark/40 dark:text-white/40 text-xs"
+                style={{ fontFamily: "baiJamjuree-medium" }}
+              >
+                Min price
+              </Text>
+              <Text
+                className="text-dark/70 dark:text-white/70 text-sm"
+                style={{ fontFamily: "baiJamjuree-semibold" }}
+              >
+                {filterQuery.minPrice}
+              </Text>
+            </View>
+            <Ionicons name="close" size={15} color="#415a77" />
+          </TouchableOpacity>
+        )}
+      </View>
 
       <View className="px-4 mt-3 mb-4">
         <Text
