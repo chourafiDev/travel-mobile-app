@@ -91,11 +91,7 @@ export default function FavoritesScreen({ navigation }) {
                   (index + 1) % 2 == 0 && "mt-5"
                 }`}
               >
-                <Destination
-                  key={item.title}
-                  destination={item.destination}
-                  refetch={refetch}
-                />
+                <Destination key={item.title} destination={item.destination} />
               </Animated.View>
             );
           }}

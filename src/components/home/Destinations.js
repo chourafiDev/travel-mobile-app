@@ -8,11 +8,7 @@ import Loading from "../Loading";
 
 const Destinations = () => {
   // fetch destinations
-  const {
-    data: destinations,
-    isLoading,
-    refetch,
-  } = useGetTopDestinationsQuery();
+  const { data: destinations, isLoading } = useGetTopDestinationsQuery();
 
   return (
     <View className="px-4 mt-6 space-y-5">
@@ -49,11 +45,7 @@ const Destinations = () => {
           renderItem={({ item }) => {
             return (
               <View className="flex-1 flex-col pb-4 w-56">
-                <Destination
-                  key={item.title}
-                  destination={item}
-                  refetch={refetch}
-                />
+                <Destination key={item.title} destination={item} />
               </View>
             );
           }}

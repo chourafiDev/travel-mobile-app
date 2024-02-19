@@ -21,7 +21,6 @@ import Toast from "react-native-toast-message";
 
 export default function Destination({
   destination: { id, title, images, destination },
-  refetch,
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
@@ -30,7 +29,7 @@ export default function Destination({
   const { data: favorites } = useGetFavoritesQuery();
 
   // check if destination favorite
-  const isFavorite = favorites.some((item) => item.destinationId === id);
+  const isFavorite = favorites?.some((item) => item.destinationId === id);
 
   // handle favorite and unfavorite destination
   const [
@@ -59,7 +58,6 @@ export default function Destination({
 
   useEffect(() => {
     if (isFavoriteSuccess) {
-      refetch();
       Toast.show({
         type: "success",
         text1: "Destination Favorited Successfully",
@@ -67,7 +65,6 @@ export default function Destination({
     }
 
     if (isUnfavoriteSuccess) {
-      refetch();
       Toast.show({
         type: "success",
         text1: "Destination Unfavorited Successfully",

@@ -45,11 +45,8 @@ export default function DestinationScreen({ route, navigation }) {
   );
 
   // fetch destination
-  const {
-    data: destination,
-    isLoading,
-    refetch,
-  } = useGetDestinationQuery(destinationId);
+  const { data: destination, isLoading } =
+    useGetDestinationQuery(destinationId);
 
   const destinationImages = destination?.images?.map((image) => {
     return { uri: image.imageUrl };
@@ -84,7 +81,6 @@ export default function DestinationScreen({ route, navigation }) {
 
   useEffect(() => {
     if (isFavoriteSuccess) {
-      refetch();
       Toast.show({
         type: "success",
         text1: "Destination Favorited Successfully",
@@ -92,7 +88,6 @@ export default function DestinationScreen({ route, navigation }) {
     }
 
     if (isUnfavoriteSuccess) {
-      refetch();
       Toast.show({
         type: "success",
         text1: "Destination Unfavorited Successfully",

@@ -111,11 +111,7 @@ export default function DestinationsScreen({ navigation }) {
                   (index + 1) % 2 == 0 && "mt-5"
                 }`}
               >
-                <Destination
-                  key={item.title}
-                  destination={item}
-                  refetch={refetch}
-                />
+                <Destination key={item.title} destination={item} />
               </Animated.View>
             );
           }}
