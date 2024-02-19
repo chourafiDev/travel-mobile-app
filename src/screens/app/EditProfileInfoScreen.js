@@ -75,8 +75,6 @@ const EditProfileInfoScreen = ({ navigation }) => {
         image,
       };
 
-      console.log(data);
-      // const payload = { id: user.id, data };
       await updateProfile(data).unwrap();
     } catch (err) {
       Toast.show({
