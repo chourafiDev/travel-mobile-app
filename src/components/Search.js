@@ -1,20 +1,45 @@
 import { View, TextInput, TouchableOpacity, Image } from "react-native";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Icon from "react-native-vector-icons/Feather";
 import { shadow } from "../../utils/theme";
 import Filter from "./Filter";
 import { useColorScheme } from "nativewind";
 import { filter } from "../../utils/assets";
 import { LinearGradient } from "expo-linear-gradient";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { setFilterQuery } from "../store/features/filterDestinationsSlice";
+import { DESTINATIONS } from "../constants/routes";
+import { useNavigation } from "@react-navigation/native";
 
 const Search = ({ withFilter, placeHolder }) => {
+  const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
+  const dispatch = useDispatch();
 
-  // Open modal bottom
+  // Open/Close modal bottom
   const sheetRef = useRef(null);
 
-  const handleSnapPress = () => {
+  const handleOpenSnapPress = () => {
     sheetRef.current?.present();
+  };
+  const handleCloseSnapPress = () => {
+    sheetRef.current?.close();
+  };
+
+  // handle search
+  const { filterQuery } = useSelector((state) => state.filterDestinations);
+  const [search, setSearch] = useState(filterQuery?.search || "");
+
+  useEffect(() => {
+    setSearch(filterQuery?.search);
+  }, [filterQuery]);
+
+  const handleSearch = () => {
+    navigation.navigate(DESTINATIONS);
+
+    const filtersData = { search };
+    dispatch(setFilterQuery(filtersData));
   };
 
   return (
@@ -26,6 +51,7 @@ const Search = ({ withFilter, placeHolder }) => {
         >
           <TouchableOpacity
             activeOpacity={0.8}
+            onPress={handleSearch}
             className="bg-gray-1 dark:bg-dark w-11 h-11 rounded-2xl items-center justify-center mr-2"
           >
             <Icon
@@ -39,6 +65,8 @@ const Search = ({ withFilter, placeHolder }) => {
           </TouchableOpacity>
           <TextInput
             placeholder={placeHolder}
+            value={search}
+            onChangeText={setSearch}
             style={{ fontFamily: "baiJamjuree-regular" }}
             className="w-full text-dark dark:text-white py-[12px]"
             placeholderTextColor={
@@ -50,7 +78,7 @@ const Search = ({ withFilter, placeHolder }) => {
           <TouchableOpacity
             className="bg-brand dark:bg-dark-2/60 justify-center items-center w-12 h-12 rounded-2xl overflow-hidden"
             style={[colorScheme == "light" && shadow.boxShadow]}
-            onPress={handleSnapPress}
+            onPress={handleOpenSnapPress}
           >
             <LinearGradient
               colors={["#23a892", "#00c3a4"]}
@@ -62,7 +90,7 @@ const Search = ({ withFilter, placeHolder }) => {
       </View>
 
       {/* Modal filter */}
-      <Filter sheetRef={sheetRef} />
+      <Filter sheetRef={sheetRef} handleCloseSnapPress={handleCloseSnapPress} />
     </>
   );
 };

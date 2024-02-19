@@ -1,28 +1,39 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import {
   Platform,
-  Pressable,
   Text,
   TextInput,
   TouchableOpacity,
   View,
+  // Pressable,
 } from "react-native";
-import {
-  BottomSheetBackdrop,
-  BottomSheetModal,
-  BottomSheetView,
-} from "@gorhom/bottom-sheet";
+import { BottomSheetBackdrop, BottomSheetModal } from "@gorhom/bottom-sheet";
 import DropDown from "./ui/DropDown";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import { useColorScheme } from "nativewind";
 import Icon from "react-native-vector-icons/Feather";
 import GradientButton from "./ui/GradientButton";
 import { useGetCategoriesQuery } from "../store/services/categoriesApiSlice";
+import { durations as durationsList } from "../../utils/data";
+import { useDispatch } from "react-redux";
+import {
+  clearFilterQuery,
+  setFilterQuery,
+} from "../store/features/filterDestinationsSlice";
+import OutlineButton from "../components/ui/OutlineButton";
+import { useSelector } from "react-redux";
+import { useNavigation } from "@react-navigation/native";
+import { DESTINATIONS } from "../constants/routes";
 
-const Filter = ({ sheetRef }) => {
+// import DateTimePicker from "@react-native-community/datetimepicker";
+
+const Filter = ({ sheetRef, handleCloseSnapPress }) => {
+  const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
+  const dispatch = useDispatch();
 
-  const snapPoints = useMemo(() => ["92%"], []);
+  const snapPoints = useMemo(() => ["84%"], []);
+
+  const { filterQuery } = useSelector((state) => state.filterDestinations);
 
   // fetch categories
   const { data: categories } = useGetCategoriesQuery();
@@ -37,6 +48,11 @@ const Filter = ({ sheetRef }) => {
     );
   }, []);
 
+  const [search, setSearch] = useState("");
+  const [destination, setDestination] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+
   // catgeory
   const [category, setCategory] = useState("");
   const handleSelectCategory = (item) => {
@@ -49,60 +65,70 @@ const Filter = ({ sheetRef }) => {
 
   //duration
   const [openDuration, setOpenDuration] = useState(false);
-  const [duration, setDuration] = useState(null);
-  const [durations, setDurations] = useState([
-    { label: "Any", value: "any" },
-    { label: "1 Day Tour", value: "1 Day Tour" },
-    { label: "2-4 Days Tour", value: "2-4 Days Tour" },
-    { label: "5-7 Days Tour", value: "5-7 Days Tour" },
-    { label: "7+ Days Tour", value: "7+ Days Tour" },
-  ]);
+  const [duration, setDuration] = useState("");
+  const [durations, setDurations] = useState(durationsList);
 
-  //activity
-  const [openActivity, setOpenActivity] = useState(false);
-  const [activity, setActivity] = useState(null);
-  const [activities, setActivities] = useState([
-    { label: "Any", value: "any" },
-    { label: "Outdoor Activity", value: "outdoor Activity" },
-    { label: "Nature and Wildlife", value: "Extreme" },
-    { label: "Bungee Jump", value: "Bungee Jump" },
-    { label: "Hiking", value: "7+ Days Tour" },
-    { label: "Mountain Trekking", value: "Mountain Trekking" },
-    { label: "Skydiving", value: "Skydiving" },
-    { label: "Water Rafting", value: "Water Rafting" },
-    { label: "In The Air", value: "In The Air" },
-    { label: "Zoos & Wildlife Parks", value: "Zoos & Wildlife Parks" },
-    { label: "Outdoor Parks", value: "Outdoor Parks" },
-    { label: "Motor Sports", value: "Motor Sports" },
-    { label: "History and Culture", value: "History and Culture" },
-  ]);
+  useEffect(() => {
+    setSearch(filterQuery?.search);
+    setDestination(filterQuery?.destination);
+    setCategory(filterQuery?.category);
+    setDuration(filterQuery?.duration ? filterQuery?.duration.toString() : "");
+    setMinPrice(filterQuery?.minPrice ? filterQuery?.minPrice : "");
+    setMaxPrice(filterQuery?.maxPrice ? filterQuery?.maxPrice : "");
+  }, [filterQuery]);
 
   //date
-  const [startDate, setStartDate] = useState("");
-  const [date, setDate] = useState(new Date());
-  const [showPicker, setShowPicker] = useState(false);
+  // const [startDate, setStartDate] = useState("");
+  // const [date, setDate] = useState(new Date());
+  // const [showPicker, setShowPicker] = useState(false);
 
-  const toogleDatePicker = () => {
-    setShowPicker(!showPicker);
+  // const toogleDatePicker = () => {
+  //   setShowPicker(!showPicker);
+  // };
+
+  // const onChangeDate = ({ type }, selectedDate) => {
+  //   if (type == "set") {
+  //     const currentDate = selectedDate;
+  //     setDate(currentDate);
+
+  //     if (Platform.OS === "android") {
+  //       toogleDatePicker();
+  //       setStartDate(currentDate.toDateString());
+  //     }
+  //   } else {
+  //     toogleDatePicker();
+  //   }
+  // };
+
+  // handle filter and clear filters
+  const handleFilterDestinations = () => {
+    navigation.navigate(DESTINATIONS);
+
+    const filtersData = {
+      search,
+      destination,
+      minPrice: Number(minPrice),
+      maxPrice: Number(maxPrice),
+      duration: Number(duration),
+      category,
+    };
+
+    dispatch(setFilterQuery(filtersData));
+
+    handleCloseSnapPress();
   };
 
-  const onChangeDate = ({ type }, selectedDate) => {
-    if (type == "set") {
-      const currentDate = selectedDate;
-      setDate(currentDate);
+  const handleClearFilters = () => {
+    dispatch(clearFilterQuery());
+    setSearch("");
+    setDestination("");
+    setMinPrice(0);
+    setMaxPrice(0);
+    setCategory("");
+    setDuration("");
 
-      if (Platform.OS === "android") {
-        toogleDatePicker();
-        setStartDate(currentDate.toDateString());
-      }
-    } else {
-      toogleDatePicker();
-    }
+    handleCloseSnapPress();
   };
-
-  // price
-  const [minPrice, setMinPrice] = useState(null);
-  const [maxPrice, setMaxPrice] = useState(null);
 
   return (
     <BottomSheetModal
@@ -114,7 +140,7 @@ const Filter = ({ sheetRef }) => {
         backgroundColor: colorScheme == "light" ? "#FBFBFB" : "#222B45",
       }}
     >
-      <BottomSheetView>
+      <View className="justify-between h-full pb-4">
         <View className="px-4">
           <Text
             className="text-dark dark:text-white text-xl mb-4"
@@ -128,7 +154,34 @@ const Filter = ({ sheetRef }) => {
               className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
             >
-              Location
+              Search
+            </Text>
+
+            <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
+              <Icon
+                name="map"
+                size={15}
+                color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
+              />
+              <TextInput
+                placeholder="Enter a keyword"
+                onChangeText={setSearch}
+                value={search}
+                className="text-dark dark:text-white flex-1 ml-3"
+                style={[{ fontFamily: "baiJamjuree-regular" }]}
+                placeholderTextColor={
+                  colorScheme == "light" ? "#222B4580" : "#ffffff"
+                }
+              />
+            </View>
+          </View>
+
+          <View className="mt-5">
+            <Text
+              className="text-dark dark:text-white text-lg mb-1"
+              style={{ fontFamily: "baiJamjuree-medium" }}
+            >
+              Destination
             </Text>
 
             <View className="w-full flex-row items-center border border-dark/10 px-3 py-2 rounded-2xl bg-white dark:bg-dark-2">
@@ -138,7 +191,9 @@ const Filter = ({ sheetRef }) => {
                 color={colorScheme == "light" ? "#222B4580" : "#ffffff"}
               />
               <TextInput
-                placeholder="Find the world..."
+                placeholder="Enter a destination"
+                onChangeText={setDestination}
+                value={destination}
                 className="text-dark dark:text-white flex-1 ml-3"
                 style={[{ fontFamily: "baiJamjuree-regular" }]}
                 placeholderTextColor={
@@ -197,25 +252,7 @@ const Filter = ({ sheetRef }) => {
             />
           </View>
 
-          <View className="mt-5">
-            <Text
-              className="text-dark dark:text-white text-lg mb-1"
-              style={{ fontFamily: "baiJamjuree-medium" }}
-            >
-              Activity
-            </Text>
-            <DropDown
-              open={openActivity}
-              value={activity}
-              items={activities}
-              setOpen={setOpenActivity}
-              setValue={setActivity}
-              setItems={setActivities}
-              zIndex={1000}
-            />
-          </View>
-
-          <View className="mt-5">
+          {/* <View className="mt-5">
             <Text
               className="text-dark dark:text-white text-lg mb-1"
               style={{ fontFamily: "baiJamjuree-medium" }}
@@ -254,7 +291,7 @@ const Filter = ({ sheetRef }) => {
                 minimumDate={new Date()}
               />
             )}
-          </View>
+          </View> */}
 
           <View className="mt-5">
             <Text
@@ -273,7 +310,7 @@ const Filter = ({ sheetRef }) => {
                 <TextInput
                   placeholder="Min"
                   onChangeText={setMinPrice}
-                  value={minPrice}
+                  value={minPrice.toString()}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   keyboardType="numeric"
@@ -291,7 +328,7 @@ const Filter = ({ sheetRef }) => {
                 <TextInput
                   placeholder="Max"
                   onChangeText={setMaxPrice}
-                  value={maxPrice}
+                  value={maxPrice.toString()}
                   className="text-dark dark:text-white flex-1 ml-3"
                   style={[{ fontFamily: "baiJamjuree-regular" }]}
                   keyboardType="numeric"
@@ -302,17 +339,29 @@ const Filter = ({ sheetRef }) => {
               </View>
             </View>
           </View>
+        </View>
 
-          <View className="mt-3">
+        <View className="mt-3 px-4 flex-row gap-3">
+          <View className="flex-1">
             <GradientButton
-              label="Apply Filter"
+              label="Apply"
               icon="filter"
               type="primary"
               size="lg"
+              onPress={handleFilterDestinations}
+              isLoading={false}
+            />
+          </View>
+          <View className="flex-1">
+            <OutlineButton
+              label="Clear"
+              type="primary"
+              size="lg"
+              onPress={handleClearFilters}
             />
           </View>
         </View>
-      </BottomSheetView>
+      </View>
     </BottomSheetModal>
   );
 };
