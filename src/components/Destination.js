@@ -14,16 +14,23 @@ import { DESTINATION } from "../constants/routes";
 import { emptyHeart, fullHeart } from "../../utils/assets";
 import {
   useFavoriteMutation,
+  useGetFavoritesQuery,
   useUnfavoriteMutation,
 } from "../store/services/favoritesApiSlice";
 import Toast from "react-native-toast-message";
 
 export default function Destination({
-  destination: { id, title, images, destination, isFavorite },
+  destination: { id, title, images, destination },
   refetch,
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
+
+  // fetch favorites destinations
+  const { data: favorites } = useGetFavoritesQuery();
+
+  // check if destination favorite
+  const isFavorite = favorites.some((item) => item.destinationId === id);
 
   // handle favorite and unfavorite destination
   const [

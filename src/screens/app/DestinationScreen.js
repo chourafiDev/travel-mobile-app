@@ -23,6 +23,7 @@ import { useGetDestinationQuery } from "../../store/services/destinationsApiSlic
 import Loading from "../../components/Loading";
 import {
   useFavoriteMutation,
+  useGetFavoritesQuery,
   useUnfavoriteMutation,
 } from "../../store/services/favoritesApiSlice";
 import { emptyHeart, fullHeart } from "../../../utils/assets";
@@ -34,6 +35,14 @@ const Tab = createMaterialTopTabNavigator();
 export default function DestinationScreen({ route, navigation }) {
   const { colorScheme } = useColorScheme();
   const { destinationId } = route.params;
+
+  // fetch favorites destinations
+  const { data: favorites } = useGetFavoritesQuery();
+
+  // check if destination favorite
+  const isFavorite = favorites.some(
+    (item) => item.destinationId === destinationId
+  );
 
   // fetch destination
   const {
@@ -136,7 +145,7 @@ export default function DestinationScreen({ route, navigation }) {
             <ActivityIndicator size="small" color="#ef476f" />
           ) : (
             <Image
-              source={destination.isFavorite ? fullHeart : emptyHeart}
+              source={isFavorite ? fullHeart : emptyHeart}
               className="w-4 h-4"
             />
           )}
