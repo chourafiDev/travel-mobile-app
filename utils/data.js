@@ -17,9 +17,9 @@ import {
 } from "./assets";
 
 export const steps = [
-  { id: "01", name: "Images" },
-  { id: "02", name: "Information (1)" },
-  { id: "03", name: "Information (2)" },
+  { id: 1, name: "Images" },
+  { id: 2, name: "Information (1)" },
+  { id: 3, name: "Information (2)" },
 ];
 
 export const categories = [
