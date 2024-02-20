@@ -216,7 +216,7 @@ export default function SettingScreen({ navigation }) {
         </Animated.View>
 
         {profile.role == "admin" && (
-          <>
+          <View className="space-y-3">
             <Animated.View
               entering={FadeInDown.delay(200).duration(1000).springify()}
             >
@@ -354,7 +354,7 @@ export default function SettingScreen({ navigation }) {
                 </View>
               </TouchableOpacity>
             </Animated.View>
-          </>
+          </View>
         )}
 
         <Animated.View
