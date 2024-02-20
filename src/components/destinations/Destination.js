@@ -53,7 +53,7 @@ const Destination = ({ destination }) => {
               + {destinationImages.length}
             </Text>
             <Image
-              source={{ uri: destinationImages[0].uri }}
+              source={{ uri: destinationImages[0]?.uri }}
               className="w-full h-full"
             />
           </TouchableOpacity>
