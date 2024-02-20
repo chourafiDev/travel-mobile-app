@@ -8,7 +8,7 @@ const apiSliceWithTag = apiSlice.enhanceEndpoints({
 
 export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
   endpoints: (builder) => ({
-    getDestinations: builder.query({
+    getDestinationsWithFilter: builder.query({
       query: (filterQuery) => {
         const { search, destination, minPrice, maxPrice, duration, category } =
           filterQuery;
@@ -54,6 +54,16 @@ export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
       },
       providesTags: ["destinations"],
     }),
+    getAllDestinations: builder.query({
+      query: () => {
+        return {
+          url: `${DESTINATIONS_URL}/all`,
+          method: "GET",
+          credentials: "include",
+        };
+      },
+      providesTags: ["destinations"],
+    }),
     getTopDestinations: builder.query({
       query: () => {
         return {
@@ -75,22 +85,22 @@ export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
       providesTags: ["destinations"],
     }),
     createDestination: builder.mutation({
-      query: (data) => {
+      query: (body) => {
         return {
           url: `${DESTINATIONS_URL}/create`,
           method: "POST",
-          body: data,
+          body: body,
           credentials: "include",
         };
       },
       invalidatesTags: ["destinations"],
     }),
     updateDestination: builder.mutation({
-      query: ({ id, data }) => {
+      query: ({ id, body }) => {
         return {
           url: `${DESTINATIONS_URL}/${id}`,
           method: "PATCH",
-          body: data,
+          body: body,
           credentials: "include",
         };
       },
@@ -110,7 +120,8 @@ export const destinationsApiSlice = apiSliceWithTag.injectEndpoints({
 });
 
 export const {
-  useGetDestinationsQuery,
+  useGetDestinationsWithFilterQuery,
+  useGetAllDestinationsQuery,
   useGetTopDestinationsQuery,
   useGetDestinationQuery,
   useCreateDestinationMutation,
