@@ -14,7 +14,7 @@ import { FAVORITES } from "../../constants/routes";
 import Search from "../../components/Search";
 import { useColorScheme } from "nativewind";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { useGetDestinationsQuery } from "../../store/services/destinationsApiSlice";
+import { useGetDestinationsWithFilterQuery } from "../../store/services/destinationsApiSlice";
 import Loading from "../../components/Loading";
 import Empty from "../../components/Empty";
 import Destination from "../../components/Destination";
@@ -35,7 +35,7 @@ export default function DestinationsScreen({ navigation }) {
     data: destinations,
     isLoading,
     refetch,
-  } = useGetDestinationsQuery(filterQuery);
+  } = useGetDestinationsWithFilterQuery(filterQuery);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -187,7 +187,7 @@ export default function DestinationsScreen({ navigation }) {
                 className="text-dark/70 dark:text-white/70 text-sm"
                 style={{ fontFamily: "baiJamjuree-semibold" }}
               >
-                {filterQuery.maxPrice}
+                ${filterQuery.maxPrice}
               </Text>
             </View>
             <Ionicons name="close" size={15} color="#415a77" />
@@ -213,7 +213,7 @@ export default function DestinationsScreen({ navigation }) {
                 className="text-dark/70 dark:text-white/70 text-sm"
                 style={{ fontFamily: "baiJamjuree-semibold" }}
               >
-                {filterQuery.minPrice}
+                ${filterQuery.minPrice}
               </Text>
             </View>
             <Ionicons name="close" size={15} color="#415a77" />
