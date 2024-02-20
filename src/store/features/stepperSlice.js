@@ -1,61 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  images: [],
-  title: "",
-  description: "",
-  destination: "",
-  categoryId: "",
-  price: "",
-  duration: "",
+  currentStep: 1,
+  formData: {},
 };
 
 const stepperSlice = createSlice({
   name: "stepper",
   initialState: initialState,
   reducers: {
-    setImageValues: (state, action) => {
-      state.images = action.payload.images;
+    setCurrentStep: (state, action) => {
+      state.currentStep = action.payload;
     },
-    setTitleValue: (state, action) => {
-      state.title = action.payload.title;
-    },
-    setDescriptionValue: (state, action) => {
-      state.description = action.payload.description;
-    },
-    setDestinationValue: (state, action) => {
-      state.destination = action.payload.destination;
-    },
-    setCategoryValue: (state, action) => {
-      state.categoryId = action.payload.categoryId;
-    },
-    setPriceValue: (state, action) => {
-      state.price = action.payload.price;
-    },
-    setDurationValue: (state, action) => {
-      state.duration = action.payload.duration;
+    setFormData: (state, action) => {
+      state.formData = { ...state.formData, ...action.payload };
     },
 
     clearStepperValues: (state) => {
-      state.images = "";
-      state.title = "";
-      state.description = "";
-      state.destination = "";
-      state.categoryId = "";
-      state.price = "";
-      state.duration = "";
+      state.formData = {};
+      state.currentStep = 1;
     },
   },
 });
 
-export const {
-  setImageValues,
-  setTitleValue,
-  setDescriptionValue,
-  setDestinationValue,
-  setCategoryValue,
-  setPriceValue,
-  setDurationValue,
-  clearStepperValues,
-} = stepperSlice.actions;
+export const { setCurrentStep, setFormData, clearStepperValues } =
+  stepperSlice.actions;
 export default stepperSlice.reducer;
