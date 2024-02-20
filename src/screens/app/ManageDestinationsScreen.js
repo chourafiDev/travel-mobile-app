@@ -6,7 +6,7 @@ import { shadow } from "../../../utils/theme";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated, { FadeInDown } from "react-native-reanimated";
-import { useGetDestinationsQuery } from "../../store/services/destinationsApiSlice";
+import { useGetAllDestinationsQuery } from "../../store/services/destinationsApiSlice";
 import Destination from "../../components/destinations/Destination";
 import AddDestination from "../../components/destinations/AddDestination";
 import Empty from "../../components/Empty";
@@ -16,7 +16,7 @@ export default function ManageDestinationsScreen({ navigation }) {
   const { colorScheme } = useColorScheme();
 
   // fetch destinations
-  const { data: destinations, isLoading } = useGetDestinationsQuery();
+  const { data: destinations, isLoading } = useGetAllDestinationsQuery();
 
   // Open modal add destination
   const sheetRefAdd = useRef(null);
