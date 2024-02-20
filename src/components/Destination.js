@@ -20,7 +20,7 @@ import {
 import Toast from "react-native-toast-message";
 
 export default function Destination({
-  destination: { id, title, images, destination },
+  destination: { id, title, images, destination, price },
 }) {
   const navigation = useNavigation();
   const { colorScheme } = useColorScheme();
@@ -99,16 +99,24 @@ export default function Destination({
       </TouchableOpacity>
 
       <Image
-        source={{ uri: images[0].imageUrl }}
+        source={{ uri: images[0]?.imageUrl }}
         className="rounded-2xl w-full h-32"
       />
 
-      <Text
-        className="text-dark dark:text-white text-base mt-4"
-        style={{ fontFamily: "baiJamjuree-semibold" }}
-      >
-        {title}
-      </Text>
+      <View className="mt-4 flex-row justify-between items-center">
+        <Text
+          className="text-dark dark:text-white text-base"
+          style={{ fontFamily: "baiJamjuree-semibold" }}
+        >
+          {title}
+        </Text>
+        <Text
+          className="text-dark/50 dark:text-white/50 text-xs"
+          style={{ fontFamily: "baiJamjuree-semibold" }}
+        >
+          ${price}
+        </Text>
+      </View>
       <View className="flex-row gap-1 items-center">
         <Icon
           name="map-pin"
