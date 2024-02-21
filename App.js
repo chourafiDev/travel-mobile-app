@@ -5,6 +5,9 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider } from "react-redux";
 import store from "./src/store";
 import Toast from "react-native-toast-message";
+import { StripeProvider } from "@stripe/stripe-react-native";
+
+const STRIPE_PUBLICH_KEY = "pk_test_Kkf7X52bm6u7DGtBmi4RIUEC00GSAampw8";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -26,7 +29,9 @@ export default function App() {
   return (
     <Provider store={store}>
       <GestureHandlerRootView className="flex-1">
-        <AppNavigation />
+        <StripeProvider publishableKey={STRIPE_PUBLICH_KEY}>
+          <AppNavigation />
+        </StripeProvider>
         <Toast />
       </GestureHandlerRootView>
     </Provider>
