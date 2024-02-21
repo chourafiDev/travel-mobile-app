@@ -159,7 +159,7 @@ export default function DestinationScreen({ route, navigation }) {
           />
           <View className="flex-row gap-2 items-center justify-center mb-3">
             <View className="flex-row gap-x-2">
-              {destinationImages.slice(0, 2).map((image) => (
+              {destinationImages.slice(1, 3).map((image) => (
                 <View
                   key={image.uri}
                   className="border-[3px] border-white/70 rounded-xl overflow-hidden w-14 h-14"
@@ -168,24 +168,28 @@ export default function DestinationScreen({ route, navigation }) {
                 </View>
               ))}
             </View>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => setIsVisible(true)}
-              className="border-[3px] border-white/70 rounded-xl overflow-hidden w-14 h-14 relative"
-            >
-              <View className="absolute top-0 left-0 bg-dark-2/60 w-full h-full z-10"></View>
-              <Text
-                className="text-white text-lg z-10 absolute top-[14px] left-[14px]"
-                style={{ fontFamily: "baiJamjuree-bold" }}
+            {destinationImages.length > 3 && (
+              <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => setIsVisible(true)}
+                className="border-[3px] border-white/70 rounded-xl overflow-hidden w-14 h-14 relative"
               >
-                +{destinationImages.length - 2}
-              </Text>
-              <Image source={destinationImages[3]} className="w-full h-full" />
-            </TouchableOpacity>
+                <View className="absolute top-0 left-0 bg-dark-2/60 w-full h-full z-10"></View>
+                <Text
+                  className="text-white text-lg z-10 absolute top-[14px] left-[14px]"
+                  style={{ fontFamily: "baiJamjuree-bold" }}
+                >
+                  +{destinationImages.length - 3}
+                </Text>
+                <Image
+                  source={destinationImages[3]}
+                  className="w-full h-full"
+                />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </ImageBackground>
-
       {/* Top Tab */}
       <View className="px-4 mt-6 flex-1">
         <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
@@ -199,7 +203,6 @@ export default function DestinationScreen({ route, navigation }) {
           />
         </Tab.Navigator>
       </View>
-
       <View className="absolute w-full bottom-0">
         <LinearGradient
           colors={[
