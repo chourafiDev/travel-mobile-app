@@ -19,6 +19,7 @@
     "@react-navigation/native": "^6.1.9",
     "@react-navigation/native-stack": "^6.9.17",
     "@reduxjs/toolkit": "^2.0.1",
+    "@stripe/stripe-react-native": "^0.37.0",
     "expo": "~49.0.15",
     "expo-font": "~11.4.0",
     "expo-image-picker": "~14.3.2",
