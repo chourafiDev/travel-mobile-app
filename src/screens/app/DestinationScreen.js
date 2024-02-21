@@ -29,6 +29,8 @@ import {
 import { emptyHeart, fullHeart } from "../../../utils/assets";
 import { shadow } from "../../../utils/theme";
 import Toast from "react-native-toast-message";
+import { useBookingCheckOutMutation } from "../../store/services/bookingApiSlice";
+import { useStripe } from "@stripe/stripe-react-native";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -94,6 +96,59 @@ export default function DestinationScreen({ route, navigation }) {
       });
     }
   }, [isFavoriteSuccess, isUnfavoriteSuccess]);
+
+  // handle booking checkout
+  const [
+    bookingCheckOut,
+    { isLoading: isBookingLoading, isSuccess: isBookingSuccess },
+  ] = useBookingCheckOutMutation();
+
+  const { initPaymentSheet, presentPaymentSheet } = useStripe();
+
+  const submitBookingCheckout = async () => {
+    // create payment intent
+    const data = {
+      price: destination.price,
+      destinationId: destination.id,
+    };
+
+    const response = await bookingCheckOut(data).unwrap();
+
+    if (response.error) {
+      Toast.show({
+        type: "error",
+        text1: "Something went wrong",
+      });
+      return;
+    }
+
+    // initiale the payment sheet
+    const initResponse = await initPaymentSheet({
+      merchantDisplayName: "Journey waypoints",
+      paymentIntentClientSecret: response.paymentIntent,
+    });
+
+    if (initResponse.error) {
+      Toast.show({
+        type: "error",
+        text1: "Something went wrong",
+      });
+      return;
+    }
+
+    // present the payment sheet
+    const paymentResponse = await presentPaymentSheet();
+
+    if (paymentResponse.error) {
+      Toast.show({
+        type: "info",
+        text1: `${paymentResponse.error.message}`,
+      });
+      return;
+    }
+
+    // if payment ok -> create booking
+  };
 
   if (isLoading) {
     return <Loading />;
@@ -217,8 +272,9 @@ export default function DestinationScreen({ route, navigation }) {
             label={`Book Now | $${destination.price}`}
             icon="credit-card"
             size="lg"
-            route=""
             type="primary"
+            isLoading={isBookingLoading}
+            onPress={submitBookingCheckout}
           />
         </View>
       </View>
