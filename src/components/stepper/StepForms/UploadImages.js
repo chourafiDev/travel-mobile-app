@@ -10,8 +10,11 @@ import {
   setFormData,
 } from "../../../store/features/stepperSlice";
 import Navigation from "../Navigation";
+import { shadow } from "../../../../utils/theme";
+import { useColorScheme } from "nativewind";
 
 const UploadImages = ({ images }) => {
+  const { colorScheme } = useColorScheme();
   const dispatch = useDispatch();
   const { currentStep, formData } = useSelector((state) => state.stepper);
 
@@ -59,7 +62,7 @@ const UploadImages = ({ images }) => {
       <View>
         <View>
           <Text
-            className="text-dark dark:text-white text-[17px] mb-4"
+            className="text-dark dark:text-white text-[17px] mb-2"
             style={{ fontFamily: "baiJamjuree-medium" }}
           >
             Upload Images
@@ -68,7 +71,9 @@ const UploadImages = ({ images }) => {
           <TouchableOpacity
             activeOpacity={0.8}
             className={`rounded-2xl justify-center items-center border h-56 bg-gray-1/50 dark:bg-dark-2 ${
-              imgError ? "border-rose-300" : "border-gray-1"
+              imgError
+                ? "border-rose-300"
+                : "border-gray-1 dark:border-gray-1/10"
             }`}
             onPress={pickImage}
           >
@@ -105,21 +110,31 @@ const UploadImages = ({ images }) => {
           </Text>
         )}
 
-        <View className="flex-row gap-x-2 mt-6">
+        <View className="flex-row flex-wrap gap-x-2 gap-y-2 mt-3">
           {formData.images
             ? formData.images?.map((image, i) => (
-                <Image
-                  key={i}
-                  source={{ uri: image }}
-                  className="h-16 w-16 rounded-2xl"
-                />
+                <View
+                  className="bg-white dark:bg-dark-2 p-1 rounded-2xl"
+                  style={[colorScheme == "light" && shadow.boxShadow]}
+                >
+                  <Image
+                    key={i}
+                    source={{ uri: image }}
+                    className="h-16 w-16 rounded-2xl"
+                  />
+                </View>
               ))
             : imgPreview?.map((image, i) => (
-                <Image
-                  key={i}
-                  source={{ uri: image }}
-                  className="h-16 w-16 rounded-2xl"
-                />
+                <View
+                  className="bg-white dark:bg-dark-2 p-1 rounded-2xl"
+                  style={[colorScheme == "light" && shadow.boxShadow]}
+                >
+                  <Image
+                    key={i}
+                    source={{ uri: image }}
+                    className="h-16 w-16 rounded-2xl"
+                  />
+                </View>
               ))}
         </View>
       </View>

@@ -55,7 +55,7 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
                 <Animated.View
                   key={imageUrl}
                   entering={FadeInDown.delay(100 * i)}
-                  className="bg-white p-1 rounded-2xl"
+                  className="bg-white dark:bg-dark-2 p-1 rounded-2xl"
                   style={[colorScheme == "light" && shadow.boxShadow]}
                 >
                   <Image
@@ -71,12 +71,12 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
             <View className="flex-row justify-between items-center mb-3 gap-x-4">
               <Animated.View
                 entering={FadeInDown.delay(40)}
-                className="flex-row flex-1 items-center bg-white p-2 rounded-2xl"
+                className="flex-row flex-1 items-center bg-white dark:bg-dark-2 p-2 rounded-2xl"
                 style={[colorScheme == "light" && shadow.boxShadow]}
               >
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  className="bg-gray-1 mr-3 dark:bg-dark-2 w-10 h-10 rounded-xl items-center justify-center"
+                  className="bg-gray-1 mr-3 dark:bg-dark w-10 h-10 rounded-xl items-center justify-center"
                 >
                   <Icon
                     name="clock"
@@ -105,12 +105,12 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
 
               <Animated.View
                 entering={FadeInDown.delay(40)}
-                className="flex-row flex-1 items-center bg-white p-2 rounded-2xl"
+                className="flex-row flex-1 items-center bg-white dark:bg-dark-2 p-2 rounded-2xl"
                 style={[colorScheme == "light" && shadow.boxShadow]}
               >
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  className="bg-gray-1 dark:bg-dark-2 mr-3 w-10 h-10 rounded-xl items-center justify-center"
+                  className="bg-gray-1 dark:bg-dark mr-3 w-10 h-10 rounded-xl items-center justify-center"
                 >
                   <Icon
                     name="star"
@@ -141,12 +141,12 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
             <View className="flex-row justify-between items-center gap-x-4">
               <Animated.View
                 entering={FadeInDown.delay(60)}
-                className="flex-row flex-1 items-center bg-white p-2 rounded-2xl"
+                className="flex-row flex-1 items-center bg-white dark:bg-dark-2 p-2 rounded-2xl"
                 style={[colorScheme == "light" && shadow.boxShadow]}
               >
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  className="bg-gray-1 mr-3 dark:bg-dark-2 w-10 h-10 rounded-xl items-center justify-center"
+                  className="bg-gray-1 mr-3 dark:bg-dark w-10 h-10 rounded-xl items-center justify-center"
                 >
                   <Icon
                     name="map-pin"
@@ -175,12 +175,12 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
 
               <Animated.View
                 entering={FadeInDown.delay(60)}
-                className="flex-row flex-1 items-center bg-white p-2 rounded-2xl"
+                className="flex-row flex-1 items-center bg-white dark:bg-dark-2 p-2 rounded-2xl"
                 style={[colorScheme == "light" && shadow.boxShadow]}
               >
                 <TouchableOpacity
                   activeOpacity={0.8}
-                  className="bg-gray-1 dark:bg-dark-2 mr-3 w-10 h-10 rounded-xl items-center justify-center"
+                  className="bg-gray-1 dark:bg-dark mr-3 w-10 h-10 rounded-xl items-center justify-center"
                 >
                   <Icon
                     name="layers"
@@ -210,7 +210,7 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
           </View>
 
           <View
-            className="mt-6 mx-4 space-y-3 bg-white p-3 rounded-2xl"
+            className="mt-6 mx-4 space-y-3 bg-white dark:bg-dark-2 p-3 rounded-2xl"
             style={[colorScheme == "light" && shadow.boxShadow]}
           >
             <Animated.Text
