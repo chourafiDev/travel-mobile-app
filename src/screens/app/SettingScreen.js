@@ -29,7 +29,7 @@ export default function SettingScreen({ navigation }) {
   const { data: profile } = useGetProfileQuery();
 
   // Open modal change image
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(profile.imageUrl || null);
   const sheetRef = useRef(null);
 
   const handleSnapOpenPress = () => {
@@ -71,17 +71,22 @@ export default function SettingScreen({ navigation }) {
 
       {/* Edit Image */}
       <View
-        className="flex-row items-center justify-between mx-4 border border-dark/5 rounded-xl p-3 bg-white dark:bg-dark-2"
+        className="flex-row items-center justify-between mx-4 rounded-xl p-3 bg-white dark:bg-dark-2"
         style={[
           colorScheme == "light" && shadow.boxShadow,
           { fontFamily: "baiJamjuree-regular" },
         ]}
       >
         <View className="flex-row items-center gap-3">
-          <Image
-            source={image ? { uri: image } : defaultImage}
-            className="w-14 h-14 rounded-[14px]"
-          />
+          <View
+            className="bg-white w-16 h-16 dark:bg-dark p-1 rounded-2xl"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+          >
+            <Image
+              source={image ? { uri: image } : defaultImage}
+              className="w-full h-full rounded-[14px]"
+            />
+          </View>
           <View>
             <Text
               className="text-lg text-dark dark:text-white"
@@ -123,8 +128,10 @@ export default function SettingScreen({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <ScrollView className="px-4 my-4 space-y-3">
+      {/* Navigations */}
+      <ScrollView className="mt-4 space-y-3">
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(100).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -171,6 +178,7 @@ export default function SettingScreen({ navigation }) {
         </Animated.View>
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(200).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -219,6 +227,7 @@ export default function SettingScreen({ navigation }) {
         {profile.role == "admin" && (
           <View className="space-y-3">
             <Animated.View
+              className="px-4"
               entering={FadeInDown.delay(200).duration(1000).springify()}
             >
               <TouchableOpacity
@@ -265,6 +274,7 @@ export default function SettingScreen({ navigation }) {
             </Animated.View>
 
             <Animated.View
+              className="px-4"
               entering={FadeInDown.delay(200).duration(1000).springify()}
             >
               <TouchableOpacity
@@ -311,6 +321,7 @@ export default function SettingScreen({ navigation }) {
             </Animated.View>
 
             <Animated.View
+              className="px-4"
               entering={FadeInDown.delay(200).duration(1000).springify()}
             >
               <TouchableOpacity
@@ -359,6 +370,7 @@ export default function SettingScreen({ navigation }) {
         )}
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(300).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -405,42 +417,47 @@ export default function SettingScreen({ navigation }) {
         </Animated.View>
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(400).duration(1000).springify()}
-          className="w-full flex-row items-center justify-between px-3 py-2 rounded-2xl bg-white dark:bg-dark-2"
-          style={[colorScheme == "light" && shadow.boxShadow]}
         >
-          <View className="flex-row items-center">
-            <View
-              activeOpacity={0.8}
-              className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
-            >
-              <Icon
-                name="bell"
-                style={{
-                  fontFamily: "baiJamjuree-bold",
-                }}
-                size={16}
-                color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-              />
+          <View
+            className="w-full flex-row items-center justify-between px-3 py-2 rounded-2xl bg-white dark:bg-dark-2"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+          >
+            <View className="flex-row items-center">
+              <View
+                activeOpacity={0.8}
+                className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
+              >
+                <Icon
+                  name="bell"
+                  style={{
+                    fontFamily: "baiJamjuree-bold",
+                  }}
+                  size={16}
+                  color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+                />
+              </View>
+              <Text
+                className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
+                style={{ fontFamily: "baiJamjuree-semibold" }}
+              >
+                Notification
+              </Text>
             </View>
-            <Text
-              className="text-dark/80 dark:text-white/80 text-[17px] ml-4"
-              style={{ fontFamily: "baiJamjuree-semibold" }}
-            >
-              Notification
-            </Text>
-          </View>
 
-          <Switch
-            trackColor={{ false: "#d9d9d9", true: "#222B45" }}
-            thumbColor={isEnabled ? "#23A892" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
-            onValueChange={toggleSwitch}
-            value={isEnabled}
-          />
+            <Switch
+              trackColor={{ false: "#d9d9d9", true: "#222B45" }}
+              thumbColor={isEnabled ? "#23A892" : "#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
+            />
+          </View>
         </Animated.View>
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(500).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -484,6 +501,7 @@ export default function SettingScreen({ navigation }) {
         </Animated.View>
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(600).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -527,6 +545,7 @@ export default function SettingScreen({ navigation }) {
         </Animated.View>
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(700).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -570,6 +589,7 @@ export default function SettingScreen({ navigation }) {
         </Animated.View>
 
         <Animated.View
+          className="px-4"
           entering={FadeInDown.delay(800).duration(1000).springify()}
         >
           <TouchableOpacity
@@ -611,6 +631,8 @@ export default function SettingScreen({ navigation }) {
             </View>
           </TouchableOpacity>
         </Animated.View>
+
+        <View className="h-6"></View>
       </ScrollView>
 
       {/* Modal change image */}
