@@ -5,8 +5,11 @@ import Destination from "../Destination";
 import { useGetTopDestinationsQuery } from "../../store/services/destinationsApiSlice";
 import Empty from "../Empty";
 import Loading from "../Loading";
+import { useNavigation } from "@react-navigation/native";
 
 const Destinations = () => {
+  const navigation = useNavigation();
+
   // fetch destinations
   const { data: destinations, isLoading } = useGetTopDestinationsQuery();
 

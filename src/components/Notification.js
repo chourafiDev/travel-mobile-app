@@ -18,7 +18,7 @@ const Notification = ({ notification, index }) => {
       >
         <View
           activeOpacity={0.8}
-          className="bg-gray-1 dark:bg-dark-2 w-9 h-9 rounded-lg items-center justify-center"
+          className="bg-gray-1 dark:bg-dark w-9 h-9 rounded-lg items-center justify-center"
         >
           <Icon
             name={icon}
