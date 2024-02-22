@@ -4,8 +4,12 @@ import { useGetCategoriesQuery } from "../../store/services/categoriesApiSlice";
 import { ScrollView } from "react-native-gesture-handler";
 import Category from "./Category";
 import Loading from "../Loading";
+import { useNavigation } from "@react-navigation/native";
+import { DESTINATIONS } from "../../constants/routes";
 
 const Categories = ({ setSelectedCategory, selectedCategory }) => {
+  const navigation = useNavigation();
+
   // fetch categories
   const { data: categories, isLoading } = useGetCategoriesQuery();
 
@@ -27,7 +31,10 @@ const Categories = ({ setSelectedCategory, selectedCategory }) => {
         >
           Categories
         </Text>
-        <TouchableOpacity className="bg-gray-1 dark:bg-dark-2/70  rounded-lg px-3 py-2">
+        <TouchableOpacity
+          onPress={() => navigation.navigate(DESTINATIONS)}
+          className="bg-gray-1 dark:bg-dark-2/70  rounded-lg px-3 py-2"
+        >
           <Text
             className="text-dark/80 text-sm dark:text-white/80"
             style={{ fontFamily: "baiJamjuree-semibold" }}

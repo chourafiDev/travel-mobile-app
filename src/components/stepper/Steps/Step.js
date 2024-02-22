@@ -11,7 +11,7 @@ const Step = ({ name, id }) => {
   return (
     <View key={id} className="space-y-1 relative flex-1 ml-3">
       <View
-        className={`border-[1.5px] w-9 h-9 rounded-full justify-center items-center bg-white ${
+        className={`border-[1.5px] w-9 h-9 rounded-full justify-center items-center bg-white dark:bg-dark-2 ${
           currentStep == id
             ? "border-brand"
             : currentStep > id
@@ -28,7 +28,11 @@ const Step = ({ name, id }) => {
         ) : (
           <Animated.Text
             entering={FadeIn.delay(200).duration(1000).springify()}
-            className={currentStep == id ? "text-brand/80" : "text-dark/60"}
+            className={
+              currentStep == id
+                ? "text-brand/80"
+                : "text-dark/60 dark:text-white/60"
+            }
             style={{ fontFamily: "baiJamjuree-medium" }}
           >
             0{id}
@@ -36,7 +40,7 @@ const Step = ({ name, id }) => {
         )}
       </View>
       <Text
-        className="text-dark/80 text-[14px]"
+        className="text-dark/80 dark:text-white/80 text-[14px]"
         style={{ fontFamily: "baiJamjuree-medium" }}
       >
         {name}
