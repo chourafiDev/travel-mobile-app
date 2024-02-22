@@ -7,7 +7,7 @@ export default function TopTabBar({
   position,
 }) {
   return (
-    <View className="flex-row bg-[#EEF0F7] dark:bg-dark-2 rounded-full mb-4">
+    <View className="flex-row bg-[#EEF0F7] dark:bg-dark-2 rounded-full mb-4 mx-4">
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =

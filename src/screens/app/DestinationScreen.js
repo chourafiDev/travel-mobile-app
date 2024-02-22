@@ -275,8 +275,9 @@ export default function DestinationScreen({ route, navigation }) {
           </View>
         </View>
       </ImageBackground>
+
       {/* Top Tab */}
-      <View className="px-4 mt-6 flex-1">
+      <View className="mt-6 flex-1">
         <Tab.Navigator tabBar={(props) => <TopTabBar {...props} />}>
           <Tab.Screen
             name="Overview"
