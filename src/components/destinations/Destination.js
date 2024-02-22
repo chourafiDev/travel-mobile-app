@@ -4,8 +4,12 @@ import Icon from "react-native-vector-icons/Feather";
 import EditDestination from "./EditDestination";
 import DeleteDestination from "./DeleteDestination";
 import ImageView from "react-native-image-viewing";
+import { shadow } from "../../../utils/theme";
+import { useColorScheme } from "nativewind";
 
 const Destination = ({ destination }) => {
+  const { colorScheme } = useColorScheme();
+
   const [visible, setIsVisible] = useState(false);
   const destinationImages = destination.images.map((image) => {
     return { uri: image.imageUrl };
@@ -31,7 +35,10 @@ const Destination = ({ destination }) => {
 
   return (
     <>
-      <View className="flex-row justify-between items-center border border-dark/10 dark:border-gray-1/5 px-2 py-3 rounded-xl">
+      <View
+        className="mx-3 flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
+        style={[colorScheme == "light" && shadow.boxShadow]}
+      >
         {/* Modal images */}
         <ImageView
           images={destinationImages}
@@ -74,7 +81,7 @@ const Destination = ({ destination }) => {
           </View>
         </View>
 
-        <View className="bg-brand/20 rounded-lg px-2 py-1">
+        <View className="bg-brand/10 rounded-lg px-2 py-1">
           <Text
             className="text-brand text-[15px]"
             style={{ fontFamily: "baiJamjuree-medium" }}
@@ -86,17 +93,17 @@ const Destination = ({ destination }) => {
         <View className="flex-row gap-1">
           <TouchableOpacity
             activeOpacity={0.8}
-            className="w-8 h-8 rounded-xl bg-brand justify-center items-center"
+            className="bg-gray-1 dark:bg-dark-2  w-9 h-9 rounded-lg items-center justify-center"
             onPress={handleSnapPressOpenEdit}
           >
-            <Icon name="edit-2" size={14} color="#ffffff" />
+            <Icon name="edit-2" size={14} color="#23A892" />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
-            className="w-8 h-8 rounded-xl bg-danger-100 justify-center items-center"
+            className="bg-gray-1 dark:bg-dark-2  w-9 h-9 rounded-lg items-center justify-center"
             onPress={handleSnapPressOpenDelete}
           >
-            <Icon name="trash-2" size={14} color="#ffffff" />
+            <Icon name="trash-2" size={14} color="#ef476f" />
           </TouchableOpacity>
         </View>
       </View>

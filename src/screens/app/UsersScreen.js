@@ -30,78 +30,86 @@ export default function UsersScreen({ navigation }) {
   return (
     <SafeAreaView className="flex-1 bg-[#f8f8fa] dark:bg-dark">
       {/* header */}
-      <View className="flex-row justify-between items-center px-4 my-3">
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          activeOpacity={0.8}
-          className="bg-gray-1 dark:bg-dark-2  w-9 h-9 rounded-lg items-center justify-center"
-        >
-          <Icon
-            name="arrow-left"
-            style={{
-              fontFamily: "baiJamjuree-bold",
-            }}
-            size={16}
-            color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
-          />
-        </TouchableOpacity>
-        <Text
-          className="text-dark dark:text-white text-xl"
-          style={{ fontFamily: "baiJamjuree-bold" }}
-        >
-          Users
-        </Text>
-        <View></View>
-      </View>
-
-      <View className="px-4 flex-row items-center justify-between">
-        <View className="flex-row gap-1">
-          <Text
-            className="text-brand text-xl"
-            style={{ fontFamily: "baiJamjuree-bold" }}
+      <View
+        className="mx-3 mt-3 p-3 space-y-4 rounded-2xl bg-white dark:bg-dark-2"
+        style={[colorScheme == "light" && shadow.boxShadow]}
+      >
+        <View className="flex-row justify-between items-center">
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            activeOpacity={0.8}
+            className="bg-gray-1 dark:bg-dark-2  w-9 h-9 rounded-lg items-center justify-center"
           >
-            {users && users.length}
-          </Text>
+            <Icon
+              name="arrow-left"
+              style={{
+                fontFamily: "baiJamjuree-bold",
+              }}
+              size={16}
+              color={colorScheme == "light" ? "#222B45" : "#fbfbfbfb"}
+            />
+          </TouchableOpacity>
           <Text
             className="text-dark dark:text-white text-xl"
-            style={{ fontFamily: "baiJamjuree-medium" }}
+            style={{ fontFamily: "baiJamjuree-bold" }}
           >
             Users
           </Text>
+          <View></View>
         </View>
-        <TouchableOpacity
-          className="bg-brand dark:bg-dark-2/60 rounded-2xl w-20 overflow-hidden"
-          style={[colorScheme == "light" && shadow.boxShadow]}
-          activeOpacity={0.8}
-          onPress={handleSnapPressOpenAdd}
-        >
-          <LinearGradient
-            colors={["#23a892", "#00c3a4"]}
-            className="w-full h-full absolute top-0 right-0"
-          />
-          <View className="flex-row items-center justify-center gap-x-2 py-2">
+
+        <View className="flex-row items-center justify-between">
+          <View className="flex-row gap-1">
             <Text
-              className="text-white text-base"
+              className="text-brand text-xl"
               style={{ fontFamily: "baiJamjuree-bold" }}
             >
-              Add
+              {users && users.length}
             </Text>
-            <Icon name="plus" size={15} color="#FBFBFB" />
+            <Text
+              className="text-dark dark:text-white text-xl"
+              style={{ fontFamily: "baiJamjuree-medium" }}
+            >
+              Users
+            </Text>
           </View>
-        </TouchableOpacity>
+          <TouchableOpacity
+            className="bg-brand dark:bg-dark-2/60 rounded-2xl w-20 overflow-hidden"
+            style={[colorScheme == "light" && shadow.boxShadow]}
+            activeOpacity={0.8}
+            onPress={handleSnapPressOpenAdd}
+          >
+            <LinearGradient
+              colors={["#23a892", "#00c3a4"]}
+              className="w-full h-full absolute top-0 right-0"
+            />
+            <View className="flex-row items-center justify-center gap-x-2 py-2">
+              <Text
+                className="text-white text-base"
+                style={{ fontFamily: "baiJamjuree-bold" }}
+              >
+                Add
+              </Text>
+              <Icon name="plus" size={15} color="#FBFBFB" />
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
 
       {isLoading ? (
         <Loading />
       ) : (
         <FlatList
-          className="px-3 mt-6"
+          className="mt-6"
           showsVerticalScrollIndicator={false}
           data={users}
           renderItem={({ item, index }) => {
             return (
-              <Animated.View entering={FadeInDown.delay(250 * index)}>
-                <User key={item.id} user={item} />
+              <Animated.View
+                key={item.id}
+                entering={FadeInDown.delay(250 * index)}
+              >
+                <User user={item} />
               </Animated.View>
             );
           }}

@@ -3,8 +3,12 @@ import { View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import EditCategory from "./EditCategory";
 import DeleteCategory from "./DeleteCategory";
+import { shadow } from "../../../utils/theme";
+import { useColorScheme } from "nativewind";
 
 const Category = memo(({ category }) => {
+  const { colorScheme } = useColorScheme();
+
   // Open modal add category
   const sheetRefEdit = useRef(null);
   const handleSnapPressOpenEdit = () => {
@@ -25,7 +29,10 @@ const Category = memo(({ category }) => {
 
   return (
     <>
-      <View className="flex-row justify-between items-center border border-dark/10 dark:border-gray-1/5 px-2 py-3 rounded-xl">
+      <View
+        className="mx-3 flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
+        style={[colorScheme == "light" && shadow.boxShadow]}
+      >
         <View className="flex-row items-center gap-4">
           <Image
             source={{ uri: category?.imageUrl }}
@@ -43,17 +50,17 @@ const Category = memo(({ category }) => {
         <View className="flex-row gap-1">
           <TouchableOpacity
             activeOpacity={0.8}
-            className="w-8 h-8 rounded-xl bg-brand justify-center items-center"
+            className="bg-gray-1 dark:bg-dark-2  w-9 h-9 rounded-lg items-center justify-center"
             onPress={handleSnapPressOpenEdit}
           >
-            <Icon name="edit-2" size={14} color="#ffffff" />
+            <Icon name="edit-2" size={14} color="#23A892" />
           </TouchableOpacity>
           <TouchableOpacity
             activeOpacity={0.8}
-            className="w-8 h-8 rounded-xl bg-danger-100 justify-center items-center"
+            className="bg-gray-1 dark:bg-dark-2  w-9 h-9 rounded-lg items-center justify-center"
             onPress={handleSnapPressOpenDelete}
           >
-            <Icon name="trash-2" size={14} color="#ffffff" />
+            <Icon name="trash-2" size={14} color="#ef476f" />
           </TouchableOpacity>
         </View>
       </View>
