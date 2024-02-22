@@ -91,7 +91,7 @@ export default function DestinationsScreen({ navigation }) {
       <View className="px-4 pt-4 flex-row flex-wrap gap-2">
         {filterQuery.category && (
           <TouchableOpacity
-            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            className="px-2 py-1 bg-[#ffffff] dark:bg-dark-2 rounded-full flex-row items-center gap-x-2"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={() =>
               dispatch(setFilterQuery({ ...filterQuery, category: "" }))
@@ -117,7 +117,7 @@ export default function DestinationsScreen({ navigation }) {
 
         {filterQuery.destination && (
           <TouchableOpacity
-            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            className="px-2 py-1 bg-[#ffffff] dark:bg-dark-2 rounded-full flex-row items-center gap-x-2"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={() =>
               dispatch(setFilterQuery({ ...filterQuery, destination: "" }))
@@ -143,7 +143,7 @@ export default function DestinationsScreen({ navigation }) {
 
         {filterQuery.duration && (
           <TouchableOpacity
-            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            className="px-2 py-1 bg-[#ffffff] dark:bg-dark-2 rounded-full flex-row items-center gap-x-2"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={() =>
               dispatch(setFilterQuery({ ...filterQuery, duration: "" }))
@@ -170,7 +170,7 @@ export default function DestinationsScreen({ navigation }) {
 
         {filterQuery.maxPrice && (
           <TouchableOpacity
-            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            className="px-2 py-1 bg-[#ffffff] dark:bg-dark-2 rounded-full flex-row items-center gap-x-2"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={() =>
               dispatch(setFilterQuery({ ...filterQuery, maxPrice: "" }))
@@ -196,7 +196,7 @@ export default function DestinationsScreen({ navigation }) {
 
         {filterQuery.minPrice && (
           <TouchableOpacity
-            className="px-2 py-1 bg-[#ffffff] rounded-full flex-row items-center gap-x-2"
+            className="px-2 py-1 bg-[#ffffff] dark:bg-dark-2 rounded-full flex-row items-center gap-x-2"
             style={[colorScheme == "light" && shadow.boxShadow]}
             onPress={() =>
               dispatch(setFilterQuery({ ...filterQuery, minPrice: "" }))

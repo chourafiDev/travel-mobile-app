@@ -99,19 +99,19 @@ const ChangeImage = ({ handleSnapClosePress, sheetRef, setImage, image }) => {
                 Change picture
               </Text>
               <Text
-                className="text-dark/40 text-center dark:text-white text-base px-6"
+                className="text-dark/40 text-center dark:text-white/40 text-base px-6"
                 style={{ fontFamily: "baiJamjuree-regular" }}
               >
                 Click on{" "}
                 <Text
-                  className="text-dark/50"
+                  className="text-dark/50 dark:text-white/50"
                   style={{ fontFamily: "baiJamjuree-medium" }}
                 >
                   "Select Photo"
                 </Text>{" "}
                 or{" "}
                 <Text
-                  className="text-dark/50"
+                  className="text-dark/50 dark:text-white/50"
                   style={{ fontFamily: "baiJamjuree-medium" }}
                 >
                   "Take Photo"
@@ -123,7 +123,7 @@ const ChangeImage = ({ handleSnapClosePress, sheetRef, setImage, image }) => {
             <View className="flex-row gap-2">
               <TouchableOpacity
                 onPress={pickImage}
-                className="flex-1 justify-center items-center bg-gray-1/30 border border-gray-1 rounded-lg p-8"
+                className="flex-1 justify-center items-center bg-gray-1/30 dark:bg-dark-2/30 border border-gray-1 dark:border-gray-1/10 rounded-lg p-8"
               >
                 <Icon
                   name="folder"
@@ -140,7 +140,7 @@ const ChangeImage = ({ handleSnapClosePress, sheetRef, setImage, image }) => {
                   Select Photo
                 </Text>
               </TouchableOpacity>
-              <TouchableOpacity className="flex-1 justify-center items-center bg-gray-1/30 border border-gray-1 rounded-lg p-8">
+              <TouchableOpacity className="flex-1 justify-center items-center bg-gray-1/30 dark:bg-dark-2/30 border border-gray-1 dark:border-gray-1/10 rounded-lg p-8">
                 <Icon
                   name="camera"
                   size={20}
