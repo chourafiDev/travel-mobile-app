@@ -36,7 +36,7 @@ import Reviews from "../../components/Reviews/Reviews";
 import GradientButton from "../../components/ui/GradientButton";
 import { useGetDestinationQuery } from "../../store/services/destinationsApiSlice";
 import Loading from "../../components/Loading";
-import BookingConfirmation from "../../components/bookings/BookingConfirmation ";
+import BookingConfirmation from "../../components/bookings/BookingConfirmation";
 
 import { emptyHeart, fullHeart } from "../../../utils/assets";
 import { shadow } from "../../../utils/theme";
