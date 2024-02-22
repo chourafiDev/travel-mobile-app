@@ -7,12 +7,27 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import { SafeAreaView } from "react-native-safe-area-context";
-import ImageView from "react-native-image-viewing";
+
+// Redux slices
+import {
+  useBookingCheckOutMutation,
+  useCreateBookingMutation,
+} from "../../store/services/bookingApiSlice";
+import {
+  useFavoriteMutation,
+  useGetFavoritesQuery,
+  useUnfavoriteMutation,
+} from "../../store/services/favoritesApiSlice";
+
+// Libraries
 import { useColorScheme } from "nativewind";
 import Icon from "react-native-vector-icons/Feather";
+import Toast from "react-native-toast-message";
+import { LinearGradient } from "expo-linear-gradient";
+import ImageView from "react-native-image-viewing";
+import { useStripe } from "@stripe/stripe-react-native";
 
 // Components
 import TopTabBar from "../../components/layout/TopTabBar";
@@ -21,20 +36,10 @@ import Reviews from "../../components/Reviews/Reviews";
 import GradientButton from "../../components/ui/GradientButton";
 import { useGetDestinationQuery } from "../../store/services/destinationsApiSlice";
 import Loading from "../../components/Loading";
-import {
-  useFavoriteMutation,
-  useGetFavoritesQuery,
-  useUnfavoriteMutation,
-} from "../../store/services/favoritesApiSlice";
+import BookingConfirmation from "../../components/bookings/BookingConfirmation ";
+
 import { emptyHeart, fullHeart } from "../../../utils/assets";
 import { shadow } from "../../../utils/theme";
-import Toast from "react-native-toast-message";
-import {
-  useBookingCheckOutMutation,
-  useCreateBookingMutation,
-} from "../../store/services/bookingApiSlice";
-import { useStripe } from "@stripe/stripe-react-native";
-import BookingConfirmation from "../../components/bookings/BookingConfirmation ";
 
 const Tab = createMaterialTopTabNavigator();
 
