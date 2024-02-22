@@ -58,7 +58,7 @@ const Booking = ({ booking }) => {
       </View>
 
       {/* Modal Add Category */}
-      <BookingDetails sheetRefDetails={sheetRefDetails} />
+      <BookingDetails sheetRefDetails={sheetRefDetails} booking={booking} />
     </>
   );
 };
