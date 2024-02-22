@@ -18,6 +18,17 @@ export const bookingApiSlice = apiSliceWithTag.injectEndpoints({
       },
       providesTags: ["booking"],
     }),
+    createBooking: builder.mutation({
+      query: (data) => {
+        return {
+          url: `${BOOKING_URL}`,
+          method: "POST",
+          body: data,
+          credentials: "include",
+        };
+      },
+      invalidatesTags: ["booking"],
+    }),
     bookingCheckOut: builder.mutation({
       query: (data) => {
         return {
@@ -31,5 +42,8 @@ export const bookingApiSlice = apiSliceWithTag.injectEndpoints({
   }),
 });
 
-export const { useGetBookingsQuery, useBookingCheckOutMutation } =
-  bookingApiSlice;
+export const {
+  useGetBookingsQuery,
+  useBookingCheckOutMutation,
+  useCreateBookingMutation,
+} = bookingApiSlice;
