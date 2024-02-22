@@ -29,7 +29,10 @@ import {
 import { emptyHeart, fullHeart } from "../../../utils/assets";
 import { shadow } from "../../../utils/theme";
 import Toast from "react-native-toast-message";
-import { useBookingCheckOutMutation } from "../../store/services/bookingApiSlice";
+import {
+  useBookingCheckOutMutation,
+  useCreateBookingMutation,
+} from "../../store/services/bookingApiSlice";
 import { useStripe } from "@stripe/stripe-react-native";
 
 const Tab = createMaterialTopTabNavigator();
@@ -97,11 +100,12 @@ export default function DestinationScreen({ route, navigation }) {
     }
   }, [isFavoriteSuccess, isUnfavoriteSuccess]);
 
-  // handle booking checkout
-  const [
-    bookingCheckOut,
-    { isLoading: isBookingLoading, isSuccess: isBookingSuccess },
-  ] = useBookingCheckOutMutation();
+  // handle booking checkout and create new booking in DB
+  const [bookingCheckOut, { isLoading: isBookingLoading }] =
+    useBookingCheckOutMutation();
+
+  const [createBooking, { isSuccess: isAddBookingSuccess }] =
+    useCreateBookingMutation();
 
   const { initPaymentSheet, presentPaymentSheet } = useStripe();
 
@@ -109,7 +113,6 @@ export default function DestinationScreen({ route, navigation }) {
     // create payment intent
     const data = {
       price: destination.price,
-      destinationId: destination.id,
     };
 
     const response = await bookingCheckOut(data).unwrap();
@@ -148,7 +151,22 @@ export default function DestinationScreen({ route, navigation }) {
     }
 
     // if payment ok -> create booking
+    const payload = {
+      amountPaid: destination.price,
+      destinationId: destination.id,
+    };
+
+    await createBooking(payload).unwrap();
   };
+
+  useEffect(() => {
+    if (isAddBookingSuccess) {
+      Toast.show({
+        type: "success",
+        text1: "Booking has applied Successfully",
+      });
+    }
+  }, [isAddBookingSuccess]);
 
   if (isLoading) {
     return <Loading />;
