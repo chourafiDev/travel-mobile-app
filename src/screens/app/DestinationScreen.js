@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -34,6 +34,7 @@ import {
   useCreateBookingMutation,
 } from "../../store/services/bookingApiSlice";
 import { useStripe } from "@stripe/stripe-react-native";
+import BookingConfirmation from "../../components/bookings/BookingConfirmation ";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -159,12 +160,18 @@ export default function DestinationScreen({ route, navigation }) {
     await createBooking(payload).unwrap();
   };
 
+  // handle open modal booking confiration
+  const sheetRef = useRef(null);
+  const handleSnapPressOpen = () => {
+    sheetRef.current?.present();
+  };
+  const handleSnapPressClose = () => {
+    sheetRef.current?.close();
+  };
+
   useEffect(() => {
     if (isAddBookingSuccess) {
-      Toast.show({
-        type: "success",
-        text1: "Booking has applied Successfully",
-      });
+      handleSnapPressOpen();
     }
   }, [isAddBookingSuccess]);
 
@@ -276,6 +283,8 @@ export default function DestinationScreen({ route, navigation }) {
           />
         </Tab.Navigator>
       </View>
+
+      {/* Button booking */}
       <View className="absolute w-full bottom-0">
         <LinearGradient
           colors={[
@@ -296,6 +305,13 @@ export default function DestinationScreen({ route, navigation }) {
           />
         </View>
       </View>
+
+      {/* Modal Booking Confirmation */}
+      <BookingConfirmation
+        sheetRef={sheetRef}
+        destination={destination.title}
+        handleSnapPressClose={handleSnapPressClose}
+      />
     </SafeAreaView>
   );
 }
