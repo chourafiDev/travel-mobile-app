@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Icon from "react-native-vector-icons/Ionicons";
 import {
+  BOOKINGS,
   CATEGORIES,
   CHANGE_PASSWORD,
   DESTINATION,
@@ -22,6 +23,7 @@ import NotificationScreen from "../screens/app/NotificationScreen";
 import UsersScreen from "../screens/app/UsersScreen";
 import CategoriesScreen from "../screens/app/CategoriesScreen";
 import ManageDestinationsScreen from "../screens/app/ManageDestinationsScreen";
+import BookingsScreen from "../screens/app/BookingsScreen";
 
 const Drawer = createDrawerNavigator();
 
@@ -42,7 +44,7 @@ function DrawerNavigator() {
         name={HOME_DRAWER}
         component={TabNavigator}
         options={{
-          title: "Home",
+          title: `${HOME_DRAWER}`,
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
@@ -53,7 +55,7 @@ function DrawerNavigator() {
         name={DESTINATION}
         component={DestinationScreen}
         options={{
-          title: "Destination",
+          title: `${DESTINATION}`,
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
@@ -63,7 +65,7 @@ function DrawerNavigator() {
         name={PROFILE_INFO}
         component={EditProfileInfoScreen}
         options={{
-          title: "Profile info",
+          title: `${PROFILE_INFO}`,
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
@@ -73,7 +75,7 @@ function DrawerNavigator() {
         name={CHANGE_PASSWORD}
         component={ChangePasswordScreen}
         options={{
-          title: "Change password",
+          title: `${CHANGE_PASSWORD}`,
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
@@ -83,7 +85,7 @@ function DrawerNavigator() {
         name={NOTIFICATION}
         component={NotificationScreen}
         options={{
-          title: "Notification",
+          title: `${NOTIFICATION}`,
           drawerIcon: ({ color }) => (
             <Icon name="home-sharp" size={20} color={color} />
           ),
@@ -94,7 +96,7 @@ function DrawerNavigator() {
         name={USERS}
         component={UsersScreen}
         options={{
-          title: "Users",
+          title: `${USERS}`,
           drawerIcon: ({ color }) => (
             <Icon name="user" size={20} color={color} />
           ),
@@ -105,7 +107,7 @@ function DrawerNavigator() {
         name={CATEGORIES}
         component={CategoriesScreen}
         options={{
-          title: "Categories",
+          title: `${CATEGORIES}`,
           drawerIcon: ({ color }) => (
             <Icon name="layers" size={20} color={color} />
           ),
@@ -116,7 +118,18 @@ function DrawerNavigator() {
         name={MANAGE_DESTINATIONS}
         component={ManageDestinationsScreen}
         options={{
-          title: "Manage Destinations",
+          title: `${MANAGE_DESTINATIONS}`,
+          drawerIcon: ({ color }) => (
+            <Icon name="columns" size={20} color={color} />
+          ),
+        }}
+      />
+
+      <Drawer.Screen
+        name={BOOKINGS}
+        component={BookingsScreen}
+        options={{
+          title: `${BOOKINGS}`,
           drawerIcon: ({ color }) => (
             <Icon name="columns" size={20} color={color} />
           ),
