@@ -9,7 +9,7 @@ const Review = ({ review }) => {
   const { colorScheme } = useColorScheme();
   return (
     <View
-      className="bg-white dark:bg-dark-2 rounded-xl p-3 mb-3"
+      className="bg-white dark:bg-dark-2 rounded-xl p-3 mb-3 mx-4"
       style={[colorScheme == "light" && shadow.boxShadow]}
     >
       <View className="flex-row justify-between items-center">

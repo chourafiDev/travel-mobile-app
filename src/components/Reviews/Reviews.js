@@ -26,7 +26,7 @@ const Reviews = ({ destinationId }) => {
 
   return (
     <View className="bg-[#f8f8fa] dark:bg-dark h-full">
-      <View className="flex-row justify-between items-center mb-4">
+      <View className="flex-row justify-between items-center mb-4 px-4">
         <Text
           className="text-dark/70 dark:text-white/70 text-base"
           style={{ fontFamily: "baiJamjuree-medium" }}
