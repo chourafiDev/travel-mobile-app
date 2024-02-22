@@ -7,7 +7,7 @@ import store from "./src/store";
 import Toast from "react-native-toast-message";
 import { StripeProvider } from "@stripe/stripe-react-native";
 
-const STRIPE_PUBLICH_KEY = "pk_test_Kkf7X52bm6u7DGtBmi4RIUEC00GSAampw8";
+const STRIPE_PUBLICH_KEY = process.env.EXPO_PUBLIC_STRIPE_PUBLICH_KEY;
 
 SplashScreen.preventAutoHideAsync();
 
