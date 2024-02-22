@@ -30,7 +30,6 @@ const Overview = ({ destination }) => {
             style={[colorScheme == "light" && shadow.boxShadow]}
           >
             <TouchableOpacity
-              onPress={() => navigation.goBack()}
               activeOpacity={0.8}
               className="bg-gray-1 mr-3 dark:bg-dark-2 w-10 h-10 rounded-xl items-center justify-center"
             >
@@ -65,7 +64,6 @@ const Overview = ({ destination }) => {
             style={[colorScheme == "light" && shadow.boxShadow]}
           >
             <TouchableOpacity
-              onPress={() => navigation.goBack()}
               activeOpacity={0.8}
               className="bg-gray-1 dark:bg-dark-2 mr-3 w-10 h-10 rounded-xl items-center justify-center"
             >
@@ -102,7 +100,6 @@ const Overview = ({ destination }) => {
             style={[colorScheme == "light" && shadow.boxShadow]}
           >
             <TouchableOpacity
-              onPress={() => navigation.goBack()}
               activeOpacity={0.8}
               className="bg-gray-1 mr-3 dark:bg-dark-2 w-10 h-10 rounded-xl items-center justify-center"
             >
@@ -137,7 +134,6 @@ const Overview = ({ destination }) => {
             style={[colorScheme == "light" && shadow.boxShadow]}
           >
             <TouchableOpacity
-              onPress={() => navigation.goBack()}
               activeOpacity={0.8}
               className="bg-gray-1 dark:bg-dark-2 mr-3 w-10 h-10 rounded-xl items-center justify-center"
             >
