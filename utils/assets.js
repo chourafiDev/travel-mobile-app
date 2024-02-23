@@ -26,6 +26,8 @@ const alert = require("../assets/images/alert.png");
 const empty = require("../assets/images/empty.png");
 const emptyHeart = require("../assets/images/empty-heart.png");
 const fullHeart = require("../assets/images/full-heart.png");
+const bgPattern = require("../assets/images/bg-pattern.png");
+const whiteLogo = require("../assets/images/white-logo.png");
 
 export {
   welcome,
@@ -55,4 +57,6 @@ export {
   empty,
   emptyHeart,
   fullHeart,
+  bgPattern,
+  whiteLogo,
 };
