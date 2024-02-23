@@ -5,17 +5,26 @@ import { useColorScheme } from "nativewind";
 import { shadow } from "../../../utils/theme";
 import { Feather } from "@expo/vector-icons";
 import moment from "moment";
+import BookingTicket from "./BookingTicket";
 
 const Booking = ({ booking }) => {
   const { colorScheme } = useColorScheme();
 
-  // Open modal add booking details
+  // Open modal add booking details and ticket
   const sheetRefDetails = useRef(null);
   const handleSnapPressOpenDetails = () => {
     sheetRefDetails.current?.present();
   };
   const handleSnapPressCloseDetails = () => {
     sheetRefDetails.current?.close();
+  };
+
+  const sheetRefTicket = useRef(null);
+  const handleSnapPressOpenTicket = () => {
+    sheetRefTicket.current?.present();
+  };
+  const handleSnapPressCloseTicket = () => {
+    sheetRefTicket.current?.close();
   };
 
   return (
@@ -41,24 +50,52 @@ const Booking = ({ booking }) => {
             </Text>
           </View>
 
-          <Text
-            className="text-dark/60 dark:text-white text-sm mt-2"
-            style={{ fontFamily: "baiJamjuree-regular" }}
-          >
-            Got it at: {moment(booking.createdAt).format("MMM D")} -{" "}
-            {moment(booking.createdAt).format("h:mm A")}
-          </Text>
+          <View className="flex-row items-center gap-x-2 mt-2">
+            <Text
+              className="text-dark/60 dark:text-white text-sm"
+              style={{ fontFamily: "baiJamjuree-regular" }}
+            >
+              Got it at: {moment(booking.createdAt).format("MMM D")} -{" "}
+              {moment(booking.createdAt).format("h:mm A")}
+            </Text>
+            <View className="flex-row items-center gap-x-1">
+              <Feather name="arrow-right" size={11} color="#222B45" />
+              <Text
+                className="text-dark/60 dark:text-white text-sm"
+                style={{ fontFamily: "baiJamjuree-regular" }}
+              >
+                {booking.destination.destination}
+              </Text>
+            </View>
+          </View>
         </View>
-        <TouchableOpacity
-          onPress={handleSnapPressOpenDetails}
-          className="bg-gray-1 dark:bg-dark w-9 h-9 rounded-lg items-center justify-center"
-        >
-          <Feather name="eye" size={18} color="#23A892" />
-        </TouchableOpacity>
+
+        <View className="flex-row items-center gap-x-2">
+          <TouchableOpacity
+            onPress={handleSnapPressOpenDetails}
+            className="bg-gray-1 dark:bg-dark w-9 h-9 rounded-lg items-center justify-center"
+          >
+            <Feather name="eye" size={18} color="#23A892" />
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={handleSnapPressOpenTicket}
+            className="bg-gray-1 dark:bg-dark w-9 h-9 rounded-lg items-center justify-center"
+          >
+            <Feather name="download" size={18} color="#f4a261" />
+          </TouchableOpacity>
+        </View>
       </View>
 
-      {/* Modal Add Category */}
-      <BookingDetails sheetRefDetails={sheetRefDetails} booking={booking} />
+      {/* Modal Booking Details */}
+      <BookingDetails
+        sheetRefDetails={sheetRefDetails}
+        handleSnapPressCloseDetails={handleSnapPressCloseDetails}
+        handleSnapPressOpenTicket={handleSnapPressOpenTicket}
+        booking={booking}
+      />
+
+      {/* Modal Booking Details */}
+      <BookingTicket sheetRefTicket={sheetRefTicket} booking={booking} />
     </>
   );
 };

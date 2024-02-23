@@ -7,7 +7,12 @@ import Animated, { FadeInDown } from "react-native-reanimated";
 import { shadow } from "../../../utils/theme";
 import Icon from "react-native-vector-icons/Feather";
 
-const BookingDetails = ({ sheetRefDetails, booking }) => {
+const BookingDetails = ({
+  sheetRefDetails,
+  handleSnapPressCloseDetails,
+  handleSnapPressOpenTicket,
+  booking,
+}) => {
   const { colorScheme } = useColorScheme();
   const snapPoints = useMemo(() => ["85%"], []);
 
@@ -28,6 +33,11 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
       />
     );
   }, []);
+
+  const onPress = () => {
+    handleSnapPressCloseDetails();
+    handleSnapPressOpenTicket();
+  };
 
   return (
     <BottomSheetModal
@@ -240,8 +250,7 @@ const BookingDetails = ({ sheetRefDetails, booking }) => {
             icon="download"
             type="primary"
             size="lg"
-            // onPress={handleFilterDestinations}
-            // isLoading={false}
+            onPress={onPress}
           />
         </View>
       </View>
