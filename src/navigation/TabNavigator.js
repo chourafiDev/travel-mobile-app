@@ -109,7 +109,7 @@ export default function TabNavigator() {
           tabBarIcon: ({ focused }) => (
             <View
               style={[colorScheme == "light" && shadow.boxShadow]}
-              className="rounded-full overflow-hidden w-[66px] h-[66px] mb-12 border-4 border-white justify-center items-center"
+              className="rounded-full overflow-hidden w-[66px] h-[66px] mb-12 border-4 border-white dark:border-dark justify-center items-center"
             >
               <LinearGradient
                 colors={["#23a892", "#00dbb7"]}
