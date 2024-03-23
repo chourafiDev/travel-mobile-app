@@ -114,6 +114,7 @@ const UploadImages = ({ images }) => {
           {formData.images
             ? formData.images?.map((image, i) => (
                 <View
+                  key={i}
                   className="bg-white dark:bg-dark-2 p-1 rounded-2xl"
                   style={[colorScheme == "light" && shadow.boxShadow]}
                 >
@@ -126,6 +127,7 @@ const UploadImages = ({ images }) => {
               ))
             : imgPreview?.map((image, i) => (
                 <View
+                  key={i}
                   className="bg-white dark:bg-dark-2 p-1 rounded-2xl"
                   style={[colorScheme == "light" && shadow.boxShadow]}
                 >

@@ -33,8 +33,8 @@ const Booking = ({ booking }) => {
         className="mx-3 flex-row items-center justify-between p-3 rounded-2xl bg-white dark:bg-dark-2"
         style={[colorScheme == "light" && shadow.boxShadow]}
       >
-        <View>
-          <View className="flex-row justify-between items-center gap-x-3">
+        <View className="flex-1 mr-6">
+          <View className="flex-row items-center gap-x-3">
             <Text
               className="text-dark dark:text-white/60 text-lg"
               style={{ fontFamily: "baiJamjuree-semibold" }}
@@ -44,7 +44,9 @@ const Booking = ({ booking }) => {
             <View className="h-3 w-[1px] bg-dark/20"></View>
             <Text
               className="text-dark dark:text-white/60 text-lg"
-              style={{ fontFamily: "baiJamjuree-semibold" }}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+              style={{ fontFamily: "baiJamjuree-semibold", flexShrink: 1 }}
             >
               {booking.destination.title}
             </Text>

@@ -103,10 +103,12 @@ export default function Destination({
         className="rounded-2xl w-full h-32"
       />
 
-      <View className="mt-4 flex-row justify-between items-center">
+      <View className="mt-4 flex-row justify-between gap-x-4 items-center">
         <Text
           className="text-dark dark:text-white text-base"
-          style={{ fontFamily: "baiJamjuree-semibold" }}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+          style={{ fontFamily: "baiJamjuree-semibold", flexShrink: 1 }}
         >
           {title}
         </Text>
