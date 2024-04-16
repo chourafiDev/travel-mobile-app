@@ -1,5 +1,8 @@
-# Journey waypoints
+ <div align=start>
+        <img src="https://res.cloudinary.com/abdelmonaime/image/upload/v1713271840/travel/icon_x9v79j.png" alt="Journey waypoints" height="150">
+ </div>
 
+# Journey waypoints
 Journey waypoints is a mobile application that lets users discover and book unique travel destinations. Built with React Native, it offers a seamless user experience on both iOS and Android devices. Users can add new destinations, explore existing ones, and book their next trip with secure payment options provided by Stripe.
 
 ## Features
